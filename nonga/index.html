@@ -3,25 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NÔNG Á NEWGEN - Đào Tạo</title>
+    <title>NÔNG Á NEWGEN - Cổng Đào Tạo</title>
+    <!-- Nhúng thư viện Icon FontAwesome để làm bộ icon giống ảnh -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* ================= THIẾT KẾ GIAO DIỆN CẬP NHẬT ================= */
+        /* ================= THIẾT KẾ GIAO DIỆN XANH MÁT - TRẺ TRUNG ================= */
         :root {
-            --bg-cream: #f7f5f0;        
-            --sidebar-bg: #ffffff;      
-            --text-dark: #1a202c;       
+            --brand-green: #059669;     /* Xanh lá đậm thương hiệu */
+            --brand-light: #10b981;     /* Xanh lá sáng trẻ trung */
+            --sidebar-bg: rgba(255, 255, 255, 0.95); /* Trắng mờ nhẹ */
+            --text-dark: #1e293b;       
             --text-muted: #64748b;      
-            --active-blue: #1a73e8;     
-            --border-light: #e2e8f0;    
-            --radius-card: 12px;
+            --active-bg: #ecfdf5;       /* Xanh mint nhạt khi chọn menu */
+            --border-light: rgba(203, 213, 225, 0.5);    
+            --radius-card: 16px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg-cream); color: var(--text-dark); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        
+        /* 1. NỀN VƯỜN CÂY TỔNG THỂ */
+        body { 
+            /* Đổi link ảnh ở đây nếu bạn muốn ảnh vườn cây khác */
+            background-image: url('https://images.unsplash.com/photo-1592982537447-6f296c0993ea?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-dark); 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+        }
 
-        /* ================= 1. HEADER (LOGO MỚI) ================= */
+        /* 2. HEADER CÔNG NGHỆ (KÍNH MỜ) */
         header {
-            background-color: var(--bg-cream);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             height: 70px;
             display: flex;
             justify-content: space-between;
@@ -29,148 +47,109 @@
             padding: 0 32px;
             border-bottom: 1px solid var(--border-light);
             z-index: 50;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
-        /* YÊU CẦU: Logo in hoa, to rõ, màu xanh lá thương hiệu */
-        .logo-section { 
-            font-size: 26px; 
-            font-weight: 900; 
-            color: #059669; 
-            cursor: pointer; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .logo-section { font-size: 24px; font-weight: 900; color: var(--brand-green); cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; display: flex; align-items: center; gap: 10px; }
+        .logo-section i { color: #f59e0b; font-size: 28px; } /* Thêm icon mặt trời nhỏ cạnh logo */
         
         .search-container { position: relative; width: 400px; }
-        .search-input { width: 100%; padding: 10px 18px; background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 24px; font-size: 15px; outline: none; }
+        .search-input { width: 100%; padding: 10px 20px 10px 40px; background-color: #f1f5f9; border: 1px solid transparent; border-radius: 30px; font-size: 14px; outline: none; transition: 0.3s; }
+        .search-input:focus { border-color: var(--brand-light); background: #fff; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); }
+        .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #94a3b8; }
         
-        .nav-icons { display: flex; align-items: center; gap: 18px; color: var(--text-muted); font-size: 20px; cursor: pointer; }
-        .user-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: #cbd5e1; overflow: hidden; border: 1px solid #94a3b8; }
+        .nav-icons { display: flex; align-items: center; gap: 20px; color: var(--text-muted); font-size: 18px; cursor: pointer; }
+        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #cbd5e1; overflow: hidden; border: 2px solid var(--brand-light); }
         .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* ================= 2. BỐ CỤC CHÍNH (WORKSPACE) ================= */
+        /* 3. BỐ CỤC CHÍNH (WORKSPACE) */
         .workspace { display: flex; flex: 1; overflow: hidden; }
 
-        /* ----- YÊU CẦU: MENU TRÁI TO RÕ HƠN ----- */
-        .sidebar { width: 280px; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-light); padding: 24px 16px; overflow-y: auto; }
-        .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+        /* ----- MENU TRÁI CÓ ICON VÒNG TRÒN MÀU ----- */
+        .sidebar { width: 290px; background-color: var(--sidebar-bg); backdrop-filter: blur(10px); border-right: 1px solid var(--border-light); padding: 24px 16px; overflow-y: auto; }
+        .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 4px; }
         
-        .menu-item { 
-            padding: 14px 20px; /* Tăng khoảng trống để nút to hơn */
-            font-size: 16px;    /* Tăng cỡ chữ */
-            font-weight: 600; 
-            color: #475569; 
-            cursor: pointer; 
-            border-radius: 8px; 
-            display: flex; 
-            align-items: center; 
-            gap: 14px; 
-            transition: 0.15s;
-        }
-        .menu-item:hover { background-color: #f1f5f9; color: var(--text-dark); }
-        .menu-item.active { background-color: var(--active-blue); color: #ffffff; }
+        .menu-item { padding: 10px 16px; font-size: 15px; font-weight: 600; color: #475569; cursor: pointer; border-radius: 12px; display: flex; align-items: center; gap: 14px; transition: 0.2s; }
+        .menu-item:hover { background-color: #f1f5f9; color: var(--text-dark); transform: translateX(4px); }
+        .menu-item.active { background-color: var(--active-bg); color: var(--brand-green); font-weight: 700; border-right: 4px solid var(--brand-green); }
         
-        .menu-divider { height: 1px; background-color: var(--border-light); margin: 16px 0; }
-        .menu-section-hdr { font-size: 13px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin: 16px 0 8px 16px; }
-        
-        /* Highlight cho menu Admin */
-        .admin-item { color: #d97706; }
-        .admin-item:hover { background-color: #fef3c7; color: #b45309; }
-        .admin-item.active { background-color: #d97706; color: white; }
+        /* CSS tạo hình Vòng tròn chứa Icon màu trắng (Giống ảnh) */
+        .icon-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        .bg-blue { background-color: #3b82f6; }   /* Tuần 1 */
+        .bg-orange { background-color: #f59e0b; } /* Tuần 2 */
+        .bg-red { background-color: #ef4444; }    /* Tuần 3 */
+        .bg-green { background-color: #10b981; }  /* Tuần 4 */
+        .bg-purple { background-color: #8b5cf6; } /* Nâng cao */
+        .bg-pink { background-color: #ec4899; }   /* Bài thuốc */
+        .bg-teal { background-color: #14b8a6; }   /* Tham khảo */
+        .bg-gray { background-color: #64748b; }   /* Liên hệ */
+        .bg-admin { background-color: #1e293b; }  /* Admin */
 
-        /* ----- KHU VỰC THÀNH PHẦN CHÍNH (BÊN PHẢI) ----- */
-        .main-view { flex: 1; overflow-y: auto; padding: 32px 48px; }
+        .menu-divider { height: 1px; background-color: var(--border-light); margin: 16px 0; }
+        .menu-section-hdr { font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin: 16px 0 10px 16px; }
+
+        /* ----- KHU VỰC CHÍNH BÊN PHẢI ----- */
+        .main-view { flex: 1; overflow-y: auto; padding: 32px 48px; background: rgba(248, 250, 252, 0.85); backdrop-filter: blur(8px); }
         
-        /* ----- YÊU CẦU: BANNER GIỚI THIỆU CHIA 2 CỘT ----- */
-        .intro-banner {
-            display: flex;
-            background: #ffffff;
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 32px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-            min-height: 240px;
-        }
-        
-        /* Cột trái: Lời chào mừng */
-        .intro-text-col {
-            flex: 1;
-            padding: 32px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .intro-text-col h1 { font-size: 26px; color: #065f46; margin-bottom: 12px; font-weight: 800; line-height: 1.3; }
-        .intro-text-col p { font-size: 16px; color: #475569; line-height: 1.6; }
-        
-        /* Cột phải: Video nhúng */
-        .intro-video-col {
-            width: 420px; /* Độ rộng cố định cho video */
-            background: #000;
-            position: relative;
-            flex-shrink: 0;
-        }
-        .intro-video-col iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
+        /* Banner Giới thiệu */
+        .intro-banner { display: flex; background: #ffffff; border-radius: var(--radius-card); overflow: hidden; margin-bottom: 36px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); min-height: 240px; border: 1px solid rgba(255,255,255,0.5); }
+        .intro-text-col { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%); }
+        .intro-text-col h1 { font-size: 28px; color: var(--brand-green); margin-bottom: 12px; font-weight: 800; line-height: 1.3; }
+        .intro-text-col p { font-size: 16px; color: #475569; line-height: 1.7; }
+        .intro-video-col { width: 450px; background: #000; position: relative; flex-shrink: 0; }
+        .intro-video-col iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
         /* Tiêu đề nhóm học phần */
-        .group-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #e2e8f0; }
-        .group-title-row h3 { font-size: 18px; font-weight: 700; color: #1e293b; }
-        .group-count { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+        .group-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(16, 185, 129, 0.2); }
+        .group-title-row h3 { font-size: 20px; font-weight: 800; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
+        .group-title-row h3 i { color: var(--brand-light); }
+        .group-count { font-size: 14px; background: #fff; padding: 4px 12px; border-radius: 20px; color: var(--brand-green); font-weight: 700; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
         /* HỆ THỐNG LƯỚI THẺ (GRID CARD) */
         .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
-        .lesson-card { cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
-        .lesson-card:hover { transform: translateY(-4px); }
-        .card-image-wrapper { 
-            position: relative; width: 100%; padding-bottom: 58%; 
-            border-radius: var(--radius-card); overflow: hidden; background-color: #000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .card-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.75; transition: 0.3s; }
-        .lesson-card:hover .card-img { opacity: 0.6; scale: 1.03; }
-        .card-overlay-title { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            display: flex; align-items: center; justify-content: center; padding: 20px;
-            color: #ffffff; font-size: 26px; font-weight: 800; text-align: center; letter-spacing: -0.5px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.6); z-index: 2;
-        }
-        .card-bottom-info { margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #334155; }
-        .check-icon { color: #2563eb; font-size: 15px; }
+        .lesson-card { cursor: pointer; transition: 0.3s; background: #fff; border-radius: var(--radius-card); padding: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); border: 1px solid #fff; }
+        .lesson-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15); border-color: var(--brand-light); }
+        
+        .card-image-wrapper { position: relative; width: 100%; padding-bottom: 60%; border-radius: 12px; overflow: hidden; background-color: #000; }
+        .card-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.5s; }
+        .lesson-card:hover .card-img { opacity: 0.5; scale: 1.05; }
+        
+        .card-overlay-title { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; color: #ffffff; font-size: 24px; font-weight: 900; text-align: center; text-shadow: 0 4px 12px rgba(0,0,0,0.8); z-index: 2; }
+        
+        .card-bottom-info { margin-top: 12px; padding: 4px 8px; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #334155; }
+        .check-icon { color: var(--brand-light); font-size: 16px; background: #ecfdf5; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
 
-        /* ================= 3. MODAL HỌC TẬP ================= */
-        .study-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 1000; }
-        .modal-container { width: 92%; max-width: 1200px; height: 85vh; background: #ffffff; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
-        .modal-header { padding: 20px 30px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: var(--bg-cream); }
-        .modal-header h3 { font-size: 20px; font-weight: 700; }
-        .close-btn { font-size: 28px; color: var(--text-muted); cursor: pointer; border: none; background: transparent; }
+        /* 4. MODAL HỌC TẬP */
+        .study-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.7); backdrop-filter: blur(6px); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-container { width: 92%; max-width: 1200px; height: 85vh; background: #ffffff; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4); }
+        .modal-header { padding: 20px 30px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: var(--active-bg); }
+        .modal-header h3 { font-size: 20px; font-weight: 800; color: var(--brand-green); }
+        .close-btn { font-size: 28px; color: var(--text-muted); cursor: pointer; border: none; background: transparent; transition: 0.2s; }
+        .close-btn:hover { color: #ef4444; transform: rotate(90deg); }
+        
         .modal-body { display: flex; flex: 1; overflow: hidden; }
-        .modal-text-pane { flex: 1; padding: 30px; overflow-y: auto; line-height: 1.8; font-size: 16px; color: #334155; }
+        .modal-text-pane { flex: 1; padding: 40px; overflow-y: auto; line-height: 1.8; font-size: 16px; color: #334155; }
         .modal-text-pane p { margin-bottom: 16px; }
-        .modal-text-pane h4 { font-size: 22px; color: #111827; margin: 20px 0 12px 0; font-weight: 700; }
-        .modal-video-pane { width: 480px; background: #f8fafc; border-left: 1px solid var(--border-light); padding: 30px 20px; flex-shrink: 0; }
-        .video-box-fixed { position: sticky; top: 0; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 8px; overflow: hidden; }
+        .modal-text-pane h4 { font-size: 22px; color: #111827; margin: 24px 0 16px 0; font-weight: 800; border-left: 4px solid var(--brand-light); padding-left: 12px; }
+        
+        .modal-video-pane { width: 500px; background: #f8fafc; border-left: 1px solid var(--border-light); padding: 30px 24px; flex-shrink: 0; }
+        .video-box-fixed { position: sticky; top: 0; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .video-box-fixed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
     </style>
 </head>
 <body>
 
-    <!-- TOP NAV: LOGO IN HOA TO RÕ -->
+    <!-- TOP NAV -->
     <header>
         <div class="logo-section" onclick="changeSection('t1')">
-            NÔNG Á NEWGEN
+            <i class="fas fa-sun"></i> NÔNG Á NEWGEN
         </div>
         <div class="search-container">
-            <input type="text" class="search-input" placeholder="🔍 Tìm kiếm bài học, hoạt chất...">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Tìm kiếm bài học, hoạt chất, quy trình...">
         </div>
         <div class="nav-icons">
-            <span>⚙️</span> <span>🔔</span>
+            <i class="fas fa-cog"></i> 
+            <i class="fas fa-bell"></i>
             <div class="user-avatar">
                 <img src="https://i.pravatar.cc/100?img=33" alt="Avatar">
             </div>
@@ -179,40 +158,56 @@
 
     <div class="workspace">
         
-        <!-- YÊU CẦU: MENU TRÁI TO RÕ HƠN -->
+        <!-- SIDEBAR: SỬ DỤNG BỘ ICON VÒNG TRÒN MÀU RỰC RỠ -->
         <aside class="sidebar">
             <ul class="sidebar-menu">
                 <li class="menu-section-hdr">Lộ trình cơ bản</li>
-                <li id="menu-t1" class="menu-item active" onclick="changeSection('t1')">📚 Đào tạo Tuần 1</li>
-                <li id="menu-t2" class="menu-item" onclick="changeSection('t2')">📚 Đào tạo Tuần 2</li>
-                <li id="menu-t3" class="menu-item" onclick="changeSection('t3')">📚 Đào tạo Tuần 3</li>
-                <li id="menu-t4" class="menu-item" onclick="changeSection('t4')">📚 Đào tạo Tuần 4</li>
+                <li id="menu-t1" class="menu-item active" onclick="changeSection('t1')">
+                    <div class="icon-circle bg-blue"><i class="fas fa-seedling"></i></div> Đào tạo Tuần 1
+                </li>
+                <li id="menu-t2" class="menu-item" onclick="changeSection('t2')">
+                    <div class="icon-circle bg-orange"><i class="fas fa-leaf"></i></div> Đào tạo Tuần 2
+                </li>
+                <li id="menu-t3" class="menu-item" onclick="changeSection('t3')">
+                    <div class="icon-circle bg-red"><i class="fas fa-tractor"></i></div> Đào tạo Tuần 3
+                </li>
+                <li id="menu-t4" class="menu-item" onclick="changeSection('t4')">
+                    <div class="icon-circle bg-green"><i class="fas fa-warehouse"></i></div> Đào tạo Tuần 4
+                </li>
                 
                 <li class="menu-divider"></li>
                 <li class="menu-section-hdr">Kho dữ liệu nâng cao</li>
-                <li id="menu-nangcao" class="menu-item" onclick="changeSection('nangcao')">🚀 Chuyên Sâu Nâng Cao</li>
-                <li id="menu-baithuoc" class="menu-item" onclick="changeSection('baithuoc')">🧪 Bài Thuốc Phối Trộn</li>
-                <li id="menu-thamkhao" class="menu-item" onclick="changeSection('thamkhao')">📖 Tài Liệu Tham Khảo</li>
-                <li id="menu-lienhe" class="menu-item" onclick="changeSection('lienhe')">📞 Thông Tin Liên Hệ</li>
+                <li id="menu-nangcao" class="menu-item" onclick="changeSection('nangcao')">
+                    <div class="icon-circle bg-purple"><i class="fas fa-rocket"></i></div> Chuyên Sâu Nâng Cao
+                </li>
+                <li id="menu-baithuoc" class="menu-item" onclick="changeSection('baithuoc')">
+                    <div class="icon-circle bg-pink"><i class="fas fa-flask"></i></div> Bài Thuốc Phối Trộn
+                </li>
+                <li id="menu-thamkhao" class="menu-item" onclick="changeSection('thamkhao')">
+                    <div class="icon-circle bg-teal"><i class="fas fa-book-open"></i></div> Tài Liệu Tham Khảo
+                </li>
+                <li id="menu-lienhe" class="menu-item" onclick="changeSection('lienhe')">
+                    <div class="icon-circle bg-gray"><i class="fas fa-headset"></i></div> Thông Tin Liên Hệ
+                </li>
 
                 <li class="menu-divider"></li>
                 <li class="menu-section-hdr">Hệ thống phân quyền</li>
-                <!-- Demo menu dành riêng cho chức năng Admin bạn yêu cầu -->
-                <li id="menu-admin" class="menu-item admin-item" onclick="renderAdminMockup()">👑 Quản Lý User (Admin)</li>
+                <li id="menu-admin" class="menu-item" onclick="renderAdminMockup()">
+                    <div class="icon-circle bg-admin"><i class="fas fa-crown"></i></div> Quản Lý User (Admin)
+                </li>
             </ul>
         </aside>
 
-        <!-- KHU VỰC CHÍNH BÊN PHẢI -->
+        <!-- KHU VỰC CHÍNH -->
         <main class="main-view">
             
-            <!-- YÊU CẦU: BANNER CHIA 2 CỘT CHUẨN XÁC -->
             <div class="intro-banner" id="company-banner">
                 <div class="intro-text-col">
                     <h1>Chào mừng bạn đến với Nông Á Newgen</h1>
                     <p>Hệ thống đào tạo nội bộ chuyên nghiệp. Dành ra ít phút xem video bên cạnh để hiểu rõ hơn về tầm nhìn, sứ mệnh và định hướng phát triển của công ty trước khi bắt đầu khóa học nhé.</p>
                 </div>
                 <div class="intro-video-col">
-                    <!-- Đổi id dQw4w9WgXcQ thành video giới thiệu cty của bạn -->
+                    <!-- Link video YouTube giới thiệu công ty -->
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
             </div>
@@ -228,7 +223,7 @@
         <div class="modal-container">
             <div class="modal-header">
                 <h3 id="modal-lesson-title">Bài học chi tiết</h3>
-                <button class="close-btn" onclick="closeModal()">✕</button>
+                <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
                 <div class="modal-text-pane" id="modal-lesson-body"></div>
@@ -242,12 +237,12 @@
     </div>
 
     <script>
-        // Dữ liệu nội dung
+        // Dữ liệu nội dung mô phỏng
         const sectionData = {
             t1: {
                 groups: [
                     {
-                        name: "Học phần văn hóa cốt lõi", count: "3 Bài học",
+                        name: "Học phần văn hóa cốt lõi", count: "3 Bài học", icon: "fa-book-reader",
                         lessons: [
                             { id: "t1_1", title: "Văn Hóa", label: "Bài 1: Quy tắc ứng xử", img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>1. Quy tắc đón tiếp khách hàng</h4><p>Luôn tươi cười niềm nở với bà con nông dân.</p>" },
                             { id: "t1_2", title: "An Toàn", label: "Bài 2: Vạch màu độc tính", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>Nhận diện nhóm độc tính</h4><p>Ghi nhớ 4 vạch màu: Đỏ, Vàng, Xanh dương, Xanh lá.</p>" },
@@ -259,7 +254,7 @@
             t2: {
                 groups: [
                     {
-                        name: "Nhóm thuốc trừ sâu bệnh", count: "2 Bài học",
+                        name: "Nhóm thuốc trừ sâu bệnh", count: "2 Bài học", icon: "fa-bug",
                         lessons: [
                             { id: "t2_1", title: "Trừ Sâu", label: "Bài 1: Trị rầy rệp", img: "https://images.unsplash.com/photo-1463171359979-300848856649?auto=format&fit=crop&w=400&q=80", video: "", body: "<h4>Hoạt chất trừ sâu rầy</h4><p>Imidacloprid, Thiamethoxam...</p>" },
                             { id: "t2_2", title: "Trị Nấm", label: "Bài 2: Trừ nấm bệnh", img: "https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=400&q=80", video: "", body: "<h4>Hoạt chất trị nấm</h4><p>Metalaxyl, Mancozeb...</p>" }
@@ -273,23 +268,21 @@
             document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
             document.getElementById('menu-' + sectionId).classList.add('active');
             
-            // Hiện lại banner công ty
             document.getElementById('company-banner').style.display = 'flex';
-
             const gridContainer = document.getElementById('grid-container');
             gridContainer.innerHTML = ''; 
 
             const data = sectionData[sectionId];
             if (!data || !data.groups || data.groups.length === 0) {
-                gridContainer.innerHTML = `<p style="color:var(--text-muted); font-style:italic;">Nội dung học phần này đang được cập nhật...</p>`;
+                gridContainer.innerHTML = `<div style="background:#fff; padding:30px; border-radius:16px; text-align:center; color:#64748b;"><i class="fas fa-tools fa-3x" style="color:#cbd5e1; margin-bottom:15px;"></i><p>Nội dung học phần này đang được cập nhật...</p></div>`;
                 return;
             }
 
             data.groups.forEach(group => {
                 let groupHtml = `
                     <div class="group-title-row">
-                        <h3>${group.name}</h3>
-                        <span class="group-count">${group.count} ˅</span>
+                        <h3><i class="fas ${group.icon}"></i> ${group.name}</h3>
+                        <span class="group-count">${group.count} <i class="fas fa-chevron-down" style="font-size:10px; margin-left:4px;"></i></span>
                     </div>
                     <div class="cards-grid">
                 `;
@@ -302,7 +295,7 @@
                                 <div class="card-overlay-title">${lesson.title}</div>
                             </div>
                             <div class="card-bottom-info">
-                                <span class="check-icon">✓</span> ${lesson.label}
+                                <div class="check-icon"><i class="fas fa-check"></i></div> ${lesson.label}
                             </div>
                         </div>
                     `;
@@ -327,54 +320,49 @@
             document.getElementById('modal-video-frame').src = ''; 
         }
 
-        // CHỨC NĂNG MÔ PHỎNG GIAO DIỆN QUẢN LÝ USER ADMIN
         function renderAdminMockup() {
             document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
             document.getElementById('menu-admin').classList.add('active');
-            
-            // Ẩn banner giới thiệu ở trang Admin
             document.getElementById('company-banner').style.display = 'none';
 
             const gridContainer = document.getElementById('grid-container');
             gridContainer.innerHTML = `
-                <div style="background:#fff; padding:30px; border-radius:12px; border:1px solid #e2e8f0;">
-                    <h2 style="margin-bottom:20px; color:#d97706;">Bảng Điều Khiển Quản Trị Viên (Mô Phỏng)</h2>
-                    <p style="color:#475569; margin-bottom:20px; line-height:1.6;"><strong>Lưu ý kỹ thuật:</strong> Giao diện tĩnh HTML không thể thao tác dữ liệu. Để các nút bên dưới hoạt động (Thêm User, Cấp quyền Admin 1/2/3, Track thời gian xem video), dự án cần tích hợp Backend như Firebase hoặc chuyển sang nền tảng LMS chuyên dụng.</p>
+                <div style="background:#fff; padding:40px; border-radius:16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                    <h2 style="margin-bottom:10px; color:#1e293b; font-weight:900;"><i class="fas fa-chart-pie" style="color:var(--brand-light);"></i> Quản Trị Hệ Thống</h2>
+                    <p style="color:#64748b; margin-bottom:30px; line-height:1.6;">Dữ liệu thống kê tiến trình học tập của đội ngũ nhân viên NÔNG Á NEWGEN.</p>
                     
-                    <div style="display:flex; gap:15px; margin-bottom:30px;">
-                        <button style="background:#1a73e8; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer;">+ Tạo User Mới</button>
-                        <button style="background:#10b981; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer;">Phân Quyền Sub-Admin</button>
+                    <div style="display:flex; gap:15px; margin-bottom:40px;">
+                        <button style="background:var(--brand-green); color:#fff; border:none; padding:12px 24px; border-radius:8px; font-weight:bold; cursor:pointer; display:flex; align-items:center; gap:8px;"><i class="fas fa-user-plus"></i> Tạo User Mới</button>
+                        <button style="background:#f1f5f9; color:#475569; border:1px solid #cbd5e1; padding:12px 24px; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-user-shield"></i> Cấp quyền Admin</button>
                     </div>
 
-                    <h3 style="margin-bottom:15px;">Báo Cáo Tiến Độ Nhân Viên</h3>
                     <table style="width:100%; text-align:left; border-collapse:collapse;">
-                        <tr style="background:#f1f5f9; border-bottom:2px solid #cbd5e1;">
-                            <th style="padding:12px;">Họ Tên</th>
-                            <th style="padding:12px;">Cấp Bậc</th>
-                            <th style="padding:12px;">Bài Đã Hoàn Thành</th>
-                            <th style="padding:12px;">Thời Gian Xem Video</th>
-                            <th style="padding:12px;">Hành Động</th>
+                        <tr style="background:#f8fafc; border-bottom:2px solid #cbd5e1; color:#475569;">
+                            <th style="padding:16px;">Họ Tên</th>
+                            <th style="padding:16px;">Cấp Bậc</th>
+                            <th style="padding:16px;">Tiến Độ Học</th>
+                            <th style="padding:16px;">Thời Gian Xem Video</th>
+                            <th style="padding:16px;"></th>
+                        </tr>
+                        <tr style="border-bottom:1px solid #e2e8f0; transition:0.2s;">
+                            <td style="padding:16px; font-weight:700;">Nguyễn Văn A</td>
+                            <td style="padding:16px;"><span style="background:#fef3c7; color:#b45309; padding:6px 12px; border-radius:6px; font-size:12px; font-weight:bold;">Admin 2</span></td>
+                            <td style="padding:16px;">15/20 Bài</td>
+                            <td style="padding:16px;">120 phút</td>
+                            <td style="padding:16px; text-align:right;"><a href="#" style="color:var(--brand-light); font-weight:bold;"><i class="fas fa-eye"></i> Xem</a></td>
                         </tr>
                         <tr style="border-bottom:1px solid #e2e8f0;">
-                            <td style="padding:12px;">Nguyễn Văn A</td>
-                            <td style="padding:12px;"><span style="background:#fef3c7; color:#b45309; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold;">Admin 2</span></td>
-                            <td style="padding:12px;">15/20 Bài</td>
-                            <td style="padding:12px;">120 phút</td>
-                            <td style="padding:12px;"><a href="#" style="color:#1a73e8;">Xem chi tiết</a></td>
-                        </tr>
-                        <tr style="border-bottom:1px solid #e2e8f0;">
-                            <td style="padding:12px;">Trần Thị B</td>
-                            <td style="padding:12px;"><span style="background:#f1f5f9; color:#475569; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold;">Nhân viên mới</span></td>
-                            <td style="padding:12px;">3/20 Bài</td>
-                            <td style="padding:12px;">45 phút</td>
-                            <td style="padding:12px;"><a href="#" style="color:#1a73e8;">Xem chi tiết</a></td>
+                            <td style="padding:16px; font-weight:700;">Trần Thị B</td>
+                            <td style="padding:16px;"><span style="background:#f1f5f9; color:#475569; padding:6px 12px; border-radius:6px; font-size:12px; font-weight:bold;">Nhân viên</span></td>
+                            <td style="padding:16px;">3/20 Bài</td>
+                            <td style="padding:16px;">45 phút</td>
+                            <td style="padding:16px; text-align:right;"><a href="#" style="color:var(--brand-light); font-weight:bold;"><i class="fas fa-eye"></i> Xem</a></td>
                         </tr>
                     </table>
                 </div>
             `;
         }
 
-        // Chạy tải dữ liệu Tuần 1 mặc định ngay khi mở trang web
         changeSection('t1');
     </script>
 </body>
