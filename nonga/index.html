@@ -3,404 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NÔNG Á NEWGEN - Hệ Thống Đào Tạo Nội Bộ</title>
+    <title>NÔNG Á NEWGEN - Đào Tạo</title>
     <style>
-        /* --- HỆ THỐNG BIẾN MÀU & STYLE CHUẨN ĐỒNG BỘ --- */
+        /* ================= CƠ SỞ MÀU SẮC & FONT ================= */
         :root {
-            --primary-color: #0b5936;
-            --primary-light: #e6f4ea;
-            --accent-color: #f39c12;
-            --text-main: #2c3e50;
-            --text-sub: #7f8c8d;
-            --bg-body: #f4f7f6;
-            --sidebar-width: 320px;
-            --video-width: 440px;
+            --bg-body: #e9f5ed;         /* Nền tổng thể xanh mint nhạt */
+            --header-bg: #1c6b38;       /* Xanh lá đậm cho Header */
+            --menu-bg: #dcf2e3;         /* Xanh lá nhạt cho Menu */
+            --menu-hover: #c4e8ce;
+            --text-dark: #1b4d2a;
+            --text-gray: #555555;
+            --accent-gold: #e5b330;     /* Vàng cho tiến trình */
+            --white: #ffffff;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { display: flex; flex-direction: column; height: 100vh; background-color: var(--bg-body); color: var(--text-main); overflow: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-body); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-        /* --- HEADER: THIẾT KẾ HIỆN ĐẠI TÍNH TIẾN ĐỘ --- */
-        header { 
-            background: linear-gradient(135deg, #073b22, var(--primary-color)); 
-            color: white; 
-            padding: 15px 30px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            z-index: 10;
+        /* ================= 1. HEADER (Thanh trên cùng) ================= */
+        header {
+            background: linear-gradient(90deg, #17542a 0%, var(--header-bg) 100%);
+            color: var(--white);
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 100;
         }
-        .logo-area h1 { font-size: 24px; font-weight: 800; letter-spacing: 1.5px; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
-        .logo-area p { font-size: 13px; opacity: 0.8; margin-top: 2px; font-weight: 300; }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .logo-icon { font-size: 28px; background: #fff; border-radius: 50%; padding: 5px; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .header-left h1 { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
         
-        .progress-container { background: rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 30px; display: flex; align-items: center; gap: 12px; backdrop-filter: blur(5px); }
-        .progress-label { font-size: 13px; font-weight: 600; min-width: 130px; }
-        .progress-bar-bg { width: 150px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px; overflow: hidden; }
-        .progress-bar-fill { width: 0%; height: 100%; background: var(--accent-color); transition: width 0.5s ease; shadow: 0 0 8px var(--accent-color); }
-
-        /* --- BỐ CỤC CHÍNH 3 CỘT --- */
-        .main-container { display: flex; flex: 1; overflow: hidden; position: relative; }
-
-        /* CỘT 1: SIDEBAR PREMIUM (TRÁI) */
-        .sidebar { width: var(--sidebar-width); background: #ffffff; box-shadow: 4px 0 15px rgba(0,0,0,0.03); overflow-y: auto; padding: 25px 15px; z-index: 5; }
-        .sidebar::-webkit-scrollbar { width: 5px; }
-        .sidebar::-webkit-scrollbar-thumb { background: #ddd; border-radius: 10px; }
-
-        .menu-header { font-size: 12px; font-weight: 700; color: var(--text-sub); letter-spacing: 1px; margin: 20px 0 10px 10px; text-transform: uppercase; }
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        .bell-icon { position: relative; font-size: 22px; color: #f1c40f; cursor: pointer; }
+        .bell-badge { position: absolute; top: -5px; right: -8px; background: #e74c3c; color: white; font-size: 10px; font-weight: bold; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         
-        /* Accordion Tuần học */
-        .week-bucket { margin-bottom: 10px; border-radius: 8px; overflow: hidden; border: 1px solid #edf2f7; }
-        .week-header { background: #f8fafc; padding: 12px 15px; font-weight: 700; font-size: 14px; color: #4a5568; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
-        .week-header:hover { background: var(--primary-light); color: var(--primary-color); }
+        .user-profile { display: flex; align-items: center; gap: 10px; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #fff; object-fit: cover; }
+        .user-info { display: flex; flex-direction: column; }
+        .user-info span { font-size: 13px; font-weight: 600; }
         
-        .lesson-list { list-style: none; padding: 5px 0; background: #fff; }
-        .lesson-item { padding: 10px 15px 10px 25px; font-size: 13.5px; color: #555; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; position: relative; }
-        .lesson-item:before { content: "📄"; filter: grayscale(100%); opacity: 0.6; }
-        .lesson-item:hover { background: #f7fafc; color: var(--primary-color); }
-        .lesson-item.active { background: var(--primary-light); color: var(--primary-color); font-weight: 700; }
-        .lesson-item.active:after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--primary-color); }
-        .lesson-item.completed:before { content: "✅"; filter: none; opacity: 1; }
+        .search-bar { background: rgba(255,255,255,0.2); border: none; padding: 6px 15px; border-radius: 20px; color: white; outline: none; font-size: 13px; width: 180px; }
+        .search-bar::placeholder { color: #d1e8da; }
 
-        /* Các Tab Lớn Độc Lập */
-        .nav-btn { display: flex; align-items: center; gap: 12px; padding: 12px 15px; margin-bottom: 8px; border-radius: 8px; font-weight: 600; color: #4a5568; cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
-        .nav-btn:hover { background: #f1f5f9; color: var(--primary-color); }
-        .nav-btn.active { background: var(--primary-color); color: white; box-shadow: 0 4px 12px rgba(11,89,54,0.2); }
+        /* ================= 2. BỐ CỤC CHÍNH CỦA TRANG ================= */
+        .main-container {
+            display: flex;
+            flex: 1;
+            padding: 20px;
+            gap: 25px;
+            overflow: hidden;
+            /* Watermark lá cây mờ ở nền */
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 100 C 20 80 0 50 20 20 C 50 0 80 20 100 50 C 80 80 50 100 50 100 Z" fill="none" stroke="%23c4e3cf" stroke-width="1" opacity="0.4"/></svg>');
+            background-size: 400px;
+            background-repeat: no-repeat;
+            background-position: bottom left;
+        }
 
-        /* CỘT 2: KHU VỰC ĐỌC NỘI DUNG (GIỮA - CUỘN MƯỢT) */
-        .content-area { flex: 1; padding: 40px; overflow-y: auto; background: #ffffff; scroll-behavior: smooth; }
+        /* ----- CỘT TRÁI: SIDEBAR MENU ----- */
+        .sidebar { width: 260px; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; z-index: 10; overflow-y: auto; }
+        .nav-item {
+            background: var(--menu-bg); padding: 14px 20px; border-radius: 12px; font-weight: 700; color: var(--text-dark);
+            display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .nav-item:hover { background: var(--menu-hover); transform: translateY(-2px); }
+        .nav-icon { font-size: 20px; }
+        
+        /* Cây thư mục (Tuần 1, Tuần 2) */
+        .sub-menu { padding-left: 35px; display: flex; flex-direction: column; gap: 10px; margin-top: -5px; position: relative; }
+        .sub-menu::before { content: ""; position: absolute; left: 20px; top: 0; bottom: 15px; width: 1px; background: #b0d4bd; }
+        .sub-item { position: relative; font-size: 14px; font-weight: 600; color: var(--text-gray); cursor: pointer; padding: 5px 0; transition: 0.2s; display: flex; align-items: center; gap: 8px;}
+        .sub-item::before { content: ""; position: absolute; left: -15px; top: 50%; width: 10px; height: 1px; background: #b0d4bd; }
+        .sub-item:hover { color: var(--header-bg); }
+        .sub-item.active { color: var(--header-bg); font-weight: 700; }
+
+        /* ----- CỘT GIỮA: NỘI DUNG DASHBOARD ----- */
+        .content-area { flex: 1; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; padding-right: 10px; }
         .content-area::-webkit-scrollbar { width: 6px; }
-        .content-area::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        
-        .badge { display: inline-block; padding: 4px 12px; background: var(--primary-light); color: var(--primary-color); font-weight: 700; font-size: 12px; border-radius: 20px; margin-bottom: 12px; }
-        .content-area h2 { font-size: 28px; color: #1a202c; font-weight: 800; margin-bottom: 20px; line-height: 1.3; }
-        
-        /* Format bài viết chuyên nghiệp */
-        .article-body { font-size: 16px; color: #4a5568; line-height: 1.8; }
-        .article-body p { margin-bottom: 16px; }
-        .article-body ul, .article-body ol { margin-left: 24px; margin-bottom: 20px; }
-        .article-body li { margin-bottom: 6px; }
-        
-        /* Hộp điểm nhấn nội dung */
-        .callout-box { background: #f8fafc; border-left: 4px solid var(--accent-color); padding: 18px; border-radius: 0 8px 8px 0; margin: 25px 0; font-style: italic; }
-        .callout-box strong { color: #1a202c; font-style: normal; }
+        .content-area::-webkit-scrollbar-thumb { background: #b0d4bd; border-radius: 10px; }
 
-        /* CỘT 3: KHUNG KHÓA VIDEO CHUYÊN NGHIỆP (PHẢI) */
-        .video-panel { width: var(--video-width); background: #f8fafc; border-left: 1px solid #e2e8f0; padding: 30px 20px; overflow-y: auto; }
-        .sticky-box { position: sticky; top: 0; }
-        .video-card { background: #ffffff; border-radius: 12px; padding: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
-        .video-tag { font-size: 11px; font-weight: 700; color: var(--accent-color); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; display: block;}
-        .video-title-text { font-size: 14px; font-weight: 700; color: #1a202c; margin-bottom: 15px; line-height: 1.4; }
+        .card { background: var(--white); border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.04); position: relative; overflow: hidden; padding: 25px; }
         
-        .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; background: #000; border-radius: 8px; overflow: hidden; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        /* Thẻ Welcome Hub (Card lớn nhất) */
+        .welcome-badge { position: absolute; top: 0; left: 0; background: #f8fbf9; padding: 10px 25px; font-weight: 800; color: var(--header-bg); font-size: 16px; border-bottom-right-radius: 16px; box-shadow: 2px 2px 10px rgba(0,0,0,0.05); }
         
-        .video-notes { margin-top: 20px; background: var(--primary-light); padding: 15px; border-radius: 8px; font-size: 13px; color: #234e32; line-height: 1.5; }
-        .video-notes h4 { font-weight: 700; margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
+        .welcome-top { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; margin-bottom: 20px; }
+        .welcome-img { width: 60%; height: 160px; object-fit: cover; border-radius: 12px; }
+        
+        /* Vòng tròn tiến độ 20% */
+        .progress-circle-wrap { position: relative; width: 130px; height: 130px; border-radius: 50%; background: conic-gradient(var(--accent-gold) 72deg, #dcf2e3 0deg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .progress-circle-inner { width: 105px; height: 105px; background: var(--white); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .progress-circle-inner span { font-size: 11px; color: var(--text-gray); font-weight: 600; margin-bottom: -5px; }
+        .progress-circle-inner h3 { font-size: 26px; font-weight: 800; color: var(--accent-gold); }
 
-        /* --- TÍNH NĂNG TRA CỨU BÀI THUỐC ĐỘG QUYỀN --- */
-        .search-box { width: 100%; padding: 12px 18px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 15px; margin-bottom: 20px; outline: none; transition: 0.2s; }
-        .search-box:focus { border-color: var(--primary-color); box-shadow: 0 0 8px rgba(11,89,54,0.15); }
+        .card h2 { font-size: 20px; color: var(--text-dark); margin-bottom: 12px; text-transform: uppercase; }
+        .card p { font-size: 15px; color: var(--text-gray); line-height: 1.6; margin-bottom: 8px; }
+
+        /* Hàng chứa các Card nhỏ bên dưới */
+        .row-cards { display: flex; gap: 20px; }
+        .small-card { flex: 1; padding: 20px; }
+        .small-card h3 { font-size: 16px; color: var(--text-dark); margin-bottom: 12px; text-transform: uppercase; }
+        .next-lesson-img { width: 100%; height: 120px; border-radius: 8px; object-fit: cover; }
+
+        /* ----- CỘT PHẢI: KHUNG VIDEO BÀI GIẢNG ----- */
+        .right-panel { width: 400px; flex-shrink: 0; }
+        .video-container {
+            background: var(--white); border-radius: 16px; padding: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            /* Tạo viền trang trí giống hình ảnh */
+            border: 2px solid #d0e8d8;
+            position: relative;
+        }
+        /* Chi tiết trang trí 4 góc (lá cây) */
+        .video-container::before { content: "🌿"; position: absolute; top: -10px; left: -10px; font-size: 24px; background: #e9f5ed; border-radius: 50%; }
+        .video-container::after { content: "🌿"; position: absolute; bottom: -10px; right: -10px; font-size: 24px; background: #e9f5ed; border-radius: 50%; transform: rotate(180deg); }
+
+        .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 12px; overflow: hidden; margin-bottom: 15px; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
         
-        .med-table { width: 100%; border-collapse: collapse; margin-top: 10px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
-        .med-table th { background: var(--primary-color); color: white; padding: 14px; font-weight: 600; text-align: left; font-size: 14px; }
-        .med-table td { padding: 14px; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #4a5568; }
-        .med-table tr:hover { background: #f8fafc; }
-        .med-table tr.hidden { display: none; }
+        .video-caption { text-align: center; font-weight: 800; color: var(--text-dark); font-size: 15px; padding-bottom: 5px; }
+
     </style>
 </head>
 <body>
 
+    <!-- THỂ HIỆN HEADER -->
     <header>
-        <div class="logo-area">
+        <div class="header-left">
+            <div class="logo-icon">🌍<!-- Thay bằng logo thực tế --></div>
             <h1>NÔNG Á NEWGEN</h1>
-            <p>Hệ thống Chuẩn hóa Kỹ thuật & Chăm sóc Khách hàng nội bộ</p>
         </div>
-        <div class="progress-container">
-            <div class="progress-label">Tiến độ khóa học: <span id="progress-percent">0%</span></div>
-            <div class="progress-bar-bg">
-                <div id="progress-fill" class="progress-bar-fill"></div>
+        <div class="header-right">
+            <div class="bell-icon">🔔<div class="bell-badge">3</div></div>
+            <div class="user-profile">
+                <!-- Avatar placeholder nam mặc vest -->
+                <img src="https://i.pravatar.cc/150?img=11" alt="User Avatar" class="avatar">
+                <div class="user-info">
+                    <span>Hệ Thống Đào Tạo Nhân Viên Mới</span>
+                    <input type="text" class="search-bar" placeholder="🔍 Tìm kiếm...">
+                </div>
             </div>
         </div>
     </header>
 
     <div class="main-container">
         
+        <!-- SIDEBAR MENU BÊN TRÁI -->
         <div class="sidebar">
-            <div class="menu-header">Chương Trình Huấn Luyện</div>
-            
-            <div class="week-bucket">
-                <div class="week-header">📅 Tuần 1: Nhập môn & An toàn</div>
-                <ul class="lesson-list">
-                    <li id="btn-t1b1" class="lesson-item active" onclick="clickLesson('t1b1')">Bài 1: Văn hóa Nông Á Newgen</li>
-                    <li id="btn-t1b2" class="lesson-item" onclick="clickLesson('t1b2')">Bài 2: Nhận diện Vạch màu độc tính</li>
-                    <li id="btn-t1b3" class="lesson-item" onclick="clickLesson('t1b3')">Bài 3: Phân loại Thuốc BVTV</li>
-                </ul>
+            <!-- Đào Tạo (Mở rộng) -->
+            <div class="nav-item">
+                <span class="nav-icon">📖</span> ĐÀO TẠO
+                <span style="margin-left:auto; font-size:12px;">▼</span>
+            </div>
+            <div class="sub-menu">
+                <div class="sub-item active" onclick="loadDashboard()">🌱 Tuần 1</div>
+                <div class="sub-item" onclick="loadContent('tuan2')">🌱 Tuần 2</div>
             </div>
 
-            <div class="week-bucket">
-                <div class="week-header">📅 Tuần 2: Danh mục sản phẩm</div>
-                <ul class="lesson-list">
-                    <li id="btn-t2b1" class="lesson-item" onclick="clickLesson('t2b1')">Bài 1: Sản phẩm Trừ Sâu & Rầy</li>
-                    <li id="btn-t2b2" class="lesson-item" onclick="clickLesson('t2b2')">Bài 2: Sản phẩm Trị Nấm Bệnh</li>
-                </ul>
+            <!-- Các mục khác -->
+            <div class="nav-item" onclick="loadContent('kiemtra')">
+                <span class="nav-icon">📋</span> KIỂM TRA
             </div>
-
-            <div class="menu-header">Công cụ hỗ trợ nhanh</div>
-            <div id="btn-kiemtra" class="nav-btn" onclick="clickMenu('kiemtra')">📝 Kiểm tra năng lực</div>
-            <div id="btn-baithuoc" class="nav-btn" onclick="clickMenu('baithuoc')">🧪 Bài thuốc phối trộn mẫu</div>
-            <div id="btn-thamkhao" class="nav-btn" onclick="clickMenu('thamkhao')">📖 Tài liệu tham khảo</div>
-            <div id="btn-lienhe" class="nav-btn" onclick="clickMenu('lienhe')">📞 Thông tin liên hệ</div>
-        </div>
-
-        <div class="content-area" id="scroll-content">
-            <div class="badge" id="content-badge">TUẦN 1 • BÀI 1</div>
-            <h2 id="content-title">Bài 1: Văn hóa cốt lõi & Quy tắc quầy kệ</h2>
-            <div id="content-body" class="article-body">
-                <p>Chào mừng bạn gia nhập đội ngũ chuyên gia nông nghiệp thế hệ mới tại <strong>NÔNG Á NEWGEN</strong>. Để bảo đảm uy tín của thương hiệu, mọi thành viên cần nằm lòng quy chuẩn phục vụ.</p>
-                <div class="callout-box">
-                    <strong>Tôn chỉ hoạt động:</strong> Tuyệt đối không tư vấn bán nâng liều quá mức trục lợi cá nhân gây cháy lá, rụng bông của bà con nông dân. Tư vấn đúng bệnh - đúng liều - đúng giá.
-                </div>
-                <p><strong>Quy trình đón tiếp 4 bước chuẩn hóa:</strong></p>
-                <ol>
-                    <li>Chào hỏi niềm nở, mời khách ngồi ghế uống nước hạ nhiệt độ (đặc biệt vào mùa khô Tây Nguyên).</li>
-                    <li>Lắng nghe nông dân kể tình trạng vườn (cây gì, giai đoạn nào, biểu hiện lá/quả ra sao).</li>
-                    <li>Yêu cầu xem ảnh chụp thực tế vườn hoặc mẫu lá/cành bệnh khách mang theo (nếu có).</li>
-                    <li>Lên phác đồ thuốc, hướng dẫn tỷ lệ pha phuy 200L hoặc bình béc chi tiết.</li>
-                </ol>
+            <div class="nav-item" onclick="loadContent('baithuoc')">
+                <span class="nav-icon">🧪</span> BÀI THUỐC MẪU
+            </div>
+            <div class="nav-item" onclick="loadContent('thamkhao')">
+                <span class="nav-icon">📚</span> THAM KHẢO
+            </div>
+            <div class="nav-item" onclick="loadContent('lienhe')">
+                <span class="nav-icon">📞</span> THÔNG TIN LIÊN HỆ
             </div>
         </div>
 
-        <div class="video-panel">
-            <div class="sticky-box">
-                <div class="video-card">
-                    <span class="video-tag">HƯỚNG DẪN TRỰC QUAN</span>
-                    <div class="video-title-text" id="video-title">Video minh họa: Quy trình tiếp đón khách hàng tại đại lý</div>
-                    <div class="video-wrapper">
-                        <iframe id="video-player" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+        <!-- KHU VỰC HIỂN THỊ NỘI DUNG CHÍNH (GIỮA) -->
+        <div class="content-area" id="main-content">
+            <!-- Giao diện Dashboard mặc định (Welcome Hub) -->
+            <div class="card">
+                <div class="welcome-badge">Welcome Hub</div>
+                <div class="welcome-top">
+                    <!-- Hình ảnh Nông trại/Nhà kính minh họa -->
+                    <img src="https://images.unsplash.com/photo-1592982537447-6f296c0993ea?auto=format&fit=crop&w=600&q=80" alt="Farm" class="welcome-img">
+                    
+                    <!-- Vòng tròn tiến độ -->
+                    <div class="progress-circle-wrap">
+                        <div class="progress-circle-inner">
+                            <span>Tiến Trình Của Bạn:</span>
+                            <h3>20%</h3>
+                        </div>
                     </div>
                 </div>
-                <div class="video-notes">
-                    <h4>💡 Gợi ý học tập:</h4>
-                    <p>Nhân viên đọc kỹ phần tài liệu văn bản bên trái, kết hợp quan sát thao tác chuẩn trong video để thực hành đúng tại quầy.</p>
+                <h2>CHÀO MỪNG BẠN ĐẾN VỚI NÔNG Á NEWGEN</h2>
+                <p>Vui lòng chọn các bài học bên menu trái để bắt đầu quy trình đào tạo nội bộ.</p>
+                <p>Hệ thống tích hợp tài liệu chuyên ngành và video minh họa trực quan giúp bạn nắm bắt công việc nhanh nhất.</p>
+            </div>
+
+            <div class="row-cards">
+                <div class="card small-card">
+                    <h3>BÀI HỌC TIẾP THEO</h3>
+                    <!-- Hình ảnh lá cây bị bệnh minh họa -->
+                    <img src="https://images.unsplash.com/photo-1558293842-c0fd3db86157?auto=format&fit=crop&w=400&q=80" alt="Bệnh trên lá" class="next-lesson-img">
                 </div>
+                <div class="card small-card">
+                    <h3>THÔNG BÁO MỚI</h3>
+                    <p style="font-size: 14px;">Thông báo mới sẽ thông báo nội dung hướng dẫn đào tạo nhân viên việc...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- KHUNG VIDEO BÊN PHẢI -->
+        <div class="right-panel">
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <!-- Video Youtube Nhúng (Thay ID video dQw4w9WgXcQ bằng ID thật) -->
+                    <iframe id="main-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0" allowfullscreen></iframe>
+                </div>
+                <div class="video-caption" id="video-caption">Video Hướng Dẫn Minh Họa</div>
             </div>
         </div>
 
     </div>
 
+    <!-- SCRIPT ĐỂ XỬ LÝ CHUYỂN TRANG/ĐỔI BÀI -->
     <script>
-        // Hệ thống dữ liệu bài học linh hoạt
-        const appData = {
-            t1b1: {
-                badge: "TUẦN 1 • BÀI 1",
-                title: "Bài 1: Văn hóa cốt lõi & Quy tắc phục vụ khách hàng",
-                videoTitle: "Video: Tác phong chuẩn quầy kệ NÔNG Á NEWGEN",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                body: `<p>Chào mừng bạn gia nhập đội ngũ chuyên gia nông nghiệp thế hệ mới tại <strong>NÔNG Á NEWGEN</strong>. Để bảo đảm uy tín của thương hiệu, mọi thành viên cần nằm lòng quy chuẩn phục vụ.</p>
-                       <div class="callout-box"><strong>Tôn chỉ hoạt động:</strong> Tuyệt đối không tư vấn bán nâng liều quá mức trục lợi cá nhân gây cháy lá, rụng bông của bà con nông dân. Tư vấn đúng bệnh - đúng liều - đúng giá.</div>
-                       <p><strong>Quy trình đón tiếp 4 bước chuẩn hóa:</strong></p>
-                       <ol>
-                           <li>Chào hỏi niềm nở, mời khách ngồi ghế uống nước hạ nhiệt độ (đặc biệt vào mùa khô Tây Nguyên).</li>
-                           <li>Lắng nghe nông dân kể tình trạng vườn (cây gì, giai đoạn nào, biểu hiện lá/quả ra sao).</li>
-                           <li>Yêu cầu xem ảnh chụp thực tế vườn hoặc mẫu lá/cành bệnh khách mang theo (nếu có).</li>
-                           <li>Lên phác đồ thuốc, hướng dẫn tỷ lệ pha phuy 200L hoặc bình béc chi tiết.</li>
-                       </ol>`
-            },
-            t1b2: {
-                badge: "TUẦN 1 • BÀI 2",
-                title: "Bài 2: Đọc hiểu chỉ số an toàn & Vạch màu độc tính",
-                videoTitle: "Video: Hướng dẫn phân biệt vạch màu trên nhãn chai thuốc",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                body: `<p>Thuốc BVTV là con dao hai lưỡi. Nhân viên bán hàng bắt buộc phải nhận diện độ độc qua vạch màu dưới đáy nhãn chai để khuyến cáo chính xác thời gian cách ly (PHI) cho nông dân.</p>
-                       <p><strong>Phân loại nhóm độc theo vạch màu:</strong></p>
-                       <ul>
-                           <li>🔴 <strong style="color:#e74c3c">Vạch Đỏ:</strong> Nhóm độc cực mạnh (Nhóm I). Phải để kho riêng, đeo mặt nạ chống độc khi bốc xếp. Chỉ bán cho người có kinh nghiệm.</li>
-                           <li>🟡 <strong style="color:#f1c40f">Vạch Vàng:</strong> Nhóm độc cao (Nhóm II). Cần trang bị găng tay, khẩu trang khi soạn hàng.</li>
-                           <li>🔵 <strong style="color:#3498db">Vạch Xanh Da Trời:</strong> Nhóm độc trung bình (Nhóm III). Ít nguy hiểm nhưng tuyệt đối không chủ quan.</li>
-                           <li>🟢 <strong style="color:#2ecc71">Vạch Xanh Lá:</strong> Nhóm độc nhẹ/Thuốc sinh học (Nhóm IV). Khuyến khích tư vấn cho nông sản sạch, xuất khẩu.</li>
-                       </ul>`
-            },
-            t1b3: {
-                badge: "TUẦN 1 • BÀI 3",
-                title: "Bài 3: Nguyên lý Phân Loại Các Nhóm Thuốc BVTV tại Kho",
-                videoTitle: "Video: Sắp xếp kho bãi theo tiêu chuẩn 5S",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                body: `<p>Kho hàng NÔNG Á NEWGEN được sắp đặt theo khu vực rõ ràng để tối ưu hóa tốc độ nhặt đơn hàng và tránh lấy nhầm hoạt chất.</p>
-                       <p><strong>Quy chuẩn 3 phân khu chủ lực:</strong></p>
-                       <p>1. <strong>Nhóm Thuốc Trừ Sâu - Rầy:</strong> Thường có dạng nhũ dầu (EC), bột (WP). Xếp ở khu thoáng gió, tránh ánh nắng trực tiếp gây biến tính hoạt chất.</p>
-                       <p>2. <strong>Nhóm Thuốc Trừ Bệnh (Nấm/Khuẩn):</strong> Dạng sữa (SC) hoặc cốm (WG). Xếp riêng để tránh nhiễm chéo mùi sang các dòng phân bón lá.</p>
-                       <p>3. <strong>Khu vực Dinh Dưỡng - Phân Bón:</strong> Các dòng Humic, NPK vi lượng, kích rễ xếp ở vị trí dễ bốc xếp bằng xe đẩy do trọng lượng nặng.</p>`
-            },
-            t2b1: {
-                badge: "TUẦN 2 • BÀI 1",
-                title: "Bài 1: Danh mục Thuốc Trừ Sâu & Rầy chủ lực Tây Nguyên",
-                videoTitle: "Video: Cơ chế diệt côn trùng chích hút hại sầu riêng, cà phê",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                body: `<p>Khu vực Tây Nguyên tập trung côn trùng chích hút mạnh như Rệp Sáp, Rầy Xanh, Nhện Đỏ gây hại Sầu Riêng và Cà Phê. Nhân viên cần ghi nhớ các hoạt chất chiến lược sau:</p>
-                       <ul>
-                           <li><strong>Thiamethoxam / Imidacloprid:</strong> Thuốc lưu dẫn cực mạnh, chuyên trị rầy xanh cứng đầu bám mặt dưới lá.</li>
-                           <li><strong>Abamectin / Spirodiclofen:</strong> Hoạt chất tiếp xúc, đặc trị Nhện Đỏ mùa khô. Lưu ý dặn khách phun đẫm ướt hai mặt lá.</li>
-                       </ul>`
-            },
-            t2b2: {
-                badge: "TUẦN 2 • BÀI 2",
-                title: "Bài 2: Danh mục Thuốc Trị Nấm Bệnh & Khuẩn",
-                videoTitle: "Video: Phân biệt nấm hồng, xì mủ gốc cây sầu riêng",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                body: `<p>Bệnh cây diễn biến rất nhanh vào mùa mưa. Cần chẩn đoán chính xác nấm hay khuẩn trước khi bốc thuốc.</p>
-                       <div class="callout-box"><strong>Quy tắc nhớ nhanh:</strong> Bệnh nấm gây thối, đốm vòng, lở cổ rễ. Bệnh khuẩn gây héo rũ nhanh, chảy dịch thối nhũn.</div>
-                       <ul>
-                           <li><strong>Metalaxyl / Mancozeb:</strong> Bộ đôi vàng chuyên quét sạch nấm Phytophthora gây thối rễ, xì mủ gốc sầu riêng.</li>
-                           <li><strong>Kasugamycin / Streptomycin:</strong> Kháng sinh thực vật chuyên trị các chủng vi khuẩn cháy bìa lá, thối trái.</li>
-                       </ul>`
-            },
-            kiemtra: {
-                badge: "HỆ THỐNG ĐÁNH GIÁ",
-                title: "📝 Kiểm Tra Năng Lực Định Kỳ Nhân Viên Mới",
-                videoTitle: "Video: Hướng dẫn làm bài trắc nghiệm cuối tuần",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                body: `<p>Mỗi tuần, nhân viên bắt buộc phải hoàn thành bài đánh giá kiến thức để được cấp quyền lên quầy bán chính thức.</p>
-                       <div class="callout-box">Hệ thống liên kết trực tiếp với dữ liệu chấm điểm tự động của Google Forms. Điểm số đạt 80/100 trở lên mới được tính là đạt yêu cầu.</div>
-                       <p><a href="https://docs.google.com/forms/" target="_blank" style="display:inline-block; padding:12px 24px; background:var(--accent-color); color:white; font-weight:700; text-decoration:none; border-radius:6px; box-shadow: 0 4px 10px rgba(243,156,18,0.3);">👉 BẤM VÀO ĐÂY ĐỂ LÀM BÀI KIỂM TRA TUẦN 1</a></p>`
-            },
-            baithuoc: {
-                badge: "TRA CỨU NHANH",
-                title: "🧪 Công Thức & Bài Thuốc Phối Trộn Mẫu Chuẩn",
-                videoTitle: "Video: Kỹ thuật pha thuốc chống kết tủa (Nguyên tắc W-G-S-L)",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                body: `<p>Nhập từ khóa cần tìm kiếm (Ví dụ: <em>Sầu riêng, Rầy, Thối rễ...</em>) vào thanh tra cứu dưới đây để lọc nhanh combo sản phẩm:</p>
-                       <input type="text" id="medSearch" class="search-box" onkeyup="filterMedicine()" placeholder="🔍 Nhập tên cây trồng hoặc tên dịch hại để tra cứu nhanh...">
-                       <table class="med-table">
-                            <thead>
-                                <tr>
-                                    <th>Cây Trồng</th>
-                                    <th>Dịch Hại Tấn Công</th>
-                                    <th>Bài Thuốc Phối Trộn</th>
-                                    <th>Liều Lượng Chuẩn</th>
-                                </tr>
-                            </thead>
-                            <tbody id="medTableBody">
-                                <tr>
-                                    <td>Sầu Riêng</td>
-                                    <td>Rầy xanh phá đọt</td>
-                                    <td>Thiamethoxam + Thấm sâu sinh học</td>
-                                    <td>1 bộ pha 400 lít nước</td>
-                                </tr>
-                                <tr>
-                                    <td>Sầu Riêng</td>
-                                    <td>Thối rễ, xì mủ thân</td>
-                                    <td>Metalaxyl + Phosphonate tưới gốc</td>
-                                    <td>Tưới gốc 2 lần (cách nhau 7 ngày)</td>
-                                </tr>
-                                <tr>
-                                    <td>Cà Phê</td>
-                                    <td>Rệp sáp cộng sinh kiến</td>
-                                    <td>Imidacloprid + Dầu khoáng EC</td>
-                                    <td>Phun đẫm gốc và chùm quả</td>
-                                </tr>
-                                <tr>
-                                    <td>Hồ Tiêu</td>
-                                    <td>Chết nhanh, chết chậm</td>
-                                    <td>Mancozeb + Đồng Bo đổ gốc</td>
-                                    <td>Phun ngừa đầu mùa mưa</td>
-                                </tr>
-                            </tbody>
-                       </table>`
-            },
-            thamkhao: {
-                badge: "TÀI LIỆU NỘI BỘ",
-                title: "📖 Cẩm Nang Tra Cứu Kỹ Thuật Tập Đoàn",
-                videoTitle: "Video: Cách cập nhật thông tin hoạt chất mới",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                body: `<p>Nhân viên tải các tài liệu đính kèm dưới đây lưu vào điện thoại để xem trực tiếp khi đi vườn hỗ trợ kỹ thuật cho nông dân:</p>
-                       <ul>
-                           <li><a href="#" style="color: var(--primary-color); font-weight:600;">📁 Hướng dẫn quản lý sâu bệnh hại trên cây Sầu riêng (Tài liệu Bayer)</a></li>
-                           <li><a href="#" style="color: var(--primary-color); font-weight:600;">📁 Quy trình phục hồi vườn cây sau thu hoạch chuẩn Tây Nguyên</a></li>
-                           <li><a href="https://www.bvtv.gov.vn/" target="_blank" style="color: var(--primary-color); font-weight:600;">🌐 Cổng thông tin tra cứu hoạt chất của Cục Bảo Vệ Thực Vật</a></li>
-                       </ul>`
-            },
-            lienhe: {
-                badge: "HỖ TRỢ NỘI BỘ",
-                title: "📞 Đường Dây Nóng Hỗ Trợ Kỹ Thuật Khẩn Cấp",
-                videoTitle: "Video: Quy trình báo cáo sự cố kho bãi",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                body: `<p>Khi gặp các ca bệnh lạ nông dân mang tới mà bạn chưa chắc chắn phác đồ phối trộn thuốc, hãy chụp ảnh gửi ngay cho các nhân sự cấp cao sau:</p>
-                       <ul>
-                           <li><strong>Giám Đốc Đại Lý (Quản lý chung):</strong> Anh Tin - 0905.xxx.xxx</li>
-                           <li><strong>Cố Vấn Kỹ Thuật Cây Ăn Trái:</strong> Kỹ sư Huỳnh - 0914.xxx.xxx</li>
-                           <li><strong>Group Zalo Kỹ Thuật NÔNG Á NEWGEN:</strong> Nhân viên quét mã QR tại quầy để tham gia.</li>
-                       </ul>`
+        // Khi bấm vào "Tuần 1", load lại màn hình chính Welcome Hub
+        function loadDashboard() {
+            location.reload(); 
+        }
+
+        // Khi bấm vào các mục khác, đổi nội dung ở cột giữa
+        function loadContent(menuId) {
+            const contentArea = document.getElementById('main-content');
+            
+            // Xóa nội dung Dashboard cũ
+            contentArea.innerHTML = '';
+            
+            // Tạo Card mới chứa nội dung chữ
+            const newCard = document.createElement('div');
+            newCard.className = 'card';
+            newCard.style.minHeight = '500px';
+
+            if(menuId === 'tuan2') {
+                newCard.innerHTML = `<h2>Tuần 2: Danh Mục Sản Phẩm</h2>
+                                     <p>Nội dung đang được cập nhật. Bạn sẽ học về thuốc Trừ Sâu, Rầy và Thuốc Trị Bệnh.</p>`;
+                document.getElementById('video-caption').innerText = "Video: Giới thiệu thuốc Trừ Sâu";
+            } 
+            else if(menuId === 'kiemtra') {
+                newCard.innerHTML = `<h2>📝 HỆ THỐNG KIỂM TRA</h2>
+                                     <p>Vui lòng nhấp vào link bên dưới để làm bài trắc nghiệm hệ thống:</p>
+                                     <br><a href="#" style="background: var(--header-bg); color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px;">Bắt đầu làm bài</a>`;
+                document.getElementById('video-caption').innerText = "Video Hướng Dẫn Thi";
             }
-        };
+            else if(menuId === 'baithuoc') {
+                newCard.innerHTML = `<h2>🧪 BÀI THUỐC MẪU ĐỘC QUYỀN</h2>
+                                     <p>Danh sách các combo phối trộn thuốc cho sầu riêng, cà phê tại NÔNG Á NEWGEN.</p>`;
+            }
+            else if(menuId === 'thamkhao') {
+                newCard.innerHTML = `<h2>📚 TÀI LIỆU THAM KHẢO</h2>
+                                     <p>Các tài liệu kỹ thuật từ Bayer, Syngenta để nhân viên tự đọc thêm.</p>`;
+            }
+            else if(menuId === 'lienhe') {
+                newCard.innerHTML = `<h2>📞 THÔNG TIN LIÊN HỆ</h2>
+                                     <p>Hotline quản lý cửa hàng: <strong>0905.xxx.xxx</strong> (Anh Tin)</p>`;
+            }
 
-        // Quản lý lưu trữ trạng thái bài đã đọc (để tính % tiến trình)
-        let completedLessons = new Set(['t1b1']); // Bài đầu mặc định hoàn thành
-
-        function updateProgressBar() {
-            const totalLessons = 5; // Tổng cộng 5 bài học nhỏ ở tuần 1 và tuần 2
-            const currentCompleted = completedLessons.size;
-            const percent = Math.round((currentCompleted / totalLessons) * 100);
-            document.getElementById('progress-percent').innerText = percent + "%";
-            document.getElementById('progress-fill').style.width = percent + "%";
+            contentArea.appendChild(newCard);
         }
-
-        // Logic điều hướng khi click bài học nhỏ
-        function clickLesson(id) {
-            // Đổi active class menu bài học
-            document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById('btn-' + id).classList.add('active');
-            
-            // Đánh dấu bài học đã hoàn thành
-            completedLessons.add(id);
-            document.getElementById('btn-' + id).classList.add('completed');
-            updateProgressBar();
-
-            // Đổ dữ liệu vào trang
-            renderContent(id);
-        }
-
-        // Logic điều hướng khi click menu lớn độc lập
-        function clickMenu(id) {
-            document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById('btn-' + id).classList.add('active');
-            
-            renderContent(id);
-        }
-
-        // Đẩy nội dung ra HTML vùng trung tâm và video
-        function renderContent(id) {
-            const data = appData[id];
-            document.getElementById('content-badge').innerText = data.badge;
-            document.getElementById('content-title').innerText = data.title;
-            document.getElementById('content-body').innerHTML = data.body;
-            
-            document.getElementById('video-title').innerText = data.videoTitle;
-            document.getElementById('video-player').src = data.videoUrl;
-            
-            // Tự động cuộn phần nội dung chữ về đầu trang mỗi khi chuyển bài
-            document.getElementById('scroll-content').scrollTop = 0;
-        }
-
-        // Tính năng tìm kiếm động cho bảng bài thuốc mẫu
-        function filterMedicine() {
-            let input = document.getElementById('medSearch').value.toLowerCase();
-            let rows = document.querySelectorAll('#medTableBody tr');
-            
-            rows.forEach(row => {
-                let text = row.innerText.toLowerCase();
-                if(text.includes(input)) {
-                    row.classList.remove('hidden');
-                } else {
-                    row.classList.add('hidden');
-                }
-            });
-        }
-
-        // Chạy kiểm tra thanh tiến trình ngay khi load trang ban đầu
-        updateProgressBar();
     </script>
 </body>
 </html>
