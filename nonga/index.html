@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Đào Tạo Nội Bộ - NÔNG Á NEWGEN</title>
+    <style>
+        /* --- CẤU HÌNH GIAO DIỆN CHUNG --- */
+        :root {
+            --primary-color: #2E7D32; /* Xanh lá thương hiệu Nông Á Newgen */
+            --secondary-color: #388E3C;
+            --dark-color: #1B5E20;
+            --text-color: #333333;
+            --bg-light: #F4F6F4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            height: 70px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        header span {
+            font-size: 14px;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        /* --- KHUNG BAO CHÍNH (3 CỘT) --- */
+        .main-container {
+            display: flex;
+            margin-top: 70px; /* Tránh bị đè bởi Header */
+            height: calc(100vh - 70px);
+            overflow: hidden;
+        }
+
+        /* --- CỘT 1: SIDEBAR TRÁI (MENU) --- */
+        .sidebar {
+            width: 25%;
+            background-color: white;
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+            padding: 20px 10px;
+        }
+
+        .menu-item {
+            margin-bottom: 10px;
+        }
+
+        .menu-btn {
+            width: 100%;
+            text-align: left;
+            padding: 12px 15px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #444;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-btn:hover, .menu-btn.active {
+            background-color: #E8F5E9;
+            color: var(--primary-color);
+        }
+
+        /* Submenu cho các Tuần */
+        .submenu {
+            padding-left: 15px;
+            display: none; /* Ẩn mặc định, hiện khi click */
+        }
+
+        .week-btn {
+            width: 100%;
+            text-align: left;
+            padding: 8px 12px;
+            margin-top: 5px;
+            background: none;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .week-btn:hover {
+            color: var(--primary-color);
+        }
+
+        /* Danh sách bài học */
+        .lesson-list {
+            padding-left: 15px;
+            display: none;
+        }
+
+        .lesson-item {
+            padding: 6px 12px;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+            border-left: 2px solid #ccc;
+            margin-top: 4px;
+        }
+
+        .lesson-item:hover, .lesson-item.active-lesson {
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+            font-weight: bold;
+            background-color: #F1F8E9;
+        }
+
+        /* --- CỘT 2: NỘI DUNG CHÍNH (GIỮA) --- */
+        .content-area {
+            width: 45%;
+            padding: 40px;
+            overflow-y: auto;
+            background-color: white;
+            line-height: 1.6;
+        }
+
+        .content-area h2 {
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            font-size: 26px;
+            border-bottom: 2px solid #E8F5E9;
+            padding-bottom: 10px;
+        }
+
+        .content-area p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        /* --- CỘT 3: VIDEO CỐ ĐỊNH (PHẢI) --- */
+        .video-panel {
+            width: 30%;
+            background-color: #fafafa;
+            border-left: 1px solid #e0e0e0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .video-box {
+            position: sticky;
+            top: 20px;
+            width: 100%;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Tỷ lệ 16:9 */
+            height: 0;
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-title {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #555;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* CSS bổ sung cho giao diện bảng Bài Thuốc */
+        .med-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .med-table th, .med-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .med-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER CÔNG TY -->
+    <header>
+        <h1>NÔNG Á NEWGEN</h1>
+        <span>Hệ Thống Đào Tạo Nhân Viên Mới</span>
+    </header>
+
+    <!-- BAO CHÍNH 3 CỘT -->
+    <div class="main-container">
+        
+        <!-- CỘT 1: SIDEBAR TRÁI -->
+        <div class="sidebar">
+            
+            <!-- Mục Đào Tạo -->
+            <div class="menu-item">
+                <button class="menu-btn" onclick="toggleSubmenu('training-sub')">📖 ĐÀO TẠO <span>▼</span></button>
+                <div id="training-sub" class="submenu">
+                    
+                    <!-- Tuần 1 -->
+                    <button class="week-btn" onclick="toggleSubmenu('w1-lessons')">📅 Tuần 1</button>
+                    <div id="w1-lessons" class="lesson-list">
+                        <div class="lesson-item" onclick="loadContent('w1_b1')">Bài 1: Nội quy & Văn hóa cửa hàng</div>
+                        <div class="lesson-item" onclick="loadContent('w1_b2')">Bài 2: Nguyên tắc an toàn lao động</div>
+                        <div class="lesson-item" onclick="loadContent('w1_b3')">Bài 3: Phân loại Thuốc BVTV cơ bản</div>
+                        <div class="lesson-item" onclick="loadContent('w1_b4')">Bài 4: Quy trình sắp xếp kho bãi</div>
+                    </div>
+
+                    <!-- Tuần 2 -->
+                    <button class="week-btn" onclick="toggleSubmenu('w2-lessons')">📅 Tuần 2</button>
+                    <div id="w2-lessons" class="lesson-list">
+                        <div class="lesson-item" onclick="loadContent('w2_b1')">Bài 1: Danh mục Thuốc Trừ Sâu - Rầy</div>
+                        <div class="lesson-item" onclick="loadContent('w2_b2')">Bài 2: Danh mục Thuốc Trừ Bệnh</div>
+                    </div>
+
+                    <!-- Thêm Tuần 3, Tuần 4 tương tự vào đây -->
+                </div>
+            </div>
+
+            <!-- Các mục khác -->
+            <div class="menu-item">
+                <button class="menu-btn" onclick="loadContent('kiem_tra')">📝 KIỂM TRA</button>
+            </div>
+            <div class="menu-item">
+                <button class="menu-btn" onclick="loadContent('bai_thuoc')">💊 BÀI THUỐC MẪU</button>
+            </div>
+            <div class="menu-item">
+                <button class="menu-btn" onclick="loadContent('tham_khao')">📚 THAM KHẢO</button>
+            </div>
+            <div class="menu-item">
+                <button class="menu-btn" onclick="loadContent('lien_he')">📞 THÔNG TIN LIÊN HỆ</button>
+            </div>
+
+        </div>
+
+        <!-- CỘT 2: NỘI DUNG GIỮA (CUỘN ĐƯỢC) -->
+        <div class="content-area" id="main-content">
+            <h2>Chào mừng bạn đến với NÔNG Á NEWGEN</h2>
+            <p>Vui lòng chọn các bài học bên menu trái để bắt đầu quy trình đào tạo nội bộ.</p>
+            <p>Hệ thống tích hợp tài liệu đọc chuyên ngành và video minh họa trực quan giúp bạn nắm bắt công việc nhanh nhất.</p>
+        </div>
+
+        <!-- CỘT 3: VIDEO CỐ ĐỊNH PHẢI -->
+        <div class="video-panel">
+            <div class="video-box">
+                <div class="video-container">
+                    <!-- Mặc định nhúng 1 video giới thiệu hoặc để trống -->
+                    <iframe id="youtube-player" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+                <div class="video-title" id="video-caption">Video Hướng Dẫn Minh Họa</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- --- JAVASCRIPT ĐIỀU HƯỚNG DỮ LIỆU --- -->
+    <script>
+        // Hàm đóng/mở menu con (Tuần và Bài)
+        function toggleSubmenu(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "block") {
+                element.style.display = "none";
+            } else {
+                element.style.display = "block";
+            }
+        }
+
+        // KHO DỮ LIỆU NỘI DUNG (Bạn có thể tự sửa chữ và link youtube ở đây)
+        const dataStorage = {
+            w1_b1: {
+                title: "Bài 1: Nội quy & Văn hóa phục vụ tại NÔNG Á NEWGEN",
+                text: "<p>Tại Nông Á Newgen, khách hàng là bà con nông dân. Chúng ta không chỉ bán thuốc mà là đem lại giải pháp cho mùa màng.</p><p>1. Giờ làm việc: Có mặt trước 15 phút để quét dọn kệ hàng.</p><p>2. Thái độ: Luôn lắng nghe tình trạng bệnh của cây trước khi bốc thuốc. Tuyệt đối không cáu gắt với nông dân.</p>",
+                video: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Thay mã video YT của bạn vào đây
+                caption: "Video: Văn hóa ứng xử với bà con nông dân"
+            },
+            w1_b2: {
+                title: "Bài 2: Nguyên tắc an toàn lao động ngành BVTV",
+                text: "<p>Thuốc bảo vệ thực vật là hàng hóa đặc thù có tính độc. Nhân viên phải tuyệt đối tuân thủ bảo hộ.</p><p>- Luôn đeo khẩu trang và găng tay khi phân loại hoặc sang chiết thuốc.</p><p>- Đọc hiểu vạch màu độc tính trên chai thuốc (Vạch đỏ: Độc cao, Vạch vàng: Nguy hiểm, Vạch xanh da trời: Cẩn thận).</p>",
+                video: "https://www.youtube.com/embed/dQw4w9WgXcQ", 
+                caption: "Video: Hướng dẫn trang bị bảo hộ tại kho thuốc"
+            },
+            w1_b3: {
+                title: "Bài 3: Phân loại Thuốc BVTV cơ bản",
+                text: "<p>Nhân viên mới cần phân biệt rõ 4 nhóm chính tại cửa hàng:</p><ul><li><b>Thuốc trừ sâu/rầy:</b> Diệt côn trùng phá hoại.</li><li><b>Thuốc trừ bệnh:</b> Diệt nấm, vi khuẩn gây thối rễ, đốm lá.</li><li><b>Thuốc trừ cỏ:</b> Cỏ tiền nảy mầm và hậu nảy mầm.</li><li><b>Phân bón lá:</b> Dinh dưỡng bổ trợ kích rễ, dưỡng hoa.</li></ul>",
+                video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                caption: "Video: Cách nhận biết các nhóm thuốc trên kệ"
+            },
+            kiem_tra: {
+                title: "Hệ Thống Bài Kiểm Tra Năng Lực",
+                text: "<p>Sau khi học xong mỗi tuần, bạn bắt buộc phải hoàn thành bài đánh giá dưới đây.</p><p><b>Bấm vào link bên dưới để làm bài trên Google Forms:</b></p><a href='#' style='color:green; font-weight:bold;'>👉 Click vào đây để làm bài kiểm tra Tuần 1</a>",
+                video: "",
+                caption: "Mục này không có video"
+            },
+            bai_thuoc: {
+                title: "Các Bài Thuốc Phối Trộn Độc Quyền",
+                text: "<p>Bảng tra cứu nhanh bộ combo thuốc phối trộn cho khách hàng:</p><table class='med-table'><tr><th>Tên Bệnh</th><th>Bộ Thuốc Kết Hợp</th><th>Liều Lượng</th></tr><tr><td>Thối rễ cam/quýt</td><td>Hoạt chất Metalaxyl + Humic</td><td>1 bộ pha 200 lít nước</td></tr><tr><td>Rầy xanh sầu riêng</td><td>Imidacloprid + Thiamethoxam</td><td>Pha bình béc 25 lít Phun kỹ mặt dưới lá</td></tr></table>",
+                video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                caption: "Video: Hướng dẫn kỹ thuật pha trộn thuốc không bị kết tủa"
+            },
+            tham_khao: {
+                title: "Tài Liệu Tham Khảo Mở Rộng",
+                text: "<p>Tải về các Catalogue sản phẩm chính hãng để nghiên cứu thêm:</p><ul><li><a href='#'>Tài liệu kỹ thuật Bayer 2026.pdf</a></li><li><a href='#'>Cẩm nang trị bệnh cây trồng Syngenta.pdf</a></li></ul>",
+                video: "",
+                caption: "Không có video"
+            },
+            lien_he: {
+                title: "Thông Tin Liên Hệ Hỗ Trợ",
+                text: "<p>Trong quá trình học việc nếu có bất kỳ thắc mắc nào về kỹ thuật, bạn vui lòng liên hệ:</p><p>- <b>Quản lý kỹ thuật:</b> Anh Nguyễn Văn A (SĐT: 0905.xxx.xxx)</p><p>- <b>Hotline Cửa hàng:</b> 1900.xxxx</p>",
+                video: "",
+                caption: "Không có video"
+            }
+        };
+
+        // Hàm đổ dữ liệu vào Cột giữa và Cột phải khi Click menu
+        function loadContent(key) {
+            const data = dataStorage[key];
+            if (data) {
+                // Đổi nội dung chữ cột giữa
+                document.getElementById('main-content').innerHTML = `<h2>${data.title}</h2>${data.text}`;
+                
+                // Đổi video cột phải
+                const player = document.getElementById('youtube-player');
+                if(data.video !== "") {
+                    player.style.display = "block";
+                    player.src = data.video;
+                    document.getElementById('video-caption').innerText = data.caption;
+                } else {
+                    player.style.display = "none"; // Ẩn video nếu mục đó không cần video
+                    document.getElementById('video-caption').innerText = "Mục này không có video minh họa";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
