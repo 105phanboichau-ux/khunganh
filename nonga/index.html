@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NÔNG Á NEWGEN - Trailheads Learning</title>
+    <title>NÔNG Á NEWGEN - Đào Tạo</title>
     <style>
-        /* ================= THIẾT KẾ GIAO DIỆN CHUẨN TRAILHEAD ================= */
+        /* ================= THIẾT KẾ GIAO DIỆN CẬP NHẬT ================= */
         :root {
-            --bg-cream: #f7f5f0;        /* Màu nền kem ấm đặc trưng của Trailhead */
-            --sidebar-bg: #ffffff;      /* Nền trắng tinh cho cột menu trái */
-            --text-dark: #1a202c;       /* Màu chữ đen xám sang trọng */
-            --text-muted: #64748b;      /* Màu chữ phụ mờ */
-            --active-blue: #1a73e8;     /* Màu xanh Pill chọn của thanh điều hướng */
-            --border-light: #e2e8f0;    /* Đường kẻ phân cách mờ */
+            --bg-cream: #f7f5f0;        
+            --sidebar-bg: #ffffff;      
+            --text-dark: #1a202c;       
+            --text-muted: #64748b;      
+            --active-blue: #1a73e8;     
+            --border-light: #e2e8f0;    
             --radius-card: 12px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         body { background-color: var(--bg-cream); color: var(--text-dark); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-        /* ================= 1. THANH ĐIỀU HƯỚNG TRÊN (TOP NAV) ================= */
+        /* ================= 1. HEADER (LOGO MỚI) ================= */
         header {
             background-color: var(--bg-cream);
-            height: 65px;
+            height: 70px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -30,126 +30,163 @@
             border-bottom: 1px solid var(--border-light);
             z-index: 50;
         }
-        .logo-section { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 20px; color: #111827; cursor: pointer; }
-        .logo-section span { color: #059669; } /* Điểm xuyết xanh lá nông nghiệp */
+        /* YÊU CẦU: Logo in hoa, to rõ, màu xanh lá thương hiệu */
+        .logo-section { 
+            font-size: 26px; 
+            font-weight: 900; 
+            color: #059669; 
+            cursor: pointer; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
         
-        .search-container { position: relative; width: 360px; }
-        .search-input { width: 100%; padding: 8px 16px; background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 20px; font-size: 14px; outline: none; }
+        .search-container { position: relative; width: 400px; }
+        .search-input { width: 100%; padding: 10px 18px; background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 24px; font-size: 15px; outline: none; }
         
-        .nav-icons { display: flex; align-items: center; gap: 18px; color: var(--text-muted); font-size: 18px; cursor: pointer; }
-        .user-avatar { width: 32px; height: 32px; border-radius: 50%; background-color: #cbd5e1; overflow: hidden; border: 1px solid #94a3b8; }
+        .nav-icons { display: flex; align-items: center; gap: 18px; color: var(--text-muted); font-size: 20px; cursor: pointer; }
+        .user-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: #cbd5e1; overflow: hidden; border: 1px solid #94a3b8; }
         .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
         /* ================= 2. BỐ CỤC CHÍNH (WORKSPACE) ================= */
         .workspace { display: flex; flex: 1; overflow: hidden; }
 
-        /* ----- SIDEBAR CỘT TRÁI CHUẨN ẢNH ----- */
-        .sidebar { width: 260px; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-light); padding: 24px 12px; overflow-y: auto; }
-        .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+        /* ----- YÊU CẦU: MENU TRÁI TO RÕ HƠN ----- */
+        .sidebar { width: 280px; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-light); padding: 24px 16px; overflow-y: auto; }
+        .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 6px; }
         
         .menu-item { 
-            padding: 10px 16px; font-size: 14px; font-weight: 500; color: #475569; 
-            cursor: pointer; border-radius: 8px; display: flex; align-items: center; gap: 12px; transition: 0.15s;
+            padding: 14px 20px; /* Tăng khoảng trống để nút to hơn */
+            font-size: 16px;    /* Tăng cỡ chữ */
+            font-weight: 600; 
+            color: #475569; 
+            cursor: pointer; 
+            border-radius: 8px; 
+            display: flex; 
+            align-items: center; 
+            gap: 14px; 
+            transition: 0.15s;
         }
         .menu-item:hover { background-color: #f1f5f9; color: var(--text-dark); }
-        .menu-item.active { background-color: var(--active-blue); color: #ffffff; font-weight: 600; }
+        .menu-item.active { background-color: var(--active-blue); color: #ffffff; }
         
-        .menu-divider { height: 1px; background-color: var(--border-light); margin: 12px 0; }
-        .menu-section-hdr { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin: 12px 0 6px 16px; }
+        .menu-divider { height: 1px; background-color: var(--border-light); margin: 16px 0; }
+        .menu-section-hdr { font-size: 13px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin: 16px 0 8px 16px; }
+        
+        /* Highlight cho menu Admin */
+        .admin-item { color: #d97706; }
+        .admin-item:hover { background-color: #fef3c7; color: #b45309; }
+        .admin-item.active { background-color: #d97706; color: white; }
 
         /* ----- KHU VỰC THÀNH PHẦN CHÍNH (BÊN PHẢI) ----- */
         .main-view { flex: 1; overflow-y: auto; padding: 32px 48px; }
         
-        /* Banner phong cảnh mờ phía trên giống ảnh */
-        .scenic-banner { width: 100%; height: 100px; background: linear-gradient(135deg, #065f46, #0284c7); border-radius: 12px; margin-bottom: 24px; position: relative; overflow: hidden; }
-        .scenic-banner::after { content: ""; position: absolute; width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80') center/cover; opacity: 0.25; }
-
-        .section-header-card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius-card); padding: 16px 20px; display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
-        .section-icon-box { width: 44px; height: 44px; background: #111827; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-        .section-info h2 { font-size: 18px; font-weight: 700; }
-        .section-info p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+        /* ----- YÊU CẦU: BANNER GIỚI THIỆU CHIA 2 CỘT ----- */
+        .intro-banner {
+            display: flex;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            min-height: 240px;
+        }
+        
+        /* Cột trái: Lời chào mừng */
+        .intro-text-col {
+            flex: 1;
+            padding: 32px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .intro-text-col h1 { font-size: 26px; color: #065f46; margin-bottom: 12px; font-weight: 800; line-height: 1.3; }
+        .intro-text-col p { font-size: 16px; color: #475569; line-height: 1.6; }
+        
+        /* Cột phải: Video nhúng */
+        .intro-video-col {
+            width: 420px; /* Độ rộng cố định cho video */
+            background: #000;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .intro-video-col iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
 
         /* Tiêu đề nhóm học phần */
         .group-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #e2e8f0; }
-        .group-title-row h3 { font-size: 16px; font-weight: 700; color: #1e293b; }
-        .group-count { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+        .group-title-row h3 { font-size: 18px; font-weight: 700; color: #1e293b; }
+        .group-count { font-size: 14px; color: var(--text-muted); font-weight: 500; }
 
-        /* HỆ THỐNG LƯỚI THẺ (GRID CARD LAYOUT) Y HỆT TRONG ẢNH */
+        /* HỆ THỐNG LƯỚI THẺ (GRID CARD) */
         .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
-        
         .lesson-card { cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
         .lesson-card:hover { transform: translateY(-4px); }
-        
-        /* Khung ảnh thẻ với chữ tiêu đề siêu lớn đè lên */
         .card-image-wrapper { 
-            position: relative; width: 100%; padding-bottom: 58%; /* Tỷ lệ khung hình ảnh của ảnh mẫu */
+            position: relative; width: 100%; padding-bottom: 58%; 
             border-radius: var(--radius-card); overflow: hidden; background-color: #000;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
         .card-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.75; transition: 0.3s; }
         .lesson-card:hover .card-img { opacity: 0.6; scale: 1.03; }
-        
-        /* Chữ lớn màu trắng căn giữa đè lên hình ảnh */
         .card-overlay-title { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             display: flex; align-items: center; justify-content: center; padding: 20px;
             color: #ffffff; font-size: 26px; font-weight: 800; text-align: center; letter-spacing: -0.5px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.6); z-index: 2;
         }
+        .card-bottom-info { margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #334155; }
+        .check-icon { color: #2563eb; font-size: 15px; }
 
-        /* Phần chữ ghi chú nhỏ bên dưới thẻ ảnh */
-        .card-bottom-info { margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: #334155; }
-        .check-icon { color: #2563eb; font-size: 14px; } /* Dấu check xanh giống ảnh */
-
-        /* ================= 3. MODAL HỌC TẬP (VỪA ĐỌC VỪA XEM VIDEO KHÔNG DI CHUYỂN) ================= */
+        /* ================= 3. MODAL HỌC TẬP ================= */
         .study-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 1000; }
         .modal-container { width: 92%; max-width: 1200px; height: 85vh; background: #ffffff; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
-        
         .modal-header { padding: 20px 30px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: var(--bg-cream); }
-        .modal-header h3 { font-size: 18px; font-weight: 700; }
-        .close-btn { font-size: 24px; color: var(--text-muted); cursor: pointer; border: none; background: transparent; }
-        
+        .modal-header h3 { font-size: 20px; font-weight: 700; }
+        .close-btn { font-size: 28px; color: var(--text-muted); cursor: pointer; border: none; background: transparent; }
         .modal-body { display: flex; flex: 1; overflow: hidden; }
-        /* Cột chữ bên trái (Cuộn tự do) */
-        .modal-text-pane { flex: 1; padding: 30px; overflow-y: auto; line-height: 1.8; font-size: 15.5px; color: #334155; }
+        .modal-text-pane { flex: 1; padding: 30px; overflow-y: auto; line-height: 1.8; font-size: 16px; color: #334155; }
         .modal-text-pane p { margin-bottom: 16px; }
-        .modal-text-pane h4 { font-size: 20px; color: #111827; margin: 20px 0 12px 0; font-weight: 700; }
-        
-        /* Cột Video bên phải (Gắn chặt một vị trí cố định) */
-        .modal-video-pane { width: 460px; background: #f8fafc; border-left: 1px solid var(--border-light); padding: 30px 20px; flex-shrink: 0; }
+        .modal-text-pane h4 { font-size: 22px; color: #111827; margin: 20px 0 12px 0; font-weight: 700; }
+        .modal-video-pane { width: 480px; background: #f8fafc; border-left: 1px solid var(--border-light); padding: 30px 20px; flex-shrink: 0; }
         .video-box-fixed { position: sticky; top: 0; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 8px; overflow: hidden; }
         .video-box-fixed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
     </style>
 </head>
 <body>
 
-    <!-- TOP NAVIGATION BAR -->
+    <!-- TOP NAV: LOGO IN HOA TO RÕ -->
     <header>
         <div class="logo-section" onclick="changeSection('t1')">
-            🌲 Trailheads <span>Nông Á Newgen</span>
+            NÔNG Á NEWGEN
         </div>
         <div class="search-container">
-            <input type="text" class="search-input" placeholder="🔍 Search bài học, hoạt chất, bài thuốc...">
+            <input type="text" class="search-input" placeholder="🔍 Tìm kiếm bài học, hoạt chất...">
         </div>
         <div class="nav-icons">
-            <span>⚙️</span> <span>👤</span> <span>🔔</span>
+            <span>⚙️</span> <span>🔔</span>
             <div class="user-avatar">
                 <img src="https://i.pravatar.cc/100?img=33" alt="Avatar">
             </div>
         </div>
     </header>
 
-    <!-- MAIN APP WORKSPACE -->
     <div class="workspace">
         
-        <!-- SIDEBAR MENU TRÁI CƠ BẢN PHẲNG CHUẨN ẢNH -->
+        <!-- YÊU CẦU: MENU TRÁI TO RÕ HƠN -->
         <aside class="sidebar">
             <ul class="sidebar-menu">
                 <li class="menu-section-hdr">Lộ trình cơ bản</li>
-                <li id="menu-t1" class="menu-item active" onclick="changeSection('t1')">🗺️ Đào tạo Tuần 1</li>
-                <li id="menu-t2" class="menu-item" onclick="changeSection('t2')">🗺️ Đào tạo Tuần 2</li>
-                <li id="menu-t3" class="menu-item" onclick="changeSection('t3')">🗺️ Đào tạo Tuần 3</li>
-                <li id="menu-t4" class="menu-item" onclick="changeSection('t4')">🗺️ Đào tạo Tuần 4</li>
+                <li id="menu-t1" class="menu-item active" onclick="changeSection('t1')">📚 Đào tạo Tuần 1</li>
+                <li id="menu-t2" class="menu-item" onclick="changeSection('t2')">📚 Đào tạo Tuần 2</li>
+                <li id="menu-t3" class="menu-item" onclick="changeSection('t3')">📚 Đào tạo Tuần 3</li>
+                <li id="menu-t4" class="menu-item" onclick="changeSection('t4')">📚 Đào tạo Tuần 4</li>
                 
                 <li class="menu-divider"></li>
                 <li class="menu-section-hdr">Kho dữ liệu nâng cao</li>
@@ -157,29 +194,36 @@
                 <li id="menu-baithuoc" class="menu-item" onclick="changeSection('baithuoc')">🧪 Bài Thuốc Phối Trộn</li>
                 <li id="menu-thamkhao" class="menu-item" onclick="changeSection('thamkhao')">📖 Tài Liệu Tham Khảo</li>
                 <li id="menu-lienhe" class="menu-item" onclick="changeSection('lienhe')">📞 Thông Tin Liên Hệ</li>
+
+                <li class="menu-divider"></li>
+                <li class="menu-section-hdr">Hệ thống phân quyền</li>
+                <!-- Demo menu dành riêng cho chức năng Admin bạn yêu cầu -->
+                <li id="menu-admin" class="menu-item admin-item" onclick="renderAdminMockup()">👑 Quản Lý User (Admin)</li>
             </ul>
         </aside>
 
-        <!-- KHU VỰC HIỂN THỊ CÁC THẺ BÀI HỌC BÊN PHẢI -->
+        <!-- KHU VỰC CHÍNH BÊN PHẢI -->
         <main class="main-view">
-            <div class="scenic-banner"></div>
             
-            <div class="section-header-card">
-                <div class="section-icon-box">🏃‍♂️</div>
-                <div class="section-info">
-                    <h2 id="section-main-title">Đào tạo Tuần 1: Nhập môn & Quy chuẩn an toàn</h2>
-                    <p id="section-main-desc">Hoàn thành các học phần thẻ bên dưới để đạt tiêu chuẩn đứng quầy quầy kệ nội bộ.</p>
+            <!-- YÊU CẦU: BANNER CHIA 2 CỘT CHUẨN XÁC -->
+            <div class="intro-banner" id="company-banner">
+                <div class="intro-text-col">
+                    <h1>Chào mừng bạn đến với Nông Á Newgen</h1>
+                    <p>Hệ thống đào tạo nội bộ chuyên nghiệp. Dành ra ít phút xem video bên cạnh để hiểu rõ hơn về tầm nhìn, sứ mệnh và định hướng phát triển của công ty trước khi bắt đầu khóa học nhé.</p>
+                </div>
+                <div class="intro-video-col">
+                    <!-- Đổi id dQw4w9WgXcQ thành video giới thiệu cty của bạn -->
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <!-- Vùng chứa các nhóm danh mục bài học -->
             <div id="grid-container">
-                <!-- Data thẻ được tự động đổ ra từ Javascript ở đây để đồng bộ y hệt hình mẫu -->
+                <!-- Thẻ bài học đổ vào đây -->
             </div>
         </main>
     </div>
 
-    <!-- HỆ THỐNG CỬA SỔ HỌC TẬP (MODAL VIEW) -->
+    <!-- CỬA SỔ HỌC TẬP (MODAL) -->
     <div class="study-modal" id="studyModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -187,81 +231,60 @@
                 <button class="close-btn" onclick="closeModal()">✕</button>
             </div>
             <div class="modal-body">
-                <!-- Cột trái chữ chạy tự do -->
-                <div class="modal-text-pane" id="modal-lesson-body">
-                    <!-- Nội dung bài học chữ dài đổ vào đây -->
-                </div>
-                <!-- Cột phải video đứng im khóa vị trí -->
+                <div class="modal-text-pane" id="modal-lesson-body"></div>
                 <div class="modal-video-pane">
                     <div class="video-box-fixed">
                         <iframe id="modal-video-frame" src="" allowfullscreen></iframe>
                     </div>
-                    <p style="font-size:13px; color:var(--text-muted); margin-top:15px; line-height:1.4;">
-                        💡 <strong>Mẹo học tập:</strong> Bạn vừa đọc tài liệu hướng dẫn từng bước bên trái, vừa có thể theo dõi thao tác thực hành kỹ thuật trực quan trên video mà không sợ bị trôi mất hình hình.
-                    </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- TRÌNH ĐIỀU KHIỂN LOGIC ĐỔ DỮ LIỆU THẺ -->
     <script>
-        // Cơ sở dữ liệu thiết lập cấu trúc Thẻ (Grid Cards) giống hệt ảnh mẫu Trailhead
+        // Dữ liệu nội dung
         const sectionData = {
             t1: {
-                title: "Đào tạo Tuần 1: Nhập môn & Quy chuẩn an toàn",
-                desc: "Nắm vững văn hóa doanh nghiệp và quy tắc bảo hộ lao động thuốc bảo vệ thực vật.",
                 groups: [
                     {
                         name: "Học phần văn hóa cốt lõi", count: "3 Bài học",
                         lessons: [
-                            { id: "t1_1", title: "Văn Hóa", label: "Bài 1: Quy tắc ứng xử", img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>1. Quy tắc đón tiếp khách hàng</h4><p>Luôn tươi cười niềm nở với bà con nông dân vào cửa hàng NÔNG Á NEWGEN. Mời nước giải nhiệt và tận tình lắng nghe ca bệnh từ vườn cây...</p><h4>2. Đạo đức nghề nghiệp quầy thuốc</h4><p>Tuyệt đối cấm hành vi ép liều, tăng nồng độ thuốc vô căn cứ để đẩy doanh số dẫn tới cháy lá bục quả của người dân.</p>" },
-                            { id: "t1_2", title: "An Toàn", label: "Bài 2: Vạch màu độc tính", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>Nhận diện nhanh nhóm độc tính BVTV</h4><p>Học viên cần ghi nhớ 4 dải vạch màu tiêu chuẩn dưới nhãn chai:</p><p>- Vạch Đỏ: Cực độc nguy hiểm bốc xếp cẩn thận.</p><p>- Vạch Vàng: Độc cao.</p><p>- Vạch Xanh Dương: Độc trung bình.</p><p>- Vạch Xanh Lá: Thuốc sinh học an toàn khuyến khích sử dụng.</p>" },
-                            { id: "t1_3", title: "Sắp Xếp", label: "Bài 3: Quản lý kho 5S", img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>Quy chuẩn phân bố quầy kệ hàng hóa</h4><p>Xếp thuốc nước EC, SC ở các giá thấp chống tràn đổ bục chai. Các dòng thuốc bột WG, WP để kệ cao thoáng mát, tránh ẩm mốc đóng bánh hoạt chất phá hủy chất lượng.</p>" }
+                            { id: "t1_1", title: "Văn Hóa", label: "Bài 1: Quy tắc ứng xử", img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>1. Quy tắc đón tiếp khách hàng</h4><p>Luôn tươi cười niềm nở với bà con nông dân.</p>" },
+                            { id: "t1_2", title: "An Toàn", label: "Bài 2: Vạch màu độc tính", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>Nhận diện nhóm độc tính</h4><p>Ghi nhớ 4 vạch màu: Đỏ, Vàng, Xanh dương, Xanh lá.</p>" },
+                            { id: "t1_3", title: "Sắp Xếp", label: "Bài 3: Quản lý kho 5S", img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>Quy chuẩn quầy kệ</h4><p>Xếp thuốc nước EC phía dưới, thuốc bột WP phía trên.</p>" }
                         ]
                     }
                 ]
             },
             t2: {
-                title: "Đào tạo Tuần 2: Nắm lòng danh mục hoạt chất",
-                desc: "Nghiên cứu sâu tính năng các dòng thuốc trừ sâu bệnh phổ thông thị trường Đắk Lắk.",
                 groups: [
                     {
-                        name: "Phân hệ thuốc diệt trừ côn trùng", count: "2 Bài học",
+                        name: "Nhóm thuốc trừ sâu bệnh", count: "2 Bài học",
                         lessons: [
-                            { id: "t2_1", title: "Trừ Sâu", label: "Bài 1: Hoạt chất trị rầy rệp", img: "https://images.unsplash.com/photo-1463171359979-300848856649?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>Thuốc trừ sâu rầy chủ lực Tây Nguyên</h4><p>Tìm hiểu sâu nhóm hoạt chất thế hệ mới Thiamethoxam, Imidacloprid có tính năng lưu dẫn mạnh mẽ, phun mặt trên thấm xuống mặt dưới diệt rầy xanh cứng đầu.</p>" },
-                            { id: "t2_2", title: "Trị Nấm", label: "Bài 2: Thuốc trừ bệnh cây", img: "https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>Phác đồ dập dịch nấm mùa mưa</h4><p>Ghi nhớ bộ đôi Metalaxyl kết hợp Mancozeb chuyên quét sạch nấm Phytophthora gây thối rễ xì mủ chết nhanh trên cây hồ tiêu và sầu riêng giá trị cao.</p>" }
+                            { id: "t2_1", title: "Trừ Sâu", label: "Bài 1: Trị rầy rệp", img: "https://images.unsplash.com/photo-1463171359979-300848856649?auto=format&fit=crop&w=400&q=80", video: "", body: "<h4>Hoạt chất trừ sâu rầy</h4><p>Imidacloprid, Thiamethoxam...</p>" },
+                            { id: "t2_2", title: "Trị Nấm", label: "Bài 2: Trừ nấm bệnh", img: "https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=400&q=80", video: "", body: "<h4>Hoạt chất trị nấm</h4><p>Metalaxyl, Mancozeb...</p>" }
                         ]
                     }
                 ]
-            },
-            t3: { title: "Đào tạo Tuần 3: Kỹ thuật phối trộn bài thuốc", desc: "Nội dung tuần 3 dạng lưới thẻ...", groups: [] },
-            t4: { title: "Đào tạo Tuần 4: Quy trình chốt sổ doanh số", desc: "Nội dung tuần 4 dạng lưới thẻ...", groups: [] },
-            nangcao: { title: "Chuyên sâu nâng cao công nghệ sinh học", desc: "Nội dung nâng cao...", groups: [] },
-            baithuoc: { title: "Bảng tra cứu bài thuốc phối trộn độc quyền", desc: "Nội dung bài thuốc...", groups: [] },
-            thamkhao: { title: "Tài liệu kỹ thuật nội bộ tập đoàn", desc: "Nội dung tham khảo...", groups: [] },
-            lienhe: { title: "Thông tin liên hệ các kỹ sư cố vấn khẩn cấp", desc: "Nội dung liên hệ...", groups: [] }
+            }
         };
 
-        // Hàm chuyển đổi các tuần / chuyên mục lớn
         function changeSection(sectionId) {
-            // Thay đổi trạng thái nút được chọn bên menu trái
             document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
             document.getElementById('menu-' + sectionId).classList.add('active');
-
-            const data = sectionData[sectionId];
-            document.getElementById('section-main-title').innerText = data.title;
-            document.getElementById('section-main-desc').innerText = data.desc;
+            
+            // Hiện lại banner công ty
+            document.getElementById('company-banner').style.display = 'flex';
 
             const gridContainer = document.getElementById('grid-container');
-            gridContainer.innerHTML = ''; // Reset xóa giao diện cũ đi để render lại
+            gridContainer.innerHTML = ''; 
 
-            if (!data.groups || data.groups.length === 0) {
-                gridContainer.innerHTML = `<p style="color:var(--text-muted); font-style:italic;">Học phần dạng thẻ của mục này đang được hệ thống thiết lập đồng bộ...</p>`;
+            const data = sectionData[sectionId];
+            if (!data || !data.groups || data.groups.length === 0) {
+                gridContainer.innerHTML = `<p style="color:var(--text-muted); font-style:italic;">Nội dung học phần này đang được cập nhật...</p>`;
                 return;
             }
 
-            // Tiến hành dựng cấu trúc nhóm và lưới card y xì hình ảnh mẫu
             data.groups.forEach(group => {
                 let groupHtml = `
                     <div class="group-title-row">
@@ -275,7 +298,7 @@
                     groupHtml += `
                         <div class="lesson-card" onclick="openLesson('${sectionId}', '${lesson.id}')">
                             <div class="card-image-wrapper">
-                                <img src="${lesson.img}" class="card-img" alt="Background">
+                                <img src="${lesson.img}" class="card-img" alt="Hình ảnh">
                                 <div class="card-overlay-title">${lesson.title}</div>
                             </div>
                             <div class="card-bottom-info">
@@ -284,15 +307,13 @@
                         </div>
                     `;
                 });
-
                 groupHtml += `</div>`;
                 gridContainer.innerHTML += groupHtml;
             });
         }
 
-        // Mở màn hình học tập (Modal) khi kích chuột vào thẻ ảnh bất kỳ
         function openLesson(sectionId, lessonId) {
-            const group = sectionData[sectionId].groups[0]; // Lấy nhóm đầu
+            const group = sectionData[sectionId].groups[0]; 
             const lesson = group.lessons.find(l => l.id === lessonId);
 
             document.getElementById('modal-lesson-title').innerText = lesson.label + " - " + lesson.title;
@@ -301,10 +322,56 @@
             document.getElementById('studyModal').style.display = 'flex';
         }
 
-        // Đóng màn hình học tập
         function closeModal() {
             document.getElementById('studyModal').style.display = 'none';
-            document.getElementById('modal-video-frame').src = ''; // Tắt tiếng video khi đóng
+            document.getElementById('modal-video-frame').src = ''; 
+        }
+
+        // CHỨC NĂNG MÔ PHỎNG GIAO DIỆN QUẢN LÝ USER ADMIN
+        function renderAdminMockup() {
+            document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+            document.getElementById('menu-admin').classList.add('active');
+            
+            // Ẩn banner giới thiệu ở trang Admin
+            document.getElementById('company-banner').style.display = 'none';
+
+            const gridContainer = document.getElementById('grid-container');
+            gridContainer.innerHTML = `
+                <div style="background:#fff; padding:30px; border-radius:12px; border:1px solid #e2e8f0;">
+                    <h2 style="margin-bottom:20px; color:#d97706;">Bảng Điều Khiển Quản Trị Viên (Mô Phỏng)</h2>
+                    <p style="color:#475569; margin-bottom:20px; line-height:1.6;"><strong>Lưu ý kỹ thuật:</strong> Giao diện tĩnh HTML không thể thao tác dữ liệu. Để các nút bên dưới hoạt động (Thêm User, Cấp quyền Admin 1/2/3, Track thời gian xem video), dự án cần tích hợp Backend như Firebase hoặc chuyển sang nền tảng LMS chuyên dụng.</p>
+                    
+                    <div style="display:flex; gap:15px; margin-bottom:30px;">
+                        <button style="background:#1a73e8; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer;">+ Tạo User Mới</button>
+                        <button style="background:#10b981; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer;">Phân Quyền Sub-Admin</button>
+                    </div>
+
+                    <h3 style="margin-bottom:15px;">Báo Cáo Tiến Độ Nhân Viên</h3>
+                    <table style="width:100%; text-align:left; border-collapse:collapse;">
+                        <tr style="background:#f1f5f9; border-bottom:2px solid #cbd5e1;">
+                            <th style="padding:12px;">Họ Tên</th>
+                            <th style="padding:12px;">Cấp Bậc</th>
+                            <th style="padding:12px;">Bài Đã Hoàn Thành</th>
+                            <th style="padding:12px;">Thời Gian Xem Video</th>
+                            <th style="padding:12px;">Hành Động</th>
+                        </tr>
+                        <tr style="border-bottom:1px solid #e2e8f0;">
+                            <td style="padding:12px;">Nguyễn Văn A</td>
+                            <td style="padding:12px;"><span style="background:#fef3c7; color:#b45309; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold;">Admin 2</span></td>
+                            <td style="padding:12px;">15/20 Bài</td>
+                            <td style="padding:12px;">120 phút</td>
+                            <td style="padding:12px;"><a href="#" style="color:#1a73e8;">Xem chi tiết</a></td>
+                        </tr>
+                        <tr style="border-bottom:1px solid #e2e8f0;">
+                            <td style="padding:12px;">Trần Thị B</td>
+                            <td style="padding:12px;"><span style="background:#f1f5f9; color:#475569; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold;">Nhân viên mới</span></td>
+                            <td style="padding:12px;">3/20 Bài</td>
+                            <td style="padding:12px;">45 phút</td>
+                            <td style="padding:12px;"><a href="#" style="color:#1a73e8;">Xem chi tiết</a></td>
+                        </tr>
+                    </table>
+                </div>
+            `;
         }
 
         // Chạy tải dữ liệu Tuần 1 mặc định ngay khi mở trang web
