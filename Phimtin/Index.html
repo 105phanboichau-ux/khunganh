@@ -5,90 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kho Phim Của Tôi</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 10px; }
-        .header { text-align: center; color: #e50914; margin-bottom: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
-        .card { background-color: #222; border-radius: 8px; padding: 15px; text-align: center; cursor: pointer; border: 1px solid #444; }
-        .card:hover { background-color: #333; }
-        .icon { font-size: 40px; margin-bottom: 5px; }
-        .title { font-size: 13px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 15px; }
+        .header { text-align: center; color: #e50914; margin-bottom: 20px; font-size: 24px; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; }
+        .card { background-color: #1a1a1a; border-radius: 10px; padding: 15px; text-align: center; cursor: pointer; border: 1px solid #333; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100px; }
+        .icon { font-size: 35px; margin-bottom: 8px; }
+        .title { font-size: 14px; font-weight: bold; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .btn-back { background-color: #e50914; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; margin-bottom: 20px; display: none; }
         
-        /* Trình phát video */
-        .player-container { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999; flex-direction: column; }
-        video { width: 100%; height: 90%; background: #000; }
-        .close-btn { color: #fff; padding: 15px; text-align: right; font-size: 18px; cursor: pointer; background: #222; }
-        .back-btn { margin-bottom: 15px; padding: 10px; background: #e50914; border: none; color: white; border-radius: 5px; display: none; }
+        /* Trình phát phim HTML5 */
+        .player-wrapper { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 1000; flex-direction: column; }
+        .player-header { padding: 15px; background: rgba(0,0,0,0.8); display: flex; justify-content: space-between; align-items: center; }
+        .movie-title-playing { font-weight: bold; font-size: 16px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 70%; }
+        .btn-close { background: #e50914; color: white; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        video { width: 100%; flex-grow: 1; background: #000; outline: none; }
+        .loading-text { text-align: center; color: #aaa; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<div class="header"><h1>Kho Phim Của Tôi</h1></div>
-<button id="back-btn" class="back-btn" onclick="loadFolders()">⬅ Quay lại</button>
+<div class="header" id="web-title">Kho Phim Của Tôi</div>
+<button class="btn-back" id="btn-back" onclick="loadFolders()">⬅ Quay lại</button>
+<div class="loading-text" id="status-msg">Đang đồng bộ dữ liệu...</div>
 <div id="grid-content" class="grid"></div>
 
-<div id="player-container" class="player-container">
-    <div class="close-btn" onclick="closePlayer()">ĐÓNG X</div>
-    <video id="video-player" controls playsinline></video>
+<div class="player-wrapper" id="player-wrapper">
+    <div class="player-header">
+        <div class="movie-title-playing" id="now-playing-title">Đang phát phim...</div>
+        <button class="btn-close" onclick="closePlayer()">Đóng X</button>
+    </div>
+    <video id="html-video-player" controls playsinline></video>
 </div>
 
 <script>
-    // --- CẤU HÌNH ---
-    const API_KEY = 'AIzaSyCMH96yNnOn4OjonemG-karYzXxzcLlsr8'; // API Key của bạn
-    const ROOT_FOLDER_ID = '1ajEUENWGITq0aFBjR8Z82L0KDFIxOVEr'; // ID thư mục Phimtin
+    const API_KEY = 'AIzaSyCMH96yNnOn4OjonemG-karYzXxzcLlsr8';
+    const ROOT_FOLDER_ID = '1ajEUENWGITq0aFBjR8Z82L0KDFIxOVEr';
 
     const gridContent = document.getElementById('grid-content');
-    const backBtn = document.getElementById('back-btn');
+    const statusMsg = document.getElementById('status-msg');
+    const btnBack = document.getElementById('btn-back');
+    const webTitle = document.getElementById('web-title');
+    const playerWrapper = document.getElementById('player-wrapper');
+    const videoPlayer = document.getElementById('html-video-player');
+    const nowPlayingTitle = document.getElementById('now-playing-title');
 
     window.onload = loadFolders;
 
     function loadFolders() {
-        backBtn.style.display = 'none';
-        gridContent.innerHTML = 'Đang tải...';
-        const url = `https://www.googleapis.com/drive/v3/files?q='${ROOT_FOLDER_ID}'+in+parents+and+mimeType='application/vnd.google-apps.folder'&fields=files(id,name)&key=${API_KEY}`;
+        statusMsg.style.display = 'block';
+        btnBack.style.display = 'none';
+        webTitle.innerText = "Kho Phim Của Tôi";
+        gridContent.innerHTML = '';
+
+        const url = `https://www.googleapis.com/drive/v3/files?q='${ROOT_FOLDER_ID}'+in+parents+and+mimeType='application/vnd.google-apps.folder'+and+trashed=false&fields=files(id,name)&key=${API_KEY}`;
         
         fetch(url).then(res => res.json()).then(data => {
-            gridContent.innerHTML = '';
-            data.files.forEach(folder => {
-                const div = document.createElement('div');
-                div.className = 'card';
-                div.innerHTML = `<div class="icon">📁</div><div class="title">${folder.name}</div>`;
-                div.onclick = () => loadFiles(folder.id);
-                gridContent.appendChild(div);
-            });
+            statusMsg.style.display = 'none';
+            if (data.files && data.files.length > 0) {
+                data.files.sort((a, b) => a.name.localeCompare(b.name));
+                data.files.forEach(folder => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `<div class="icon">📁</div><div class="title">${folder.name}</div>`;
+                    card.onclick = () => loadFiles(folder.id, folder.name);
+                    gridContent.appendChild(card);
+                });
+            } else {
+                statusMsg.style.display = 'block';
+                statusMsg.innerText = "Thư mục trống.";
+            }
         });
     }
 
-    function loadFiles(folderId) {
-        backBtn.style.display = 'block';
-        gridContent.innerHTML = 'Đang tải phim...';
-        const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType!='application/vnd.google-apps.folder'&fields=files(id,name)&key=${API_KEY}`;
+    function loadFiles(folderId, folderName) {
+        statusMsg.style.display = 'block';
+        statusMsg.innerText = `Đang mở ${folderName}...`;
+        gridContent.innerHTML = '';
+        btnBack.style.display = 'block';
+        webTitle.innerText = folderName;
+
+        const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType!='application/vnd.google-apps.folder'+and+trashed=false&fields=files(id,name)&key=${API_KEY}`;
         
         fetch(url).then(res => res.json()).then(data => {
-            gridContent.innerHTML = '';
-            data.files.forEach(file => {
-                const div = document.createElement('div');
-                div.className = 'card';
-                div.innerHTML = `<div class="icon">🎬</div><div class="title">${file.name}</div>`;
-                div.onclick = () => playMovie(file.id);
-                gridContent.appendChild(div);
-            });
+            statusMsg.style.display = 'none';
+            if (data.files && data.files.length > 0) {
+                data.files.sort((a, b) => a.name.localeCompare(b.name));
+                data.files.forEach(file => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `<div class="icon">🎬</div><div class="title">${file.name}</div>`;
+                    
+                    // KHI BẤM VÀO PHIM -> GỌI HÀM PHÁT VIDEO STREAM
+                    card.onclick = () => playStream(file.id, file.name);
+                    
+                    gridContent.appendChild(card);
+                });
+            } else {
+                statusMsg.style.display = 'block';
+                statusMsg.innerText = "Không có phim trong thư mục này.";
+            }
         });
     }
 
-    function playMovie(fileId) {
-        // Link trực tiếp, trình duyệt sẽ tự tải file video về thay vì load web Google Drive
-        const streamUrl = `https://drive.google.com/uc?export=open&id=${fileId}`;
-        const player = document.getElementById('video-player');
-        player.src = streamUrl;
-        document.getElementById('player-container').style.display = 'flex';
-        player.play();
+    function playStream(fileId, fileName) {
+        nowPlayingTitle.innerText = fileName;
+        
+        // SỬ DỤNG API ĐỂ LẤY DỮ LIỆU THÔ (DIRECT STREAM)
+        // Tham số alt=media bắt buộc Google trả về file video chứ không trả về trang cảnh báo
+        const directStreamUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${API_KEY}`;
+        
+        videoPlayer.src = directStreamUrl;
+        playerWrapper.style.display = 'flex';
+        
+        // Cố gắng tự động phát
+        videoPlayer.play().catch(e => console.log("Cần bấm nút Play thủ công trên iOS."));
     }
 
     function closePlayer() {
-        const player = document.getElementById('video-player');
-        player.pause();
-        player.src = "";
-        document.getElementById('player-container').style.display = 'none';
+        videoPlayer.pause();
+        videoPlayer.src = ""; // Xóa bộ đệm
+        playerWrapper.style.display = 'none';
     }
 </script>
 </body>
