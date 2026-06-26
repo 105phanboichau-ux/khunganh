@@ -5,125 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kho Phim Của Tôi</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 15px; }
-        .header { text-align: center; color: #e50914; margin-bottom: 20px; font-size: 24px; font-weight: bold; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; }
-        .card { background-color: #1a1a1a; border-radius: 10px; padding: 15px; text-align: center; cursor: pointer; border: 1px solid #333; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100px; }
-        .icon { font-size: 35px; margin-bottom: 8px; }
-        .title { font-size: 14px; font-weight: bold; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .btn-back { background-color: #e50914; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; margin-bottom: 20px; display: none; }
+        body { background-color: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 15px; }
+        .header { text-align: center; color: #ff0000; margin-bottom: 25px; font-size: 24px; font-weight: bold; }
         
-        /* Trình phát phim HTML5 */
-        .player-wrapper { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 1000; flex-direction: column; }
-        .player-header { padding: 15px; background: rgba(0,0,0,0.8); display: flex; justify-content: space-between; align-items: center; }
-        .movie-title-playing { font-weight: bold; font-size: 16px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 70%; }
-        .btn-close { background: #e50914; color: white; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
-        video { width: 100%; flex-grow: 1; background: #000; outline: none; }
-        .loading-text { text-align: center; color: #aaa; margin-top: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
+        .card { background-color: #272727; border-radius: 10px; overflow: hidden; cursor: pointer; transition: transform 0.2s; }
+        .card:hover { background-color: #3d3d3d; transform: scale(1.03); }
+        .thumbnail { width: 100%; height: auto; display: block; border-bottom: 3px solid #ff0000; aspect-ratio: 16/9; object-fit: cover; }
+        .title { padding: 10px; font-size: 14px; font-weight: bold; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        /* Khung trình phát YouTube */
+        .player-wrapper { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; flex-direction: column; }
+        .player-header { padding: 15px; display: flex; justify-content: flex-end; }
+        .btn-close { background: #ff0000; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; }
+        .iframe-container { width: 100%; flex-grow: 1; display: flex; justify-content: center; align-items: center; padding-bottom: 20px; }
+        iframe { width: 90%; height: 85%; border-radius: 10px; border: none; background: #000; }
+        
+        .status-msg { text-align: center; color: #aaa; margin-top: 50px; font-size: 16px; }
     </style>
 </head>
 <body>
 
-<div class="header" id="web-title">Kho Phim Của Tôi</div>
-<button class="btn-back" id="btn-back" onclick="loadFolders()">⬅ Quay lại</button>
-<div class="loading-text" id="status-msg">Đang đồng bộ dữ liệu...</div>
+<div class="header">Kho Phim Của Tôi</div>
+<div class="status-msg" id="status-msg">Đang tải danh sách phim từ YouTube...</div>
 <div id="grid-content" class="grid"></div>
 
 <div class="player-wrapper" id="player-wrapper">
     <div class="player-header">
-        <div class="movie-title-playing" id="now-playing-title">Đang phát phim...</div>
         <button class="btn-close" onclick="closePlayer()">Đóng X</button>
     </div>
-    <video id="html-video-player" controls playsinline></video>
+    <div class="iframe-container">
+        <iframe id="youtube-player" src="" allowfullscreen></iframe>
+    </div>
 </div>
 
 <script>
-    const API_KEY = 'AIzaSyCMH96yNnOn4OjonemG-karYzXxzcLlsr8';
-    const ROOT_FOLDER_ID = '1ajEUENWGITq0aFBjR8Z82L0KDFIxOVEr';
+    // ================= CẤU HÌNH ĐÃ ĐƯỢC TÍCH HỢP SẴN =================
+    const API_KEY = 'AIzaSyCMH96yNnOn4OjonemG-karYzXxzcLlsr8'; 
+    const PLAYLIST_ID = 'PLB7OgAC8FDq8'; 
+    // =================================================================
 
     const gridContent = document.getElementById('grid-content');
     const statusMsg = document.getElementById('status-msg');
-    const btnBack = document.getElementById('btn-back');
-    const webTitle = document.getElementById('web-title');
     const playerWrapper = document.getElementById('player-wrapper');
-    const videoPlayer = document.getElementById('html-video-player');
-    const nowPlayingTitle = document.getElementById('now-playing-title');
+    const youtubePlayer = document.getElementById('youtube-player');
 
-    window.onload = loadFolders;
+    window.onload = loadYouTubePlaylist;
 
-    function loadFolders() {
-        statusMsg.style.display = 'block';
-        btnBack.style.display = 'none';
-        webTitle.innerText = "Kho Phim Của Tôi";
-        gridContent.innerHTML = '';
+    function loadYouTubePlaylist() {
+        if (!PLAYLIST_ID || PLAYLIST_ID === '') {
+            statusMsg.innerHTML = '<span style="color:#ff0000;">Lỗi: Chưa có ID Danh sách phát.</span>';
+            return;
+        }
 
-        const url = `https://www.googleapis.com/drive/v3/files?q='${ROOT_FOLDER_ID}'+in+parents+and+mimeType='application/vnd.google-apps.folder'+and+trashed=false&fields=files(id,name)&key=${API_KEY}`;
+        const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${PLAYLIST_ID}&key=${API_KEY}`;
         
-        fetch(url).then(res => res.json()).then(data => {
+        fetch(url)
+        .then(res => res.json())
+        .then(data => {
             statusMsg.style.display = 'none';
-            if (data.files && data.files.length > 0) {
-                data.files.sort((a, b) => a.name.localeCompare(b.name));
-                data.files.forEach(folder => {
+            if (data.items && data.items.length > 0) {
+                data.items.forEach(item => {
+                    const videoId = item.snippet.resourceId.videoId;
+                    const title = item.snippet.title;
+                    
+                    // Lấy ảnh bìa video chất lượng vừa phải, tối ưu hóa hiển thị
+                    let thumbnailUrl = '';
+                    if (item.snippet.thumbnails) {
+                        thumbnailUrl = item.snippet.thumbnails.medium ? item.snippet.thumbnails.medium.url : 
+                                      (item.snippet.thumbnails.default ? item.snippet.thumbnails.default.url : '');
+                    }
+                    
+                    // Bỏ qua các video bị lỗi hoặc đã bị xóa
+                    if(title === "Private video" || title === "Deleted video") return;
+
                     const card = document.createElement('div');
                     card.className = 'card';
-                    card.innerHTML = `<div class="icon">📁</div><div class="title">${folder.name}</div>`;
-                    card.onclick = () => loadFiles(folder.id, folder.name);
+                    
+                    // Hiển thị khung nếu không có ảnh bìa, hoặc hiển thị ảnh bìa nếu có
+                    const imageHtml = thumbnailUrl ? `<img src="${thumbnailUrl}" class="thumbnail" alt="Bìa phim">` : `<div style="width: 100%; height: 100px; background: #444; display:flex; align-items:center; justify-content:center;">🎞️</div>`;
+                    
+                    card.innerHTML = `
+                        ${imageHtml}
+                        <div class="title">${title}</div>
+                    `;
+                    card.onclick = () => playYouTubeVideo(videoId);
                     gridContent.appendChild(card);
                 });
             } else {
                 statusMsg.style.display = 'block';
-                statusMsg.innerText = "Thư mục trống.";
+                statusMsg.innerText = "Danh sách phát hiện đang trống. Hãy thêm phim vào Playlist Kho Phim của bạn.";
             }
+        })
+        .catch(err => {
+            statusMsg.style.display = 'block';
+            statusMsg.innerText = "Lỗi kết nối YouTube API. Hãy kiểm tra lại xem bạn đã bật YouTube Data API v3 chưa.";
+            console.error("Chi tiết lỗi:", err);
         });
     }
 
-    function loadFiles(folderId, folderName) {
-        statusMsg.style.display = 'block';
-        statusMsg.innerText = `Đang mở ${folderName}...`;
-        gridContent.innerHTML = '';
-        btnBack.style.display = 'block';
-        webTitle.innerText = folderName;
-
-        const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType!='application/vnd.google-apps.folder'+and+trashed=false&fields=files(id,name)&key=${API_KEY}`;
-        
-        fetch(url).then(res => res.json()).then(data => {
-            statusMsg.style.display = 'none';
-            if (data.files && data.files.length > 0) {
-                data.files.sort((a, b) => a.name.localeCompare(b.name));
-                data.files.forEach(file => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.innerHTML = `<div class="icon">🎬</div><div class="title">${file.name}</div>`;
-                    
-                    // KHI BẤM VÀO PHIM -> GỌI HÀM PHÁT VIDEO STREAM
-                    card.onclick = () => playStream(file.id, file.name);
-                    
-                    gridContent.appendChild(card);
-                });
-            } else {
-                statusMsg.style.display = 'block';
-                statusMsg.innerText = "Không có phim trong thư mục này.";
-            }
-        });
-    }
-
-    function playStream(fileId, fileName) {
-        nowPlayingTitle.innerText = fileName;
-        
-        // SỬ DỤNG API ĐỂ LẤY DỮ LIỆU THÔ (DIRECT STREAM)
-        // Tham số alt=media bắt buộc Google trả về file video chứ không trả về trang cảnh báo
-        const directStreamUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${API_KEY}`;
-        
-        videoPlayer.src = directStreamUrl;
+    function playYouTubeVideo(videoId) {
+        // Mở video thông qua link nhúng, tự động phát
+        const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+        youtubePlayer.src = embedUrl;
         playerWrapper.style.display = 'flex';
-        
-        // Cố gắng tự động phát
-        videoPlayer.play().catch(e => console.log("Cần bấm nút Play thủ công trên iOS."));
     }
 
     function closePlayer() {
-        videoPlayer.pause();
-        videoPlayer.src = ""; // Xóa bộ đệm
+        youtubePlayer.src = ""; // Xóa link để ngắt tiếng khi đóng
         playerWrapper.style.display = 'none';
     }
 </script>
