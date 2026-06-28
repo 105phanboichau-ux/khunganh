@@ -14,16 +14,8 @@
         .thumbnail { width: 100%; height: auto; display: block; border-bottom: 3px solid #ff0000; aspect-ratio: 16/9; object-fit: cover; }
         .title { padding: 10px; font-size: 14px; font-weight: bold; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         
-        /* Khung trình phát YouTube */
-        .player-wrapper { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; flex-direction: column; }
-        .player-header { padding: 15px; display: flex; justify-content: flex-end; }
-        .btn-close { background: #ff0000; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; }
-        .iframe-container { width: 100%; flex-grow: 1; display: flex; justify-content: center; align-items: center; padding-bottom: 20px; }
-        iframe { width: 90%; height: 85%; border-radius: 10px; border: none; background: #000; }
-        
         .status-msg { text-align: center; color: #aaa; margin-top: 50px; font-size: 16px; line-height: 1.6; }
-        /* Hộp hiển thị lỗi thông minh */
-        .error-box { background-color: #2a1414; border: 1px solid #ff0000; padding: 15px; border-radius: 8px; color: #ff8888; max-width: 600px; margin: 20px auto; text-align: left; box-shadow: 0 0 10px rgba(255,0,0,0.5); }
+        .error-box { background-color: #2a1414; border: 1px solid #ff0000; padding: 15px; border-radius: 8px; color: #ff8888; max-width: 600px; margin: 20px auto; text-align: left; }
     </style>
 </head>
 <body>
@@ -31,15 +23,6 @@
 <div class="header">Kho Phim Của Tôi</div>
 <div class="status-msg" id="status-msg">Đang tải danh sách phim từ YouTube...</div>
 <div id="grid-content" class="grid"></div>
-
-<div class="player-wrapper" id="player-wrapper">
-    <div class="player-header">
-        <button class="btn-close" onclick="closePlayer()">Đóng X</button>
-    </div>
-    <div class="iframe-container">
-        <iframe id="youtube-player" src="" allowfullscreen></iframe>
-    </div>
-</div>
 
 <script>
     // ================= CẤU HÌNH ĐÃ ĐƯỢC TÍCH HỢP SẴN =================
@@ -49,8 +32,6 @@
 
     const gridContent = document.getElementById('grid-content');
     const statusMsg = document.getElementById('status-msg');
-    const playerWrapper = document.getElementById('player-wrapper');
-    const youtubePlayer = document.getElementById('youtube-player');
 
     window.onload = loadYouTubePlaylist;
 
@@ -67,14 +48,12 @@
         .then(data => {
             statusMsg.style.display = 'none';
             
-            // 🛠️ KIỂM TRA VÀ HIỂN THỊ LỖI CHI TIẾT TỪ GOOGLE
             if (data.error) {
                 statusMsg.style.display = 'block';
                 statusMsg.innerHTML = `
                     <div class="error-box">
-                        <strong style="color: #ff4444;">❌ LỖI PHẢN HỒI TỪ YOUTUBE API:</strong><br><br>
-                        <strong>Nội dung:</strong> ${data.error.message}<br><br>
-                        <small>Mã số lỗi: ${data.error.code} | Lý do: ${data.error.errors[0].reason}</small>
+                        <strong style="color: #ff4444;">❌ LỖI PHẢN HỒI TỪ YOUTUBE API:</strong><br>
+                        <strong>Nội dung:</strong> ${data.error.message}
                     </div>
                 `;
                 return;
@@ -102,29 +81,25 @@
                         ${imageHtml}
                         <div class="title">${title}</div>
                     `;
+                    
+                    // KHI BẤM VÀO: Gọi thẳng link xem chính thức để iPad tự kích hoạt App YouTube hoặc mở tab mới mượt mà
                     card.onclick = () => playYouTubeVideo(videoId);
                     gridContent.appendChild(card);
                 });
             } else {
                 statusMsg.style.display = 'block';
-                statusMsg.innerText = "Danh sách phát thực sự đang trống (0 video). Hãy kiểm tra lại các video bên trong.";
+                statusMsg.innerText = "Danh sách phát trống.";
             }
         })
         .catch(err => {
             statusMsg.style.display = 'block';
-            statusMsg.innerHTML = `<div class="error-box">❌ Lỗi kết nối mạng hoặc trình duyệt lỗi: ${err.message}</div>`;
+            statusMsg.innerHTML = `<div class="error-box">❌ Lỗi kết nối: ${err.message}</div>`;
         });
     }
 
     function playYouTubeVideo(videoId) {
-        const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
-        youtubePlayer.src = embedUrl;
-        playerWrapper.style.display = 'flex';
-    }
-
-    function closePlayer() {
-        youtubePlayer.src = "";
-        playerWrapper.style.display = 'none';
+        // Ép mở đường link xem trực tiếp bằng tab mới, giúp gọi app YouTube nếu có
+        window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
     }
 </script>
 </body>
