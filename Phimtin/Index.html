@@ -21,7 +21,9 @@
         .iframe-container { width: 100%; flex-grow: 1; display: flex; justify-content: center; align-items: center; padding-bottom: 20px; }
         iframe { width: 90%; height: 85%; border-radius: 10px; border: none; background: #000; }
         
-        .status-msg { text-align: center; color: #aaa; margin-top: 50px; font-size: 16px; }
+        .status-msg { text-align: center; color: #aaa; margin-top: 50px; font-size: 16px; line-height: 1.6; }
+        /* Hộp hiển thị lỗi thông minh */
+        .error-box { background-color: #2a1414; border: 1px solid #ff0000; padding: 15px; border-radius: 8px; color: #ff8888; max-width: 600px; margin: 20px auto; text-align: left; box-shadow: 0 0 10px rgba(255,0,0,0.5); }
     </style>
 </head>
 <body>
@@ -54,7 +56,7 @@
 
     function loadYouTubePlaylist() {
         if (!PLAYLIST_ID || PLAYLIST_ID === '') {
-            statusMsg.innerHTML = '<span style="color:#ff0000;">Lỗi: Chưa có ID Danh sách phát.</span>';
+            statusMsg.innerHTML = '<div class="error-box">Lỗi: Chưa cấu hình PLAYLIST_ID.</div>';
             return;
         }
 
@@ -64,25 +66,36 @@
         .then(res => res.json())
         .then(data => {
             statusMsg.style.display = 'none';
+            
+            // 🛠️ KIỂM TRA VÀ HIỂN THỊ LỖI CHI TIẾT TỪ GOOGLE
+            if (data.error) {
+                statusMsg.style.display = 'block';
+                statusMsg.innerHTML = `
+                    <div class="error-box">
+                        <strong style="color: #ff4444;">❌ LỖI PHẢN HỒI TỪ YOUTUBE API:</strong><br><br>
+                        <strong>Nội dung:</strong> ${data.error.message}<br><br>
+                        <small>Mã số lỗi: ${data.error.code} | Lý do: ${data.error.errors[0].reason}</small>
+                    </div>
+                `;
+                return;
+            }
+
             if (data.items && data.items.length > 0) {
                 data.items.forEach(item => {
                     const videoId = item.snippet.resourceId.videoId;
                     const title = item.snippet.title;
                     
-                    // Lấy ảnh bìa video chất lượng vừa phải, tối ưu hóa hiển thị
                     let thumbnailUrl = '';
                     if (item.snippet.thumbnails) {
                         thumbnailUrl = item.snippet.thumbnails.medium ? item.snippet.thumbnails.medium.url : 
                                       (item.snippet.thumbnails.default ? item.snippet.thumbnails.default.url : '');
                     }
                     
-                    // Bỏ qua các video bị lỗi hoặc đã bị xóa
                     if(title === "Private video" || title === "Deleted video") return;
 
                     const card = document.createElement('div');
                     card.className = 'card';
                     
-                    // Hiển thị khung nếu không có ảnh bìa, hoặc hiển thị ảnh bìa nếu có
                     const imageHtml = thumbnailUrl ? `<img src="${thumbnailUrl}" class="thumbnail" alt="Bìa phim">` : `<div style="width: 100%; height: 100px; background: #444; display:flex; align-items:center; justify-content:center;">🎞️</div>`;
                     
                     card.innerHTML = `
@@ -94,25 +107,23 @@
                 });
             } else {
                 statusMsg.style.display = 'block';
-                statusMsg.innerText = "Danh sách phát hiện đang trống. Hãy thêm phim vào Playlist Kho Phim của bạn.";
+                statusMsg.innerText = "Danh sách phát thực sự đang trống (0 video). Hãy kiểm tra lại các video bên trong.";
             }
         })
         .catch(err => {
             statusMsg.style.display = 'block';
-            statusMsg.innerText = "Lỗi kết nối YouTube API. Hãy kiểm tra lại xem bạn đã bật YouTube Data API v3 chưa.";
-            console.error("Chi tiết lỗi:", err);
+            statusMsg.innerHTML = `<div class="error-box">❌ Lỗi kết nối mạng hoặc trình duyệt lỗi: ${err.message}</div>`;
         });
     }
 
     function playYouTubeVideo(videoId) {
-        // Mở video thông qua link nhúng, tự động phát
         const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
         youtubePlayer.src = embedUrl;
         playerWrapper.style.display = 'flex';
     }
 
     function closePlayer() {
-        youtubePlayer.src = ""; // Xóa link để ngắt tiếng khi đóng
+        youtubePlayer.src = "";
         playerWrapper.style.display = 'none';
     }
 </script>
