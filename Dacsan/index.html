@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Hệ Thống Cộng Tác Viên Đặc Sản Tây Nguyên</title>
+ <style>
+ body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f6f9; color:
+#333; }
+ .header { background-color: #1e3a8a; color: white; padding: 40px 20px; text-align: center; }
+ .header h1 { margin: 0; font-size: 26px; }
+ .header p { margin: 10px 0 0 0; font-size: 15px; opacity: 0.9; }
+ .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+ .grid-policy { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;
+margin-bottom: 40px; }
+ .card-policy { background: white; padding: 20px; border-radius: 6px; border-left: 4px solid #2563eb;
+box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+ .card-policy h3 { margin: 0 0 8px 0; color: #1e3a8a; font-size: 16px; }
+ .card-policy p { margin: 0; font-size: 13px; color: #64748b; }
+ .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+ .product-card { background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding:
+20px; display: flex; flex-direction: column; justify-content: space-between; }
+ .product-title { font-size: 16px; font-weight: bold; color: #0f172a; margin-bottom: 8px; }
+ .price-box { background: #f1f5f9; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 13px;
+}
+ .price-retail { color: #475569; }
+ .commission { color: #16a34a; font-weight: bold; font-size: 15px; margin-top: 4px; }
+ .btn-group { display: flex; flex-direction: column; gap: 8px; }
+ .btn { padding: 10px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; text-align: center;
+font-size: 13px; text-decoration: none; }
+ .btn-download { background-color: #4b5563; color: white; }
+ .btn-copy { background-color: #2563eb; color: white; }
+ .btn-order { background-color: #16a34a; color: white; }
+ .form-section { background: white; padding: 25px; border-radius: 8px; margin-top: 40px; box-shadow: 0
+4px 6px rgba(0,0,0,0.05); }
+ .form-group { margin-bottom: 15px; }
+ .form-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+ .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1;
+border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+ </style>
+</head>
+<body>
+ <div class="header">
+ <h1>HỢP TÁC KINH DOANH ĐẶC SẢN TÂY NGUYÊN - VỐN 0 ĐỒNG</h1>
+ <p>Hỗ trợ hình ảnh, bài viết mẫu. Bạn chỉ lo đăng bài chốt đơn, kho lo đóng gói và giao hàng!</p>
+ </div>
+ <div class="container">
+ <div class="grid-policy">
+ <div class="card-policy"><h3>0 VỐN NHẬP HÀNG</h3><p>Không bỏ tiền mua trước hàng.</p></div>
+ <div class="card-policy"><h3>0 RỦI RO TỒN KHO</h3><p>Kho tổng chịu trách nhiệm tồn
+kho.</p></div>
+ <div class="card-policy"><h3>0 LO ĐÓNG GÓI</h3><p>Nhân viên đóng hàng chuyên
+nghiệp.</p></div>
+ <div class="card-policy"><h3>BẢO MẬT KHÁCH</h3><p>Giao hàng hiển thị tên cá nhân
+CTV.</p></div>
+ </div>
+ 
+ <h2 style="color: #1e3a8a;">DANH MỤC SẢN PHẨM & TƯ LIỆU ĐĂNG BÀI</h2>
+ <div class="product-grid">
+ <div class="product-card">
+ <div>
+ <div class="product-title">Hạt Macca Sấy Nứt Vỏ Đắk Lắk (500g)</div>
+ <div class="price-box">
+ <div class="price-retail">Giá bán lẻ niêm yết: 125.000đ</div>
+ <div class="commission">Hoa hồng nhận được: +30.000đ</div>
+ </div>
+ </div>
+ <div class="btn-group">
+ <button class="btn btn-download" onclick="alert('Hệ thống đang chuẩn bị tải xuống Album hình ảnh
+và Video review thật tại rẫy Macca...')">Tải Ảnh & Video Thật</button>
+ <button class="btn btn-copy" onclick="navigator.clipboard.writeText('Hạt Macca sấy nứt vỏ chuẩn
+size đại Đắk Lắk, hạt to tròn trùng trục, ăn giòn tan, béo ngậy tự nhiên. Nguồn dinh dưỡng vàng cho mẹ bầu và
+các bé. Giá ưu đãi đầu mùa chỉ 125k/hộp 500g tặng kèm dụng cụ khui hạt. Ib hoặc LH hotline em ngay: [Nhập
+Số Điện Thoại Của Bạn]'); alert('Đã copy bài viết mẫu thành công vào bộ nhớ tạm!');">Copy Bài Viết
+Mẫu</button>
+ <a href="#order-form" class="btn btn-order">Lên Đơn Hàng Này</a>
+ </div>
+ </div>
+ <div class="product-card">
+ <div>
+ <div class="product-title">Cà Phê Robusta Nguyên Chất Rang Mộc (500g)</div>
+ <div class="price-box">
+ <div class="price-retail">Giá bán lẻ niêm yết: 140.000đ</div>
+ <div class="commission">Hoa hồng nhận được: +35.000đ</div>
+ </div>
+ </div>
+ <div class="btn-group">
+ <button class="btn btn-download" onclick="alert('Hệ thống đang tải xuống Album ảnh xưởng rang
+                                                 hạt cà phê mộc...')">Tải Ảnh & Video Thật</button>
+ <button class="btn btn-copy" onclick="navigator.clipboard.writeText('Cà phê hạt Robusta Buôn Ma
+Thuột nguyên chất 100%, rang mộc mộc mạc thủ công không pha tẩm đậu bắp hay hóa chất. Hương vị đậm
+đà, sánh đượm đắng thanh chuẩn vị Tây Nguyên. Thơm nức mũi khi mở túi, chỉ 140k/bịch 500g. Mua hàng
+nhắn em: [Nhập Số Điện Thoại Của Bạn]'); alert('Đã copy bài viết mẫu thành công vào bộ nhớ tạm!');">Copy
+Bài Viết Mẫu</button>
+ <a href="#order-form" class="btn btn-order">Lên Đơn Hàng Này</a>
+ </div>
+ </div>
+ </div>
+ 
+ <div class="form-section" id="order-form">
+ <h2 style="margin-top:0; color: #1e3a8a;">FORM ĐẶT HÀNG DÀNH CHO CTV</h2>
+ <form onsubmit="event.preventDefault(); alert('Đơn hàng đã gửi về kho tổng thành công! Hệ thống sẽ
+xử lý đóng hàng ngay.');">
+ <div class="form-group">
+ <label>Họ Tên hoặc Mã Số CTV để tính hoa hồng:</label>
+ <input type="text" required placeholder="Nhập tên của bạn để kho đối soát tiền">
+ </div>
+ <div class="form-group">
+ <label>Sản Phẩm & Số Lượng Khách Đặt:</label>
+ <textarea rows="2" required placeholder="Ví dụ: 2 hộp Macca Đắk Lắk"></textarea>
+ </div>
+ <div class="form-group">
+ <label>Họ Tên Người Nhận (Khách hàng cuối):</label>
+ <input type="text" required>
+ </div>
+ <div class="form-group">
+ <label>Số Điện Thoại Khách Hàng:</label>
+ <input type="tel" required>
+ </div>
+ <div class="form-group">
+ <label>Địa Chỉ Giao Hàng Chi Tiết:</label>
+ <input type="text" required placeholder="Số nhà, tên đường, thôn, xã, huyện, tỉnh thành...">
+ </div>
+ <button type="submit" class="btn btn-order" style="width:100%; font-size:15px; padding: 12px;">GỬI
+ĐƠN HÀNG VỀ KHO TỔNG</button>
+ </form>
+ </div>
+ </div>
+</body>
+</html>
+   
