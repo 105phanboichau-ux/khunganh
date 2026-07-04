@@ -3,367 +3,439 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NÔNG Á NEWGEN - Cổng Đào Tạo</title>
-    <!-- Nhúng thư viện Icon FontAwesome để làm bộ icon giống ảnh -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Hệ Thống Đào Tạo Nội Bộ - Nông Á Newgen</title>
     
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <style>
-        /* ================= THIẾT KẾ GIAO DIỆN XANH MÁT - TRẺ TRUNG ================= */
-        :root {
-            --brand-green: #059669;     /* Xanh lá đậm thương hiệu */
-            --brand-light: #10b981;     /* Xanh lá sáng trẻ trung */
-            --sidebar-bg: rgba(255, 255, 255, 0.95); /* Trắng mờ nhẹ */
-            --text-dark: #1e293b;       
-            --text-muted: #64748b;      
-            --active-bg: #ecfdf5;       /* Xanh mint nhạt khi chọn menu */
-            --border-light: rgba(203, 213, 225, 0.5);    
-            --radius-card: 16px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
-        
-        /* 1. NỀN VƯỜN CÂY TỔNG THỂ */
-        body { 
-            /* Đổi link ảnh ở đây nếu bạn muốn ảnh vườn cây khác */
-            background-image: url('https://images.unsplash.com/photo-1592982537447-6f296c0993ea?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: var(--text-dark); 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            overflow: hidden; 
-        }
-
-        /* 2. HEADER CÔNG NGHỆ (KÍNH MỜ) */
-        header {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            height: 70px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 32px;
-            border-bottom: 1px solid var(--border-light);
-            z-index: 50;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-        .logo-section { font-size: 24px; font-weight: 900; color: var(--brand-green); cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; display: flex; align-items: center; gap: 10px; }
-        .logo-section i { color: #f59e0b; font-size: 28px; } /* Thêm icon mặt trời nhỏ cạnh logo */
-        
-        .search-container { position: relative; width: 400px; }
-        .search-input { width: 100%; padding: 10px 20px 10px 40px; background-color: #f1f5f9; border: 1px solid transparent; border-radius: 30px; font-size: 14px; outline: none; transition: 0.3s; }
-        .search-input:focus { border-color: var(--brand-light); background: #fff; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); }
-        .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #94a3b8; }
-        
-        .nav-icons { display: flex; align-items: center; gap: 20px; color: var(--text-muted); font-size: 18px; cursor: pointer; }
-        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #cbd5e1; overflow: hidden; border: 2px solid var(--brand-light); }
-        .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* 3. BỐ CỤC CHÍNH (WORKSPACE) */
-        .workspace { display: flex; flex: 1; overflow: hidden; }
-
-        /* ----- MENU TRÁI CÓ ICON VÒNG TRÒN MÀU ----- */
-        .sidebar { width: 290px; background-color: var(--sidebar-bg); backdrop-filter: blur(10px); border-right: 1px solid var(--border-light); padding: 24px 16px; overflow-y: auto; }
-        .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-        
-        .menu-item { padding: 10px 16px; font-size: 15px; font-weight: 600; color: #475569; cursor: pointer; border-radius: 12px; display: flex; align-items: center; gap: 14px; transition: 0.2s; }
-        .menu-item:hover { background-color: #f1f5f9; color: var(--text-dark); transform: translateX(4px); }
-        .menu-item.active { background-color: var(--active-bg); color: var(--brand-green); font-weight: 700; border-right: 4px solid var(--brand-green); }
-        
-        /* CSS tạo hình Vòng tròn chứa Icon màu trắng (Giống ảnh) */
-        .icon-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-        .bg-blue { background-color: #3b82f6; }   /* Tuần 1 */
-        .bg-orange { background-color: #f59e0b; } /* Tuần 2 */
-        .bg-red { background-color: #ef4444; }    /* Tuần 3 */
-        .bg-green { background-color: #10b981; }  /* Tuần 4 */
-        .bg-purple { background-color: #8b5cf6; } /* Nâng cao */
-        .bg-pink { background-color: #ec4899; }   /* Bài thuốc */
-        .bg-teal { background-color: #14b8a6; }   /* Tham khảo */
-        .bg-gray { background-color: #64748b; }   /* Liên hệ */
-        .bg-admin { background-color: #1e293b; }  /* Admin */
-
-        .menu-divider { height: 1px; background-color: var(--border-light); margin: 16px 0; }
-        .menu-section-hdr { font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin: 16px 0 10px 16px; }
-
-        /* ----- KHU VỰC CHÍNH BÊN PHẢI ----- */
-        .main-view { flex: 1; overflow-y: auto; padding: 32px 48px; background: rgba(248, 250, 252, 0.85); backdrop-filter: blur(8px); }
-        
-        /* Banner Giới thiệu */
-        .intro-banner { display: flex; background: #ffffff; border-radius: var(--radius-card); overflow: hidden; margin-bottom: 36px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); min-height: 240px; border: 1px solid rgba(255,255,255,0.5); }
-        .intro-text-col { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%); }
-        .intro-text-col h1 { font-size: 28px; color: var(--brand-green); margin-bottom: 12px; font-weight: 800; line-height: 1.3; }
-        .intro-text-col p { font-size: 16px; color: #475569; line-height: 1.7; }
-        .intro-video-col { width: 450px; background: #000; position: relative; flex-shrink: 0; }
-        .intro-video-col iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-
-        /* Tiêu đề nhóm học phần */
-        .group-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(16, 185, 129, 0.2); }
-        .group-title-row h3 { font-size: 20px; font-weight: 800; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
-        .group-title-row h3 i { color: var(--brand-light); }
-        .group-count { font-size: 14px; background: #fff; padding: 4px 12px; border-radius: 20px; color: var(--brand-green); font-weight: 700; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-
-        /* HỆ THỐNG LƯỚI THẺ (GRID CARD) */
-        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
-        .lesson-card { cursor: pointer; transition: 0.3s; background: #fff; border-radius: var(--radius-card); padding: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); border: 1px solid #fff; }
-        .lesson-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15); border-color: var(--brand-light); }
-        
-        .card-image-wrapper { position: relative; width: 100%; padding-bottom: 60%; border-radius: 12px; overflow: hidden; background-color: #000; }
-        .card-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.5s; }
-        .lesson-card:hover .card-img { opacity: 0.5; scale: 1.05; }
-        
-        .card-overlay-title { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; color: #ffffff; font-size: 24px; font-weight: 900; text-align: center; text-shadow: 0 4px 12px rgba(0,0,0,0.8); z-index: 2; }
-        
-        .card-bottom-info { margin-top: 12px; padding: 4px 8px; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #334155; }
-        .check-icon { color: var(--brand-light); font-size: 16px; background: #ecfdf5; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
-
-        /* 4. MODAL HỌC TẬP */
-        .study-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.7); backdrop-filter: blur(6px); display: none; justify-content: center; align-items: center; z-index: 1000; }
-        .modal-container { width: 92%; max-width: 1200px; height: 85vh; background: #ffffff; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4); }
-        .modal-header { padding: 20px 30px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: var(--active-bg); }
-        .modal-header h3 { font-size: 20px; font-weight: 800; color: var(--brand-green); }
-        .close-btn { font-size: 28px; color: var(--text-muted); cursor: pointer; border: none; background: transparent; transition: 0.2s; }
-        .close-btn:hover { color: #ef4444; transform: rotate(90deg); }
-        
-        .modal-body { display: flex; flex: 1; overflow: hidden; }
-        .modal-text-pane { flex: 1; padding: 40px; overflow-y: auto; line-height: 1.8; font-size: 16px; color: #334155; }
-        .modal-text-pane p { margin-bottom: 16px; }
-        .modal-text-pane h4 { font-size: 22px; color: #111827; margin: 24px 0 16px 0; font-weight: 800; border-left: 4px solid var(--brand-light); padding-left: 12px; }
-        
-        .modal-video-pane { width: 500px; background: #f8fafc; border-left: 1px solid var(--border-light); padding: 30px 24px; flex-shrink: 0; }
-        .video-box-fixed { position: sticky; top: 0; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .video-box-fixed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        /* Tùy chỉnh thanh cuộn cho đẹp */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        /* Tùy chỉnh hiển thị nội dung HTML */
+        .prose h3 { font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem; color: #032D60; }
+        .prose p { margin-bottom: 1rem; line-height: 1.6; }
+        .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+        .prose li { margin-bottom: 0.25rem; }
     </style>
 </head>
-<body>
+<body class="bg-[#F3F2F2]">
+    <div id="root"></div>
 
-    <!-- TOP NAV -->
-    <header>
-        <div class="logo-section" onclick="changeSection('t1')">
-            <i class="fas fa-sun"></i> NÔNG Á NEWGEN
-        </div>
-        <div class="search-container">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" placeholder="Tìm kiếm bài học, hoạt chất, quy trình...">
-        </div>
-        <div class="nav-icons">
-            <i class="fas fa-cog"></i> 
-            <i class="fas fa-bell"></i>
-            <div class="user-avatar">
-                <img src="https://i.pravatar.cc/100?img=33" alt="Avatar">
-            </div>
-        </div>
-    </header>
+    <script type="text/babel" data-type="module">
+        const { useState, useEffect } = React;
 
-    <div class="workspace">
-        
-        <!-- SIDEBAR: SỬ DỤNG BỘ ICON VÒNG TRÒN MÀU RỰC RỠ -->
-        <aside class="sidebar">
-            <ul class="sidebar-menu">
-                <li class="menu-section-hdr">Lộ trình cơ bản</li>
-                <li id="menu-t1" class="menu-item active" onclick="changeSection('t1')">
-                    <div class="icon-circle bg-blue"><i class="fas fa-seedling"></i></div> Đào tạo Tuần 1
-                </li>
-                <li id="menu-t2" class="menu-item" onclick="changeSection('t2')">
-                    <div class="icon-circle bg-orange"><i class="fas fa-leaf"></i></div> Đào tạo Tuần 2
-                </li>
-                <li id="menu-t3" class="menu-item" onclick="changeSection('t3')">
-                    <div class="icon-circle bg-red"><i class="fas fa-tractor"></i></div> Đào tạo Tuần 3
-                </li>
-                <li id="menu-t4" class="menu-item" onclick="changeSection('t4')">
-                    <div class="icon-circle bg-green"><i class="fas fa-warehouse"></i></div> Đào tạo Tuần 4
-                </li>
-                
-                <li class="menu-divider"></li>
-                <li class="menu-section-hdr">Kho dữ liệu nâng cao</li>
-                <li id="menu-nangcao" class="menu-item" onclick="changeSection('nangcao')">
-                    <div class="icon-circle bg-purple"><i class="fas fa-rocket"></i></div> Chuyên Sâu Nâng Cao
-                </li>
-                <li id="menu-baithuoc" class="menu-item" onclick="changeSection('baithuoc')">
-                    <div class="icon-circle bg-pink"><i class="fas fa-flask"></i></div> Bài Thuốc Phối Trộn
-                </li>
-                <li id="menu-thamkhao" class="menu-item" onclick="changeSection('thamkhao')">
-                    <div class="icon-circle bg-teal"><i class="fas fa-book-open"></i></div> Tài Liệu Tham Khảo
-                </li>
-                <li id="menu-lienhe" class="menu-item" onclick="changeSection('lienhe')">
-                    <div class="icon-circle bg-gray"><i class="fas fa-headset"></i></div> Thông Tin Liên Hệ
-                </li>
-
-                <li class="menu-divider"></li>
-                <li class="menu-section-hdr">Hệ thống phân quyền</li>
-                <li id="menu-admin" class="menu-item" onclick="renderAdminMockup()">
-                    <div class="icon-circle bg-admin"><i class="fas fa-crown"></i></div> Quản Lý User (Admin)
-                </li>
-            </ul>
-        </aside>
-
-        <!-- KHU VỰC CHÍNH -->
-        <main class="main-view">
-            
-            <div class="intro-banner" id="company-banner">
-                <div class="intro-text-col">
-                    <h1>Chào mừng bạn đến với Nông Á Newgen</h1>
-                    <p>Hệ thống đào tạo nội bộ chuyên nghiệp. Dành ra ít phút xem video bên cạnh để hiểu rõ hơn về tầm nhìn, sứ mệnh và định hướng phát triển của công ty trước khi bắt đầu khóa học nhé.</p>
-                </div>
-                <div class="intro-video-col">
-                    <!-- Link video YouTube giới thiệu công ty -->
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                </div>
-            </div>
-
-            <div id="grid-container">
-                <!-- Thẻ bài học đổ vào đây -->
-            </div>
-        </main>
-    </div>
-
-    <!-- CỬA SỔ HỌC TẬP (MODAL) -->
-    <div class="study-modal" id="studyModal">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3 id="modal-lesson-title">Bài học chi tiết</h3>
-                <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-text-pane" id="modal-lesson-body"></div>
-                <div class="modal-video-pane">
-                    <div class="video-box-fixed">
-                        <iframe id="modal-video-frame" src="" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Dữ liệu nội dung mô phỏng
-        const sectionData = {
-            t1: {
-                groups: [
-                    {
-                        name: "Học phần văn hóa cốt lõi", count: "3 Bài học", icon: "fa-book-reader",
-                        lessons: [
-                            { id: "t1_1", title: "Văn Hóa", label: "Bài 1: Quy tắc ứng xử", img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>1. Quy tắc đón tiếp khách hàng</h4><p>Luôn tươi cười niềm nở với bà con nông dân.</p>" },
-                            { id: "t1_2", title: "An Toàn", label: "Bài 2: Vạch màu độc tính", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>Nhận diện nhóm độc tính</h4><p>Ghi nhớ 4 vạch màu: Đỏ, Vàng, Xanh dương, Xanh lá.</p>" },
-                            { id: "t1_3", title: "Sắp Xếp", label: "Bài 3: Quản lý kho 5S", img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", body: "<h4>Quy chuẩn quầy kệ</h4><p>Xếp thuốc nước EC phía dưới, thuốc bột WP phía trên.</p>" }
-                        ]
-                    }
-                ]
+        // =========================================================================
+        // 1. KHO DỮ LIỆU BÀI HỌC (DATA)
+        // =========================================================================
+        const lessons = [
+            // --- TUẦN 1 ---
+            {
+                id: "t1-1", categoryId: "tuan-1", title: "HUMIC VÀ FULVIC?",
+                description: "Hai hợp chất quan trọng trong nông nghiệp hiện đại: Humic và Fulvic.",
+                duration: "10 phút", points: 100, icon: "🏷️", youtubeId: "nrJPTCENFdw", 
+                content: `<h3>🌱 HUMIC VÀ FULVIC TRONG NÔNG NGHIỆP</h3><p>Hai hợp chất quan trọng: <strong>Humic</strong> và <strong>Fulvic</strong>. Từ cách chiết xuất đến tác dụng cụ thể với đất và cây trồng.</p><ul><li>Giúp đất tơi xốp, giữ ẩm tốt.</li><li>Kích thích bộ rễ phát triển cực mạnh.</li></ul><p>📞 <strong>Liên hệ tư vấn:</strong> 0935 620 820</p>`
             },
-            t2: {
-                groups: [
-                    {
-                        name: "Nhóm thuốc trừ sâu bệnh", count: "2 Bài học", icon: "fa-bug",
-                        lessons: [
-                            { id: "t2_1", title: "Trừ Sâu", label: "Bài 1: Trị rầy rệp", img: "https://images.unsplash.com/photo-1463171359979-300848856649?auto=format&fit=crop&w=400&q=80", video: "", body: "<h4>Hoạt chất trừ sâu rầy</h4><p>Imidacloprid, Thiamethoxam...</p>" },
-                            { id: "t2_2", title: "Trị Nấm", label: "Bài 2: Trừ nấm bệnh", img: "https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=400&q=80", video: "", body: "<h4>Hoạt chất trị nấm</h4><p>Metalaxyl, Mancozeb...</p>" }
-                        ]
-                    }
-                ]
+            {
+                id: "t1-2", categoryId: "tuan-1", title: "Trichoderma là gì?",
+                description: "TẤT TẦN TẬT VỀ NẤM ĐỐI KHÁNG TRICHODERMA",
+                duration: "10 phút", points: 100, icon: "🏷️", youtubeId: "8jWX4Vi7IZ8", 
+                content: `<h3>🦠 TỔNG QUAN VỀ NẤM TRICHODERMA</h3><p>Nấm đối kháng Trichoderma là giải pháp sinh học an toàn giúp kiểm soát các bệnh về rễ.</p><p>📞 <strong>Liên hệ tư vấn:</strong> 0935 620 820</p>`
+            },
+            {
+                id: "t1-3", categoryId: "tuan-1", title: "TRICHODERMA LÀ GÌ chuyên sâu ?",
+                description: "Giải đáp 10 thắc mắc về sử dụng Trichoderma hiệu quả.",
+                duration: "10 phút", points: 100, icon: "🏷️", youtubeId: "wS1Y-IFpOm0", 
+                content: `<h3>🦠 TỔNG QUAN VỀ NẤM TRICHODERMA</h3><p>Video giải đáp 10 thắc mắc về sử dụng Trichoderma hiệu quả.</p><p>📞 <strong>Liên hệ tư vấn:</strong> 0935 620 820</p>`
+            },
+            {
+                id: "t1-4", categoryId: "tuan-1", title: "TÁC DỤNG TRUNG VI LƯỢNG (COMBI)?",
+                description: "Trung vi lượng là gì - tác dụng của TVL đối với cây trồng",
+                duration: "10 phút", points: 100, icon: "🏷️", youtubeId: "N3i50C3Jb5k", 
+                content: `<h3>TÁC DỤNG TRUNG VI LƯỢNG</h3><p>Nguyên tố như Canxi, Magie, Lưu huỳnh, Sắt, Kẽm, Đồng, Bo, Mangan giữ vai trò rất quan trọng đối với cây trồng.</p>`
+            },
+            {
+                id: "t1-5", categoryId: "tuan-1", title: "Chất bám dính là gì? Chất loang trải là gì?",
+                description: "Phân biệt chất bám dính, loang trải và dầu khoáng. Sử dụng khi nào?",
+                duration: "10 phút", points: 100, icon: "🏷️", youtubeId: "NAd326nDCTk", 
+                content: `<h3>🌱 CHẤT BÁM DÍNH & LOANG TRẢI</h3><p>Hướng quản lý hiệu quả dịch hại bằng chất phụ trợ.</p>`
+            },
+            {
+                id: "t1-6", categoryId: "tuan-1", title: "THUỐC CÁT - BASUDIN - HẠT CẢI",
+                description: "Thuốc rải gốc có quản lý được rệp và quy trình quản lý rệp sáp.",
+                duration: "10 phút", points: 100, icon: "🏷️", youtubeId: "Ii6YgkqLvew", 
+                content: `<h3>🌱 QUẢN LÝ RỆP SÁP BẰNG THUỐC RẢI GỐC</h3><p>Chi tiết cách rải gốc.</p>`
+            },
+            {
+                id: "t1-7", categoryId: "tuan-1", title: "PHÂN GÀ NỞ",
+                description: "Phân gà viên nén có tốt không? So sánh với phân gà truyền thống.",
+                duration: "10 phút", points: 100, icon: "🏷️", youtubeId: "EvsJXlx1m9Q", 
+                content: `<p>Ưu điểm của phân gà viên nén và cách sử dụng hiệu quả.</p>`
+            },
+            {
+                id: "t1-8", categoryId: "tuan-1", title: "Giới thiệu Nông nghiệp Thông minh",
+                description: "Tìm hiểu tổng quan về nông nghiệp hiện đại và các xu hướng công nghệ.",
+                duration: "15 phút", points: 100, icon: "🌱", 
+                content: `<p>Nội dung giới thiệu về hệ thống nông nghiệp thông minh...</p>`
+            },
+
+            // --- TUẦN 2 & 3 ---
+            {
+                id: "t2-1", categoryId: "tuan-2", title: "Tìm hiểu về PH đất",
+                description: "Vôi, Hữu Cơ, Humic, Vi sinh vật nâng pH đất bằng cách nào?",
+                duration: "10 phút", points: 100, icon: "🏷️", youtubeId: "4vOHir-lbmQ", 
+                content: `<h3>🧪 QUẢN LÝ ĐỘ pH ĐẤT</h3><p>Ứng dụng vôi và hữu cơ nâng pH.</p>`
+            },
+            {
+                id: "t3-1", categoryId: "tuan-3", title: "Giải pháp thuốc đặc trị MỌT ĐỤC CÀNH hại cây",
+                description: "Báo giá và hướng dẫn sử dụng các dòng thuốc lưu dẫn, xông hơi trị mọt.",
+                duration: "13 phút", points: 125, icon: "🐛", youtubeId: "xFzwirpIbrM", 
+                content: `<h3>🐛 Cách trị mọt dứt điểm:</h3><p>Sử dụng Lambda, Profenofos và bộ ba trị mọt.</p>`
+            },
+
+            // --- THEO CÂY TRỒNG & THÁNG ---
+            {
+                id: "sr-1", categoryId: "cay-sau-rieng", title: "Tổng hợp các BỘ ĐẬU TRÁI, CHỐNG RỤNG Sầu Riêng",
+                description: "Giới thiệu 5 bộ thuốc giúp đậu trái mạnh, chống rụng trước và sau xổ nhụy.",
+                duration: "18 phút", points: 150, icon: "🌳", youtubeId: "Grdg2MuAiQc",
+                content: `<h3>🍈 Phân tích 5 bộ đậu trái đặc hiệu:</h3><p>Các bộ thuốc từ An Phát Nông, Việt Nông...</p>`
+            },
+            {
+                id: "sr-2", categoryId: "cay-sau-rieng", title: "Cách đi phân nuôi trái Sầu Riêng 50-90 ngày",
+                description: "Quy trình NPK, quản lý đọt giúp trái lớn nhanh, không bể gai.",
+                duration: "16 phút", points: 250, icon: "🍈", youtubeId: "Gs-ycdSGjGY", 
+                content: `<h3>📋 Quy trình nuôi trái 50-90 ngày:</h3><p>Bón phân NPK cân đối, chặn đọt non.</p>`
+            },
+            {
+                id: "th10-1", categoryId: "thang-10", title: "Tưới Lân + Kali nước tạo mầm gốc",
+                description: "Giải pháp tưới VinoBloom và Kali hữu cơ giúp cây hấp thu cực nhanh.",
+                duration: "19 phút", points: 200, icon: "💧", youtubeId: "bveaW_uJPh0", 
+                content: `<h3>💦 Ưu điểm tuyệt đối:</h3><p>Hấp thu tức thì 100%, không bị chai hay làm chua đất.</p>`
+            },
+            {
+                id: "kth-1", categoryId: "kien-thuc-hay", title: "Tham quan cửa hàng & Các dòng phân thuốc chủ lực",
+                description: "Khám phá các dòng phân bón dạng can nhập khẩu và thuốc BVTV quản lý sâu bệnh.",
+                duration: "32 phút", points: 100, icon: "🏪", youtubeId: "Orx026YsZhE",
+                content: `<h3>🏪 TỔNG QUAN CÁC MẶT HÀNG:</h3><p>Dòng can tưới nhập khẩu nguyên đai nguyên kiện.</p>`
             }
-        };
+        ];
 
-        function changeSection(sectionId) {
-            document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
-            document.getElementById('menu-' + sectionId).classList.add('active');
-            
-            document.getElementById('company-banner').style.display = 'flex';
-            const gridContainer = document.getElementById('grid-container');
-            gridContainer.innerHTML = ''; 
+        // =========================================================================
+        // 2. GIAO DIỆN ICONS (SVG)
+        // =========================================================================
+        function ChevronIcon({ isOpen }) {
+            return <svg className={`h-4 w-4 text-white/60 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>;
+        }
+        function CalendarIcon({ isActive }) { return <svg className={`h-5 w-5 ${isActive ? "text-white" : "text-white/60 group-hover:text-white"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>; }
+        function StarIcon({ isActive }) { return <svg className={`h-5 w-5 ${isActive ? "text-white" : "text-white/60 group-hover:text-white"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>; }
+        function CheckCircleIcon({ isActive }) { return <svg className={`h-5 w-5 ${isActive ? "text-white" : "text-white/60 group-hover:text-white"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>; }
+        function LeafIcon({ isActive }) { return <svg className={`h-5 w-5 ${isActive ? "text-white" : "text-white/60 group-hover:text-white"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 21c3 0 7-1 7-8V5c0-1.25 1-2 2-2h4c2 0 4 1.5 4 4v2c0 4-4 6-9 6h-2v6H3z" /></svg>; }
+        function ClockIcon({ isActive }) { return <svg className={`h-5 w-5 ${isActive ? "text-white" : "text-white/60 group-hover:text-white"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>; }
+        function BookOpenIcon({ isActive }) { return <svg className={`h-5 w-5 ${isActive ? "text-white" : "text-white/60 group-hover:text-white"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>; }
+        function PhoneIcon({ isActive }) { return <svg className={`h-5 w-5 ${isActive ? "text-white" : "text-white/60 group-hover:text-white"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>; }
 
-            const data = sectionData[sectionId];
-            if (!data || !data.groups || data.groups.length === 0) {
-                gridContainer.innerHTML = `<div style="background:#fff; padding:30px; border-radius:16px; text-align:center; color:#64748b;"><i class="fas fa-tools fa-3x" style="color:#cbd5e1; margin-bottom:15px;"></i><p>Nội dung học phần này đang được cập nhật...</p></div>`;
-                return;
-            }
+        // =========================================================================
+        // 3. GIAO DIỆN THẺ BÀI HỌC (LESSON CARD)
+        // =========================================================================
+        function LessonCard({ lesson, onClick }) {
+            const hasImage = lesson.thumbnail || lesson.youtubeId;
+            const imageUrl = lesson.thumbnail ? lesson.thumbnail : (lesson.youtubeId ? `https://img.youtube.com/vi/${lesson.youtubeId}/maxresdefault.jpg` : null);
 
-            data.groups.forEach(group => {
-                let groupHtml = `
-                    <div class="group-title-row">
-                        <h3><i class="fas ${group.icon}"></i> ${group.name}</h3>
-                        <span class="group-count">${group.count} <i class="fas fa-chevron-down" style="font-size:10px; margin-left:4px;"></i></span>
+            return (
+                <div onClick={onClick} className="group flex cursor-pointer flex-col overflow-hidden rounded-xl border border-[#E5E5E5] bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+                    <div className={`relative aspect-[2/1] w-full overflow-hidden flex items-center justify-center ${!hasImage ? 'bg-gradient-to-br from-[#0176D3] to-[#045c9e]' : 'bg-black'}`}>
+                        {hasImage ? (
+                            <React.Fragment>
+                                <img src={imageUrl} alt={lesson.title} className="h-full w-full object-cover opacity-90 transition-transform duration-300 group-hover:scale-105 group-hover:opacity-100" onError={(e) => { e.currentTarget.src = `https://img.youtube.com/vi/${lesson.youtubeId}/0.jpg`; }} />
+                                {lesson.youtubeId && (
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors group-hover:bg-[#FF0000]">
+                                            <svg className="h-7 w-7 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                                        </div>
+                                    </div>
+                                )}
+                            </React.Fragment>
+                        ) : (
+                            <span className="text-6xl transition-transform duration-300 group-hover:scale-110">{lesson.icon || "📚"}</span>
+                        )}
                     </div>
-                    <div class="cards-grid">
-                `;
+                    <div className="flex flex-1 flex-col p-5">
+                        <div className="mb-2 flex items-center gap-3 text-xs font-semibold text-[#706E6B]">
+                            <span className="text-[#E87722]">⭐ {lesson.points || 100} điểm</span>
+                            <span>•</span>
+                            <span>{lesson.duration || "15 phút"}</span>
+                        </div>
+                        <h3 className="mb-4 line-clamp-2 text-lg font-bold text-[#181818] group-hover:text-[#0176D3]">{lesson.title}</h3>
+                        <div className="mt-auto">
+                            <button className="w-full rounded-lg bg-[#0176D3] py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#014486]">Xem nội dung</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
 
-                group.lessons.forEach(lesson => {
-                    groupHtml += `
-                        <div class="lesson-card" onclick="openLesson('${sectionId}', '${lesson.id}')">
-                            <div class="card-image-wrapper">
-                                <img src="${lesson.img}" class="card-img" alt="Hình ảnh">
-                                <div class="card-overlay-title">${lesson.title}</div>
+        // =========================================================================
+        // 4. GIAO DIỆN MENU TRÁI (SIDEBAR)
+        // =========================================================================
+        function Sidebar({ activeCategory, onSelectCategory }) {
+            const [openDropdowns, setOpenDropdowns] = useState({ "menu-cay": false, "menu-thang": false });
+
+            const toggleDropdown = (menuId) => {
+                setOpenDropdowns(prev => ({ ...prev, [menuId]: !prev[menuId] }));
+            };
+
+            const menuSections = [
+                {
+                    title: "LỘ TRÌNH HỌC",
+                    items: [
+                        { name: "Tuần 1", id: "tuan-1", icon: CalendarIcon },
+                        { name: "Tuần 2", id: "tuan-2", icon: CalendarIcon },
+                        { name: "Tuần 3", id: "tuan-3", icon: CalendarIcon },
+                        { name: "Tuần 4", id: "tuan-4", icon: CalendarIcon },
+                        { name: "Nâng cao", id: "nang-cao", icon: StarIcon },
+                        { name: "Kiểm tra", id: "kiem-tra", icon: CheckCircleIcon },
+                    ],
+                },
+                {
+                    title: "CÔNG CỤ & TÀI LIỆU",
+                    items: [
+                        { 
+                            name: "Bài thuốc theo cây", id: "menu-cay", icon: LeafIcon,
+                            subItems: [
+                                { name: "Cà phê", id: "cay-ca-phe" }, { name: "Tiêu", id: "cay-tieu" },
+                                { name: "Sầu Riêng", id: "cay-sau-rieng" }, { name: "Lúa", id: "cay-lua" },
+                                { name: "Nhãn Vải", id: "cay-nhan-vai" }, { name: "Rau", id: "cay-rau" },
+                                { name: "Bắp - Hoa", id: "cay-bap-hoa" },
+                            ]
+                        },
+                        { 
+                            name: "Bài thuốc theo tháng", id: "menu-thang", icon: ClockIcon,
+                            subItems: [
+                                { name: "Tháng 1", id: "thang-1" }, { name: "Tháng 2", id: "thang-2" },
+                                { name: "Tháng 3", id: "thang-3" }, { name: "Tháng 4", id: "thang-4" },
+                                { name: "Tháng 5", id: "thang-5" }, { name: "Tháng 6", id: "thang-6" },
+                                { name: "Tháng 7", id: "thang-7" }, { name: "Tháng 8", id: "thang-8" },
+                                { name: "Tháng 9", id: "thang-9" }, { name: "Tháng 10", id: "thang-10" },
+                                { name: "Tháng 11", id: "thang-11" }, { name: "Tháng 12", id: "thang-12" },
+                            ]
+                        },
+                        { name: "Kiến thức hay", id: "kien-thuc-hay", icon: BookOpenIcon },
+                        { name: "Danh bạ", id: "danh-ba", icon: PhoneIcon },
+                    ],
+                },
+            ];
+
+            return (
+                <aside className="flex h-screen w-64 flex-shrink-0 flex-col bg-[#032D60] text-white">
+                    <div className="flex items-center gap-3 border-b border-white/10 px-6 py-6">
+                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#0176D3]">
+                            <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p className="text-[10px] font-bold uppercase tracking-wider text-white/70">Agriculture</p>
+                            <h1 className="text-xl font-bold tracking-tight">Trailhead</h1>
+                        </div>
+                    </div>
+                    <nav className="flex-1 overflow-y-auto px-4 py-6">
+                        <div className="space-y-8">
+                            {menuSections.map((section, idx) => (
+                                <div key={idx}>
+                                    <h2 className="mb-3 px-2 text-xs font-bold uppercase tracking-wider text-white/60">{section.title}</h2>
+                                    <ul className="space-y-1">
+                                        {section.items.map((item) => {
+                                            const hasSubItems = item.subItems && item.subItems.length > 0;
+                                            const isChildActive = hasSubItems && item.subItems.some(sub => sub.id === activeCategory);
+                                            const isActive = activeCategory === item.id || isChildActive;
+                                            const isOpen = openDropdowns[item.id] || isChildActive;
+
+                                            return (
+                                                <li key={item.id} className="flex flex-col">
+                                                    <button
+                                                        onClick={() => { hasSubItems ? toggleDropdown(item.id) : onSelectCategory(item.id); }}
+                                                        className={`group flex w-full items-center justify-between rounded-lg px-3 py-2.5 transition-all ${isActive ? "bg-[#0176D3] font-semibold text-white shadow-sm" : "text-white/80 hover:bg-white/10 hover:text-white"}`}
+                                                    >
+                                                        <div className="flex items-center gap-3">
+                                                            <item.icon isActive={isActive} />
+                                                            <span className="text-[15px]">{item.name}</span>
+                                                        </div>
+                                                        {hasSubItems ? <ChevronIcon isOpen={isOpen} /> : (isActive && <div className="h-2 w-2 rounded-full bg-white/80" />)}
+                                                    </button>
+                                                    {hasSubItems && isOpen && (
+                                                        <ul className="ml-7 mt-1 space-y-1 border-l border-white/20 pl-2">
+                                                            {item.subItems.map(sub => {
+                                                                const isSubActive = activeCategory === sub.id;
+                                                                return (
+                                                                    <li key={sub.id}>
+                                                                        <button onClick={() => onSelectCategory(sub.id)} className={`w-full rounded-md px-3 py-2 text-left text-[14px] transition-colors ${isSubActive ? "bg-white/15 font-semibold text-white" : "text-white/60 hover:bg-white/10 hover:text-white"}`}>{sub.name}</button>
+                                                                    </li>
+                                                                );
+                                                            })}
+                                                        </ul>
+                                                    )}
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </nav>
+                </aside>
+            );
+        }
+
+        // =========================================================================
+        // 5. GIAO DIỆN BẢNG ĐIỀU KHIỂN CHÍNH (DASHBOARD)
+        // =========================================================================
+        function Dashboard() {
+            const [activeCategory, setActiveCategory] = useState("tuan-1");
+            const [selectedLesson, setSelectedLesson] = useState(null);
+
+            const filteredLessons = lessons.filter(lesson => lesson.categoryId === activeCategory);
+
+            return (
+                <div className="flex h-screen w-full overflow-hidden bg-[#F3F2F2]">
+                    <Sidebar activeCategory={activeCategory} onSelectCategory={setActiveCategory} />
+                    
+                    <main className="flex-1 overflow-y-auto p-8">
+                        <div className="mx-auto max-w-[1400px]">
+                            <div className="mb-8 rounded-xl border border-[#CFE9FE] bg-[#EEF4FF] p-4 text-sm text-[#014486]">
+                                ℹ️ Chào mừng bạn đến với Nông Á Newgen. Hãy chọn bài học để bắt đầu.
                             </div>
-                            <div class="card-bottom-info">
-                                <div class="check-icon"><i class="fas fa-check"></i></div> ${lesson.label}
+                            
+                            <h2 className="mb-6 text-2xl font-bold text-[#181818] uppercase">NỘI DUNG: {activeCategory.replace(/-/g, " ")}</h2>
+
+                            {filteredLessons.length > 0 ? (
+                                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                                    {filteredLessons.map(lesson => (
+                                        <LessonCard key={lesson.id} lesson={lesson} onClick={() => setSelectedLesson(lesson)} />
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="mt-10 flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#CFE9FE] bg-white p-12 text-center">
+                                    <span className="text-4xl mb-4">🚧</span>
+                                    <h3 className="text-lg font-bold text-[#181818]">Chưa có bài học</h3>
+                                </div>
+                            )}
+                        </div>
+                    </main>
+
+                    {selectedLesson && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
+                            <button onClick={() => setSelectedLesson(null)} className="absolute right-6 top-6 text-white hover:text-gray-300 transition-transform hover:rotate-90 z-[60]">
+                                <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                            </button>
+
+                            <div className="flex h-[90vh] w-full max-w-6xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl lg:flex-row">
+                                <div className="w-full bg-[#032D60] lg:w-3/5 flex flex-col items-center justify-center relative">
+                                    {selectedLesson.youtubeId ? (
+                                        <div className="relative h-full w-full bg-black">
+                                            <iframe
+                                                className="absolute inset-0 h-full w-full"
+                                                src={`https://www.youtube-nocookie.com/embed/${selectedLesson.youtubeId}?autoplay=1&modestbranding=1&rel=0&fs=0`}
+                                                title={selectedLesson.title}
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                sandbox="allow-scripts allow-same-origin allow-presentation"
+                                            ></iframe>
+                                            <div className="absolute top-0 left-0 right-0 h-16 z-10 bg-transparent cursor-default"></div>
+                                            <div className="absolute bottom-0 right-0 h-14 w-24 z-10 bg-transparent cursor-default"></div>
+                                        </div>
+                                    ) : selectedLesson.thumbnail ? (
+                                        <img src={selectedLesson.thumbnail} alt={selectedLesson.title} className="h-full w-full object-cover" />
+                                    ) : (
+                                        <div className="flex flex-col items-center justify-center p-10 text-center text-white">
+                                            <span className="text-8xl mb-6">{selectedLesson.icon || "📚"}</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex w-full flex-col bg-white lg:w-2/5">
+                                    <div className="border-b border-[#E5E5E5] bg-gray-50 px-8 py-6">
+                                        <div className="mb-2 flex items-center gap-3 text-xs font-semibold">
+                                            <span className="rounded-full bg-[#FFF3E0] px-3 py-1 text-[#E87722]">⭐ {selectedLesson.points} điểm</span>
+                                            <span className="text-[#706E6B]">{selectedLesson.duration}</span>
+                                        </div>
+                                        <h2 className="text-2xl font-bold text-[#181818]">{selectedLesson.title}</h2>
+                                    </div>
+                                    <div className="prose prose-sm flex-1 overflow-y-auto px-8 py-6 text-[#444444]" dangerouslySetInnerHTML={{ __html: selectedLesson.content || "<p>Nội dung đang cập nhật...</p>" }} />
+                                </div>
                             </div>
                         </div>
-                    `;
-                });
-                groupHtml += `</div>`;
-                gridContainer.innerHTML += groupHtml;
-            });
-        }
-
-        function openLesson(sectionId, lessonId) {
-            const group = sectionData[sectionId].groups[0]; 
-            const lesson = group.lessons.find(l => l.id === lessonId);
-
-            document.getElementById('modal-lesson-title').innerText = lesson.label + " - " + lesson.title;
-            document.getElementById('modal-lesson-body').innerHTML = lesson.body;
-            document.getElementById('modal-video-frame').src = lesson.video;
-            document.getElementById('studyModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('studyModal').style.display = 'none';
-            document.getElementById('modal-video-frame').src = ''; 
-        }
-
-        function renderAdminMockup() {
-            document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
-            document.getElementById('menu-admin').classList.add('active');
-            document.getElementById('company-banner').style.display = 'none';
-
-            const gridContainer = document.getElementById('grid-container');
-            gridContainer.innerHTML = `
-                <div style="background:#fff; padding:40px; border-radius:16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-                    <h2 style="margin-bottom:10px; color:#1e293b; font-weight:900;"><i class="fas fa-chart-pie" style="color:var(--brand-light);"></i> Quản Trị Hệ Thống</h2>
-                    <p style="color:#64748b; margin-bottom:30px; line-height:1.6;">Dữ liệu thống kê tiến trình học tập của đội ngũ nhân viên NÔNG Á NEWGEN.</p>
-                    
-                    <div style="display:flex; gap:15px; margin-bottom:40px;">
-                        <button style="background:var(--brand-green); color:#fff; border:none; padding:12px 24px; border-radius:8px; font-weight:bold; cursor:pointer; display:flex; align-items:center; gap:8px;"><i class="fas fa-user-plus"></i> Tạo User Mới</button>
-                        <button style="background:#f1f5f9; color:#475569; border:1px solid #cbd5e1; padding:12px 24px; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-user-shield"></i> Cấp quyền Admin</button>
-                    </div>
-
-                    <table style="width:100%; text-align:left; border-collapse:collapse;">
-                        <tr style="background:#f8fafc; border-bottom:2px solid #cbd5e1; color:#475569;">
-                            <th style="padding:16px;">Họ Tên</th>
-                            <th style="padding:16px;">Cấp Bậc</th>
-                            <th style="padding:16px;">Tiến Độ Học</th>
-                            <th style="padding:16px;">Thời Gian Xem Video</th>
-                            <th style="padding:16px;"></th>
-                        </tr>
-                        <tr style="border-bottom:1px solid #e2e8f0; transition:0.2s;">
-                            <td style="padding:16px; font-weight:700;">Nguyễn Văn A</td>
-                            <td style="padding:16px;"><span style="background:#fef3c7; color:#b45309; padding:6px 12px; border-radius:6px; font-size:12px; font-weight:bold;">Admin 2</span></td>
-                            <td style="padding:16px;">15/20 Bài</td>
-                            <td style="padding:16px;">120 phút</td>
-                            <td style="padding:16px; text-align:right;"><a href="#" style="color:var(--brand-light); font-weight:bold;"><i class="fas fa-eye"></i> Xem</a></td>
-                        </tr>
-                        <tr style="border-bottom:1px solid #e2e8f0;">
-                            <td style="padding:16px; font-weight:700;">Trần Thị B</td>
-                            <td style="padding:16px;"><span style="background:#f1f5f9; color:#475569; padding:6px 12px; border-radius:6px; font-size:12px; font-weight:bold;">Nhân viên</span></td>
-                            <td style="padding:16px;">3/20 Bài</td>
-                            <td style="padding:16px;">45 phút</td>
-                            <td style="padding:16px; text-align:right;"><a href="#" style="color:var(--brand-light); font-weight:bold;"><i class="fas fa-eye"></i> Xem</a></td>
-                        </tr>
-                    </table>
+                    )}
                 </div>
-            `;
+            );
         }
 
-        changeSection('t1');
+        // =========================================================================
+        // 6. ỨNG DỤNG CHÍNH (XỬ LÝ ĐĂNG NHẬP)
+        // =========================================================================
+        function App() {
+            // Mật khẩu truy cập hệ thống
+            const CORRECT_PASSWORD = "nonganewgen2026"; 
+
+            const [password, setPassword] = useState("");
+            const [isAuthorized, setIsAuthorized] = useState(false);
+            const [error, setError] = useState("");
+            const [isLoading, setIsLoading] = useState(true);
+
+            useEffect(() => {
+                const authStatus = sessionStorage.getItem("web_authorized");
+                if (authStatus === "true") setIsAuthorized(true);
+                setIsLoading(false);
+            }, []);
+
+            const handleLogin = (e) => {
+                e.preventDefault();
+                if (password === CORRECT_PASSWORD) {
+                    sessionStorage.setItem("web_authorized", "true");
+                    setIsAuthorized(true);
+                    setError("");
+                } else {
+                    setError("❌ Mật khẩu không chính xác. Vui lòng kiểm tra lại!");
+                }
+            };
+
+            if (isLoading) return <div className="min-h-screen bg-[#032D60]"></div>;
+            if (isAuthorized) return <Dashboard />;
+
+            return (
+                <div className="flex min-h-screen items-center justify-center bg-[#F3F2F2] p-4">
+                    <div className="w-full max-w-md overflow-hidden rounded-2xl border border-[#E5E5E5] bg-white shadow-xl">
+                        <div className="bg-[#032D60] px-6 py-8 text-center text-white">
+                            <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-[#0176D3] shadow-md">
+                                <svg className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                            </div>
+                            <h1 className="text-2xl font-bold tracking-tight">Hệ Thống Nội Bộ</h1>
+                            <p className="mt-1 text-sm text-white/70">Nền tảng đào tạo kỹ thuật nông nghiệp Newgen</p>
+                        </div>
+                        <form onSubmit={handleLogin} className="p-6 space-y-5">
+                            <div>
+                                <label className="block text-xs font-bold uppercase tracking-wider text-[#706E6B] mb-2">Nhập mã khóa truy cập:</label>
+                                <input type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-lg border border-[#E5E5E5] px-4 py-3 text-lg transition-all focus:border-[#0176D3] focus:outline-none focus:ring-2 focus:ring-[#0176D3]/20" required />
+                            </div>
+                            {error && <p className="text-sm font-semibold text-[#C23934] bg-[#FFEAEA] p-3 rounded-lg border border-[#FCD2D2]">{error}</p>}
+                            <button type="submit" className="w-full rounded-lg bg-[#0176D3] py-3 text-center text-base font-bold text-white shadow-md transition-all hover:bg-[#014486] focus:outline-none focus:ring-2 focus:ring-[#0176D3]/50">Mở khóa hệ thống</button>
+                        </form>
+                        <div className="border-t border-[#E5E5E5] bg-gray-50 px-6 py-4 text-center text-xs text-[#706E6B]">
+                            Chỉ dành cho nhân viên và đại lý ủy quyền. <br/>Mọi hành vi truy cập trái phép sẽ bị ghi lại lịch sử.
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // =========================================================================
+        // 7. KHỞI CHẠY ỨNG DỤNG
+        // =========================================================================
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
     </script>
 </body>
 </html>
