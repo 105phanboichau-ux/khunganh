@@ -49,16 +49,14 @@
 </head>
 <body class="bg-google-bg text-google-text font-sans antialiased">
 <div id="root"></div>
-<script type="text/babel">
+
+<script type="text/babel" data-type="module">
 const { useState, useEffect, useRef } = React;
 
 // =========================================================================
-// 1. KHO DỮ LIỆU BÀI HỌC (ĐƯỢC PHÂN LÔ RÕ RÀNG)
+// 1. KHO DỮ LIỆU BÀI HỌC
 // =========================================================================
 
-// -------------------------------------------------------------------------
-// 🟢 1. HỌC CƠ BẢN
-// -------------------------------------------------------------------------
 const dataHocCoBan = [
   { 
     id: "hcb-1", 
@@ -70,19 +68,9 @@ const dataHocCoBan = [
   },
 ];
 
-// -------------------------------------------------------------------------
-// 🟡 2. HỌC NÂNG CAO
-// -------------------------------------------------------------------------
 const dataHocNangCao = [];
-
-// -------------------------------------------------------------------------
-// 🔵 3. HOẠT CHẤT
-// -------------------------------------------------------------------------
 const dataHoatChat = [];
 
-// -------------------------------------------------------------------------
-// 🟠 4. SẦU RIÊNG
-// -------------------------------------------------------------------------
 const dataSauRieng = [
   { 
     id: "sr-coi-dot", 
@@ -94,14 +82,8 @@ const dataSauRieng = [
   }
 ];
 
-// -------------------------------------------------------------------------
-// 🟤 5. CÀ PHÊ
-// -------------------------------------------------------------------------
 const dataCaPhe = [];
 
-// -------------------------------------------------------------------------
-// ⚫ 6. TIÊU
-// -------------------------------------------------------------------------
 const dataTieu = [
   { 
     id: "tieu-lo-co-re", 
@@ -139,34 +121,13 @@ const dataTieu = [
   }
 ];
 
-// -------------------------------------------------------------------------
-// 🟣 7. CÂY KHÁC
-// -------------------------------------------------------------------------
 const dataCayKhac = [];
-
-// -------------------------------------------------------------------------
-// 🟢 8. PHÂN BÓN
-// -------------------------------------------------------------------------
 const dataPhanBon = [];
-
-// -------------------------------------------------------------------------
-// 🟡 9. BÀI THUỐC 12 THÁNG
-// -------------------------------------------------------------------------
 const dataBaiThuoc = [];
-
-// -------------------------------------------------------------------------
-// 🔵 10. KIẾN THỨC - KINH NGHIỆM
-// -------------------------------------------------------------------------
 const dataKienThuc = [];
-
-// -------------------------------------------------------------------------
-// 🟠 11. SẢN PHẨM
-// -------------------------------------------------------------------------
 const dataSanPham = [];
 
-// -------------------------------------------------------------------------
-// 🔴 TỔNG HỢP DỮ LIỆU
-// -------------------------------------------------------------------------
+// TỔNG HỢP DỮ LIỆU
 const lessons = [
   ...dataHocCoBan, ...dataHocNangCao, ...dataHoatChat, 
   ...dataSauRieng, ...dataCaPhe, ...dataTieu, 
@@ -175,7 +136,7 @@ const lessons = [
 ];
 
 // =========================================================================
-// 2. CẤU TRÚC MENU (MENU BÊN TRÁI VÀ TAB TRÊN CÙNG)
+// 2. CẤU TRÚC MENU
 // =========================================================================
 function CalendarIcon() { return <svg className="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>; }
 function StarIcon() { return <svg className="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>; }
@@ -200,7 +161,7 @@ const mainMenus = [
 ];
 
 // =========================================================================
-// 3. GIAO DIỆN HIỂN THỊ TỪNG BÀI (THÔNG MINH TỰ ĐỘNG CHIA CỘT HOẶC TRÀN VIỀN)
+// 3. GIAO DIỆN HIỂN THỊ TỪNG BÀI 
 // =========================================================================
 function LessonRow({ lesson }) {
   const containerRef = useRef(null);
@@ -218,10 +179,8 @@ function LessonRow({ lesson }) {
     }
   };
 
-  // Check kỹ lưỡng điều kiện có text hay không để tránh lỗi
   const hasContent = lesson.content ? lesson.content.trim() !== "" : false;
 
-  // TRƯỜNG HỢP 1: CÓ CHỮ TRONG CONTENT -> HIỂN THỊ 2 CỘT (NHƯ CŨ)
   if (hasContent) {
     const renderMediaCol = () => {
       if (lesson.canvaUrl) {
@@ -244,7 +203,7 @@ function LessonRow({ lesson }) {
       <div className="flex flex-col lg:flex-row gap-8 bg-white rounded-[24px] border border-google-border p-6 shadow-sm mb-8">
         <div className="w-full lg:w-1/2 flex flex-col pt-2">
           <h2 className="text-[22px] font-bold text-google-text mb-6 uppercase tracking-tight leading-snug">{lesson.title}</h2>
-          <div className="prose max-w-none flex-1" dangerouslySetInnerHTML={{ __html: lesson.content }} />
+          <div className="prose max-w-none flex-1" dangerouslySetInnerHTML={{ __html: lesson.content || "" }} />
         </div>
         <div className="w-full lg:w-1/2 rounded-[16px] overflow-hidden bg-black border border-gray-100 relative min-h-[300px] lg:min-h-[400px]">
           {renderMediaCol()}
@@ -253,7 +212,6 @@ function LessonRow({ lesson }) {
     );
   }
 
-  // TRƯỜNG HỢP 2: KHÔNG CÓ CHỮ TRONG CONTENT -> HIỂN THỊ FULL CHIỀU NGANG
   const renderFullMedia = () => {
     if (lesson.canvaUrl) {
       return <iframe className="w-full min-h-[70vh] md:min-h-[900px] bg-gray-50" src={lesson.canvaUrl} allowFullScreen allow="fullscreen" style={{border: 'none'}} title={`Canva - ${lesson.title}`}></iframe>;
@@ -339,11 +297,10 @@ return (
 // =========================================================================
 function Dashboard() {
   const [activeMenuId, setActiveMenuId] = useState(mainMenus[0].id);
-  const [activeSubMenuId, setActiveSubMenuId] = useState("ALL"); // Luôn mặc định mở Tất Cả
+  const [activeSubMenuId, setActiveSubMenuId] = useState("ALL"); 
 
   const currentMenu = mainMenus.find(m => m.id === activeMenuId) || mainMenus[0];
 
-  // Lọc bài viết hiển thị (Nếu là ALL thì quét toàn bộ subItems, nếu không thì quét chính xác)
   const filteredLessons = lessons.filter(lesson => {
     if (activeSubMenuId === "ALL") {
       return currentMenu.subItems ? currentMenu.subItems.some(sub => sub.id === lesson.categoryId) : false;
@@ -353,7 +310,7 @@ function Dashboard() {
 
   const handleMenuChange = (menuId) => {
     setActiveMenuId(menuId);
-    setActiveSubMenuId("ALL"); // Khi qua Menu khác tự động reset về Tất Cả
+    setActiveSubMenuId("ALL"); 
   };
 
   return (
@@ -363,7 +320,6 @@ function Dashboard() {
     <main className="flex flex-1 flex-col overflow-hidden relative">
       
       <div className="bg-google-surface/80 backdrop-blur-md sticky top-0 z-10 px-8 py-5 flex items-center gap-2 overflow-x-auto border-b border-google-border">
-        {/* Nút lọc hiển thị Tất cả nội dung */}
         <button
           onClick={() => setActiveSubMenuId("ALL")}
           className={`flex-shrink-0 px-4 py-2 rounded-full text-[14px] font-medium transition-all duration-200 border 
@@ -418,27 +374,32 @@ function Dashboard() {
 }
 
 // =========================================================================
-// 6. ỨNG DỤNG CHÍNH (XỬ LÝ ĐĂNG NHẬP)
+// 6. ỨNG DỤNG CHÍNH 
 // =========================================================================
 function App() {
   const CORRECT_PASSWORD = "nonganewgen2026";
   const [password, setPassword] = useState("");
-  // ĐÃ ĐỔI: Chuyển isAuthorized thành "true" để tắt khóa pass, giúp bạn dễ kiểm tra web
+  // Tính năng mật khẩu đã bị tắt tạm thời để tiện kiểm tra
   const [isAuthorized, setIsAuthorized] = useState(true); 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // Vẫn giữ khung Hook này để vòng đời React không bị xáo trộn gây lỗi
   useEffect(() => {
-    const authStatus = sessionStorage.getItem("web_authorized");
-    if (authStatus === "true") setIsAuthorized(true);
+    try {
+      const authStatus = sessionStorage.getItem("web_authorized");
+      if (authStatus === "true") setIsAuthorized(true);
+    } catch (err) {
+      console.log(err);
+    }
     setIsLoading(false);
   }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
     if (password === CORRECT_PASSWORD) {
-      sessionStorage.setItem("web_authorized", "true");
+      try {
+        sessionStorage.setItem("web_authorized", "true");
+      } catch (err) {}
       setIsAuthorized(true);
       setError("");
     } else {
@@ -447,8 +408,6 @@ function App() {
   };
 
   if (isLoading) return <div className="min-h-screen bg-google-surface"></div>;
-  
-  // Bỏ qua khung đăng nhập và vào thẳng giao diện nếu isAuthorized = true
   if (isAuthorized) return <Dashboard />;
 
   return (
