@@ -81,23 +81,30 @@
             </a>
 
             <!-- Menu liên kết -->
-            <nav class="hidden lg:flex items-center space-x-2 text-sm font-bold text-slate-700">
-                <a href="#about" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
+            <nav class="hidden lg:flex items-center space-x-1.5 text-sm font-bold text-slate-700">
+                <a href="#about" class="px-3 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
                     Về nhóm
                 </a>
-                <a href="#activities" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
+                <a href="#activities" class="px-3 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
                     Hoạt động
                 </a>
-                <a href="#stories" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
+                <a href="#stories" class="px-3 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
                     Nhật ký buôn làng
                 </a>
-                <a href="#join" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
-                    Tham gia tình nguyện
+                <a href="#donate" class="px-3 py-2 rounded-xl text-slate-700 hover:text-brand-green hover:bg-green-100/70 border border-transparent hover:border-green-200 transition-all duration-200">
+                    Đóng góp
+                </a>
+                <a href="#join" class="px-3 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
+                    Tham gia
                 </a>
             </nav>
 
-            <!-- Nút hành động -->
+            <!-- Cụm nút hành động: Đóng Góp & Đăng Ký Tham Gia -->
             <div class="flex items-center space-x-2 sm:space-x-3">
+                <a href="#donate" class="bg-white hover:bg-green-50 text-brand-green border-2 border-brand-green text-xs sm:text-sm font-bold px-3 py-2 sm:px-4 sm:py-2.5 rounded-full shadow-sm hover:shadow transition whitespace-nowrap flex items-center gap-1.5">
+                    <i class="fa-solid fa-gift text-xs"></i>
+                    <span>Đóng Góp</span>
+                </a>
                 <a href="#join" class="bg-brand-pink hover:bg-brand-pink-dark text-white text-xs sm:text-sm font-bold px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-md shadow-pink-200 hover:shadow-lg transition whitespace-nowrap">
                     Đăng Ký Tham Gia
                 </a>
@@ -195,7 +202,7 @@
                 <p class="mt-3 text-slate-600 text-sm sm:text-base">Không cần những điều lớn lao, chúng mình bắt đầu từ những sự giúp đỡ gần gũi và cần thiết nhất.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            <div id="activities" class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                 <!-- Việc 1 -->
                 <div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-pink-300 transition duration-300 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
                     <div>
@@ -221,7 +228,7 @@
                         </div>
                         <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Thăm hỏi & Hỗ trợ</h3>
                         <p class="text-slate-600 text-sm leading-relaxed">
-                            Nhiều cụ già cả tuần không có ai nói chuyện. Chúng mình đến ngồi nghe các cụ kể chuyện xưa, pha một ấm trà ấm và mang lại tiếng cười cho ngôi nhà nhỏ.Hỗ trợ ông bà việc nặng.
+                            Nhiều cụ già cả tuần không có ai nói chuyện. Chúng mình đến ngồi nghe các cụ kể chuyện xưa, pha một ấm trà ấm và mang lại tiếng cười cho ngôi nhà nhỏ. Hỗ trợ ông bà việc nặng.
                         </p>
                     </div>
                     <div class="mt-5 sm:mt-6 pt-4 border-t border-slate-100 text-brand-green font-bold text-xs sm:text-sm flex items-center gap-2">
@@ -404,66 +411,6 @@
         </div>
     </section>
 
-    <!-- 6. KHỐI ĐĂNG KÝ THAM GIA TÌNH NGUYỆN (CALL TO ACTION) -->
-    <section id="join" class="py-16 sm:py-20 bg-gradient-to-tr from-brand-pink to-pink-700 text-white relative z-10 overflow-hidden">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6" data-aos="fade-up">
-            <span class="inline-block px-3.5 py-1 bg-white/20 backdrop-blur rounded-full text-xs font-bold uppercase tracking-wider text-pink-100">
-                Gia nhập nhóm tình nguyện
-            </span>
-            <h2 class="text-3xl sm:text-4xl font-black leading-tight">
-                Bạn có muốn cùng chúng mình ghé thăm các cụ cuối tuần này?
-            </h2>
-            <p class="text-base sm:text-lg text-pink-100 max-w-2xl mx-auto leading-relaxed">
-                Dù bạn là học sinh, sinh viên, người đi làm hay người dân địa phương tại Đắk Lắk — chỉ cần một buổi sáng rảnh rỗi và một tấm lòng sẻ chia, bạn đã có thể mang lại niềm vui lớn cho một cụ già neo đơn.
-            </p>
-
-            <div class="pt-4 flex flex-wrap justify-center gap-4">
-                <a href="https://zalo.me" target="_blank" class="bg-white text-brand-pink hover:bg-pink-50 font-extrabold text-base px-8 py-3.5 rounded-2xl shadow-xl transition flex items-center gap-2">
-                    <i class="fa-solid fa-comments"></i>
-                    <span>Nhắn tin tham gia nhóm qua Zalo</span>
-                </a>
-            </div>
-            <p class="text-xs text-pink-200">Hoặc liên hệ gặp trực tiếp nhóm tại Buôn Ma Thuột</p>
-        </div>
-    </section>
-
-    <!-- 7. CHÂN TRANG (FOOTER) -->
-    <footer id="contact" class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-slate-800">
-                <div class="md:col-span-7 space-y-3">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-brand-pink flex items-center justify-center text-white font-black text-lg">
-                            100
-                        </div>
-                        <span class="text-lg font-black text-white tracking-tight uppercase">NHÓM TÌNH NGUYỆN TRĂM TUỔI</span>
-                    </div>
-                    <p class="text-xs sm:text-sm text-slate-400 max-w-md leading-relaxed">
-                        Cộng đồng tình nguyện tự do vì người cao tuổi tại tỉnh Đắk Lắk. Hoạt động trên tinh thần tự nguyện, sẻ chia và mang hơi ấm yêu thương đến các buôn làng.
-                    </p>
-                </div>
-
-                <div class="md:col-span-5 space-y-2">
-                    <h4 class="text-white font-bold text-sm mb-2">Kết nối với nhóm</h4>
-                    <p class="text-xs text-slate-400"><i class="fa-solid fa-location-dot text-brand-pink mr-2"></i> Buôn Ma Thuột, Đắk Lắk</p>
-                    <p class="text-xs text-slate-400"><i class="fa-solid fa-heart text-brand-pink mr-2"></i> Hoạt động thiện nguyện cuối tuần</p>
-                </div>
-            </div>
-
-            <div class="pt-6 text-center text-xs text-slate-500">
-                <p>&copy; 2026 Nhóm Tình Nguyện Trăm Tuổi - Đắk Lắk. Cùng nhau trao yêu thương.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Thư viện Javascript kích hoạt AOS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 80
-        });
-    </script>
-</body>
-</html>
+    <!-- 6. MỤC ĐÓNG GÓP & CHUNG TAY (DONATION / CONTRIBUTION) -->
+    <section id="donate" class="py-16 sm:py-20 bg-brand-green-light/60 border-t border-green-200/70 relative z-10">
+        <div
