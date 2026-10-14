@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trăm Tuổi | Doanh Nghiệp Xã Hội Chăm Sóc Người Cao Tuổi</title>
+    <title>Trăm Tuổi | Nhóm Tình Nguyện Vì Người Cao Tuổi Đắk Lắk</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icon -->
@@ -34,13 +34,11 @@
         }
     </script>
     <style>
-        /* Họa tiết lưới chấm bi tinh tế tạo chiều sâu */
         .bg-dots {
             background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
             background-size: 24px 24px;
         }
 
-        /* Chuyển động nhẹ của quầng sáng nền */
         @keyframes blob-float {
             0%, 100% { transform: translate(0px, 0px) scale(1); }
             50% { transform: translate(30px, -20px) scale(1.08); }
@@ -63,7 +61,7 @@
         <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-amber-100/40 rounded-full blur-3xl animate-blob-1"></div>
     </div>
 
-    <!-- 1. THANH ĐIỀU HƯỚNG CHÍNH (ĐÃ FIX CHỐNG TRÀN VÀ ĐÈ NỘI DUNG TRÊN MOBILE) -->
+    <!-- 1. THANH ĐIỀU HƯỚNG CHÍNH -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/80">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-0 sm:h-20 flex items-center justify-between relative z-10">
             <!-- Logo Trăm Tuổi -->
@@ -76,39 +74,38 @@
                 <div>
                     <div class="flex items-center gap-1.5 sm:gap-2">
                         <span class="text-xl sm:text-2xl font-black text-brand-green tracking-tight uppercase leading-none">TRĂM TUỔI</span>
-                        <span class="text-[9px] sm:text-[10px] font-bold bg-green-100 text-brand-green px-1.5 py-0.5 rounded-full border border-green-200 uppercase">Đắk Lắk</span>
+                        <span class="text-[9px] sm:text-[10px] font-bold bg-green-100 text-brand-green px-1.5 py-0.5 rounded-full border border-green-200 uppercase">Tình Nguyện</span>
                     </div>
-                    <p class="hidden sm:block text-xs font-semibold text-slate-500 mt-0.5">Doanh Nghiệp Xã Hội Vì Người Cao Tuổi</p>
+                    <p class="hidden sm:block text-xs font-semibold text-slate-500 mt-0.5">Nhóm Tình Nguyện Vì Người Cao Tuổi Đắk Lắk</p>
                 </div>
             </a>
 
-            <!-- Menu liên kết (desktop) -->
+            <!-- Menu liên kết -->
             <nav class="hidden lg:flex items-center space-x-2 text-sm font-bold text-slate-700">
                 <a href="#about" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
-                    Sứ mệnh
+                    Về nhóm
                 </a>
-                <a href="#articles" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
-                    Tin tức & Hoạt động
+                <a href="#activities" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
+                    Hoạt động
                 </a>
-                <a href="#app" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
-                    Đề án Nền tảng số
+                <a href="#stories" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
+                    Nhật ký buôn làng
                 </a>
-                <a href="#partners" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
-                    Đối tác & Pháp trị
+                <a href="#join" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-pink hover:bg-pink-100/70 border border-transparent hover:border-pink-200 transition-all duration-200">
+                    Tham gia tình nguyện
                 </a>
             </nav>
 
             <!-- Nút hành động -->
             <div class="flex items-center space-x-2 sm:space-x-3">
-                <span class="text-[11px] sm:text-xs font-bold px-2 py-1 bg-slate-100 rounded-full border border-slate-300 text-slate-600 hidden md:inline-block">VI | EN</span>
-                <a href="#contact" class="bg-brand-pink hover:bg-brand-pink-dark text-white text-xs sm:text-sm font-bold px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-md shadow-pink-200 hover:shadow-lg transition whitespace-nowrap">
-                    Liên hệ Hợp tác
+                <a href="#join" class="bg-brand-pink hover:bg-brand-pink-dark text-white text-xs sm:text-sm font-bold px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-md shadow-pink-200 hover:shadow-lg transition whitespace-nowrap">
+                    Đăng Ký Tham Gia
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- 2. BANNER CHÍNH (HERO - BỔ SUNG PT-24 / PT-28 TRÁNH CHE KHUẤT) -->
+    <!-- 2. BANNER CHÍNH (HERO) -->
     <section class="relative pt-24 sm:pt-28 pb-16 sm:pb-24 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
@@ -117,42 +114,42 @@
                 <div class="lg:col-span-7 space-y-5 sm:space-y-6" data-aos="fade-right" data-aos-duration="800">
                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur border border-pink-200 text-brand-pink text-xs font-bold shadow-sm">
                         <span class="w-2 h-2 rounded-full bg-brand-pink animate-ping"></span>
-                        <span>Mô hình Doanh nghiệp Xã hội phi lợi nhuận tối đa</span>
+                        <span>Cộng đồng thiện nguyện tự do tại Đắk Lắk</span>
                     </div>
 
                     <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.25] sm:leading-[1.2]">
-                        Gắn kết yêu thương, <br>
-                        nâng niu <span class="text-brand-pink underline decoration-pink-300 decoration-wavy decoration-2">thế hệ vàng</span> Tây Nguyên.
+                        Cùng trao yêu thương, <br>
+                        nâng niu <span class="text-brand-pink underline decoration-pink-300 decoration-wavy decoration-2">nụ cười tuổi già</span> Tây Nguyên.
                     </h1>
 
                     <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-xl">
-                        Xây dựng mạng lưới hỗ trợ toàn diện cho người cao tuổi tại Đắk Lắk: kết nối thăm hỏi thực địa, tổ chức sinh hoạt cộng đồng và từng bước chuyển đổi số bằng các giải pháp thân thiện nhất.
+                        Chúng tôi là nhóm bạn trẻ và những tấm lòng thiện nguyện tại Đắk Lắk, cùng nhau dành thời gian cuối tuần để thăm hỏi, dọn dẹp nhà cửa và lắng nghe câu chuyện của các cụ già neo đơn tại các buôn làng xa.
                     </p>
 
                     <div class="flex flex-wrap gap-3 sm:gap-4 pt-1 sm:pt-2">
-                        <a href="#articles" class="w-full sm:w-auto text-center bg-brand-green hover:bg-green-900 text-white text-base font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-green-900/15 transition flex items-center justify-center gap-2">
-                            <i class="fa-regular fa-newspaper"></i>
-                            <span>Xem Nhật Ký Hoạt Động</span>
+                        <a href="#join" class="w-full sm:w-auto text-center bg-brand-pink hover:bg-brand-pink-dark text-white text-base font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-pink-900/15 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                            <span>Tham Gia Nhóm Tình Nguyện</span>
                         </a>
-                        <a href="#app" class="w-full sm:w-auto text-center bg-white/90 backdrop-blur hover:bg-white text-slate-700 border border-slate-300 text-base font-bold px-6 py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
-                            <i class="fa-solid fa-mobile-screen-button text-brand-pink"></i>
-                            <span>Kế Hoạch Nền Tảng Số</span>
+                        <a href="#stories" class="w-full sm:w-auto text-center bg-white/90 backdrop-blur hover:bg-white text-slate-700 border border-slate-300 text-base font-bold px-6 py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fa-regular fa-newspaper text-brand-green"></i>
+                            <span>Nhật Ký Chuyến Đi</span>
                         </a>
                     </div>
 
-                    <!-- Chỉ số nhanh -->
+                    <!-- Tiêu chí nhóm -->
                     <div class="pt-5 grid grid-cols-3 gap-2.5 sm:gap-4 border-t border-slate-200/80">
                         <div class="p-2.5 sm:p-3 bg-white/60 backdrop-blur rounded-2xl border border-white text-center sm:text-left">
-                            <p class="text-xl sm:text-2xl font-black text-brand-pink">1.000+</p>
-                            <p class="text-[11px] sm:text-xs text-slate-500 font-medium leading-tight">Hội viên thử nghiệm</p>
+                            <p class="text-xl sm:text-2xl font-black text-brand-pink">Tự Nguyện</p>
+                            <p class="text-[11px] sm:text-xs text-slate-500 font-medium leading-tight">Góp sức và thời gian</p>
                         </div>
                         <div class="p-2.5 sm:p-3 bg-white/60 backdrop-blur rounded-2xl border border-white text-center sm:text-left">
-                            <p class="text-xl sm:text-2xl font-black text-brand-green">100%</p>
-                            <p class="text-[11px] sm:text-xs text-slate-500 font-medium leading-tight">Tái đầu tư vì cộng đồng</p>
+                            <p class="text-xl sm:text-2xl font-black text-brand-green">Chân Thành</p>
+                            <p class="text-[11px] sm:text-xs text-slate-500 font-medium leading-tight">Lắng nghe & thấu cảm</p>
                         </div>
                         <div class="p-2.5 sm:p-3 bg-white/60 backdrop-blur rounded-2xl border border-white text-center sm:text-left">
-                            <p class="text-xl sm:text-2xl font-black text-slate-800">SDG 3 & 10</p>
-                            <p class="text-[11px] sm:text-xs text-slate-500 font-medium leading-tight">Mục tiêu phát triển LHQ</p>
+                            <p class="text-xl sm:text-2xl font-black text-slate-800">Thực Tế</p>
+                            <p class="text-[11px] sm:text-xs text-slate-500 font-medium leading-tight">Hành động tận nơi</p>
                         </div>
                     </div>
                 </div>
@@ -166,20 +163,20 @@
                                      alt="Người cao tuổi vui vẻ" 
                                      class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent flex flex-col justify-end p-5 sm:p-6 text-white">
-                                    <span class="bg-brand-pink text-white text-[10px] font-bold uppercase px-2.5 py-1 rounded w-max mb-1.5">Hoạt động tại Đắk Lắk</span>
-                                    <h4 class="text-base sm:text-lg font-bold leading-snug">"Mỗi chuyến ghé thăm là một niềm vui sum vầy của các cụ neo đơn."</h4>
+                                    <span class="bg-brand-pink text-white text-[10px] font-bold uppercase px-2.5 py-1 rounded w-max mb-1.5">Gắn kết thế hệ</span>
+                                    <h4 class="text-base sm:text-lg font-bold leading-snug">"Mỗi buổi ghé thăm là một ngày các cụ không còn thấy lẻ loi."</h4>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Card trôi góc dưới -->
                         <div class="absolute -bottom-4 -left-2 sm:-bottom-5 sm:-left-5 bg-white/95 backdrop-blur p-3 rounded-2xl shadow-xl border border-pink-100 flex items-center gap-3">
-                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-green-100 text-brand-green flex items-center justify-center text-lg sm:text-xl flex-shrink-0">
-                                <i class="fa-solid fa-seedling"></i>
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-pink-100 text-brand-pink flex items-center justify-center text-lg sm:text-xl flex-shrink-0">
+                                <i class="fa-solid fa-heart"></i>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-slate-800">Đã nộp bảo hộ nhãn hiệu</p>
-                                <p class="text-[10px] text-slate-500">Cục SHTT - Nhóm 38 & 45</p>
+                                <p class="text-xs font-bold text-slate-800">Dự án cộng đồng tự phát</p>
+                                <p class="text-[10px] text-slate-500">Bắt đầu từ trái tim</p>
                             </div>
                         </div>
                     </div>
@@ -189,59 +186,63 @@
         </div>
     </section>
 
-    <!-- 3. SỨ MỆNH & MỤC TIÊU CỐT LÕI -->
+    <!-- 3. MỤC TIÊU VÀ CÔNG VIỆC TÌNH NGUYỆN (ABOUT & ACTIVITIES) -->
     <section id="about" class="py-16 sm:py-20 bg-white/80 backdrop-blur-sm border-y border-slate-200/70 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16" data-aos="fade-up">
-                <span class="text-xs font-black uppercase tracking-widest text-brand-pink bg-pink-50 px-3 py-1 rounded-full border border-pink-200">Định hướng phát triển</span>
-                <h2 class="mt-3 text-2xl sm:text-4xl font-extrabold text-slate-900">3 Giá trị cốt lõi của Trăm Tuổi</h2>
+                <span class="text-xs font-black uppercase tracking-widest text-brand-pink bg-pink-50 px-3 py-1 rounded-full border border-pink-200">Chúng mình làm gì?</span>
+                <h2 class="mt-3 text-2xl sm:text-4xl font-extrabold text-slate-900">Những việc nhỏ mang lại niềm vui lớn</h2>
+                <p class="mt-3 text-slate-600 text-sm sm:text-base">Không cần những điều lớn lao, chúng mình bắt đầu từ những sự giúp đỡ gần gũi và cần thiết nhất.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Việc 1 -->
                 <div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-pink-300 transition duration-300 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
                     <div>
                         <div class="w-12 h-12 sm:w-14 sm:h-14 bg-pink-100 text-brand-pink rounded-2xl flex items-center justify-center text-xl sm:text-2xl mb-5 sm:mb-6 shadow-sm">
-                            <i class="fa-solid fa-people-carry-box"></i>
+                            <i class="fa-solid fa-broom"></i>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Hỗ trợ thực địa lưu động</h3>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Dọn dẹp môi trường sống</h3>
                         <p class="text-slate-600 text-sm leading-relaxed">
-                            Tổ chức các chuyến công tác định kỳ về các xã, buôn làng tại Đắk Lắk. Mang đội ngũ tình nguyện viên hỗ trợ dọn dẹp vệ sinh môi trường sống, thăm hỏi và khảo sát nhu cầu sinh hoạt thực tế.
+                            Cùng nhau dọn dẹp vườn tược, sửa sang lại góc nhà, quét mạng nhện và sắp xếp đồ đạc gọn gàng giúp các cụ lớn tuổi đi lại an toàn, tránh trượt ngã.
                         </p>
                     </div>
                     <div class="mt-5 sm:mt-6 pt-4 border-t border-slate-100 text-brand-pink font-bold text-xs sm:text-sm flex items-center gap-2">
-                        <span>Hoạt động định kỳ</span>
+                        <span>Hoạt động cuối tuần</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 </div>
 
+                <!-- Việc 2 -->
                 <div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-green-300 transition duration-300 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
                     <div>
                         <div class="w-12 h-12 sm:w-14 sm:h-14 bg-green-100 text-brand-green rounded-2xl flex items-center justify-center text-xl sm:text-2xl mb-5 sm:mb-6 shadow-sm">
-                            <i class="fa-solid fa-hand-holding-hand"></i>
+                            <i class="fa-solid fa-mug-hot"></i>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Ngày hội gắn kết đồng niên</h3>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Thăm hỏi & Trò chuyện</h3>
                         <p class="text-slate-600 text-sm leading-relaxed">
-                            Phối hợp chặt chẽ cùng Hội Người cao tuổi cơ sở tổ chức các câu lạc bộ dưỡng sinh, chia sẻ ký ức văn hóa và sinh hoạt văn nghệ, tạo sân chơi ấm áp để người già không còn cảm thấy cô đơn.
+                            Nhiều cụ già cả tuần không có ai nói chuyện. Chúng mình đến ngồi nghe các cụ kể chuyện xưa, pha một ấm trà ấm và mang lại tiếng cười cho ngôi nhà nhỏ.
                         </p>
                     </div>
                     <div class="mt-5 sm:mt-6 pt-4 border-t border-slate-100 text-brand-green font-bold text-xs sm:text-sm flex items-center gap-2">
-                        <span>Gắn kết Hội Người cao tuổi</span>
+                        <span>Lắng nghe tâm tư</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 </div>
 
-                <div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-indigo-300 transition duration-300 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+                <!-- Việc 3 -->
+                <div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-amber-300 transition duration-300 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
                     <div>
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-indigo-100 text-indigo-700 rounded-2xl flex items-center justify-center text-xl sm:text-2xl mb-5 sm:mb-6 shadow-sm">
-                            <i class="fa-solid fa-microchip"></i>
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center text-xl sm:text-2xl mb-5 sm:mb-6 shadow-sm">
+                            <i class="fa-solid fa-kit-medical"></i>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Ứng dụng công nghệ vì con người</h3>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Kiểm tra sức khỏe cơ bản</h3>
                         <p class="text-slate-600 text-sm leading-relaxed">
-                            Không ngừng nghiên cứu xây dựng giải pháp nền tảng số tối giản: nút bấm trợ giúp khẩn cấp SOS, nhắc nhở uống thuốc và kết nối con cháu, phù hợp hoàn toàn với thể trạng người lớn tuổi.
+                            Hỗ trợ đo huyết áp, nhắc nhở giờ uống thuốc đúng bữa và ghi nhận những vấn đề sinh hoạt khó khăn để kết nối hỗ trợ kịp thời khi cần.
                         </p>
                     </div>
-                    <div class="mt-5 sm:mt-6 pt-4 border-t border-slate-100 text-indigo-700 font-bold text-xs sm:text-sm flex items-center gap-2">
-                        <span>Chuyển đổi số nhân văn</span>
+                    <div class="mt-5 sm:mt-6 pt-4 border-t border-slate-100 text-amber-700 font-bold text-xs sm:text-sm flex items-center gap-2">
+                        <span>Chăm sóc tận tâm</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 </div>
@@ -249,18 +250,18 @@
         </div>
     </section>
 
-    <!-- 4. KHU VỰC BÀI VIẾT (CARDS FLOATING) -->
-    <section id="articles" class="py-16 sm:py-20 relative z-10">
+    <!-- 4. NHẬT KÝ THỰC ĐỊA & CÂU CHUYỆN BUÔN LÀNG (CARDS FLOATING) -->
+    <section id="stories" class="py-16 sm:py-20 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14" data-aos="fade-up">
                 <div>
-                    <span class="text-xs font-black uppercase tracking-widest text-brand-green bg-green-100 px-3 py-1 rounded-full border border-green-200">Tin tức & Nhật ký</span>
-                    <h2 class="mt-3 text-2xl sm:text-4xl font-extrabold text-slate-900">Những câu chuyện từ buôn làng</h2>
-                    <p class="mt-2 text-slate-600 text-sm sm:text-base">Cập nhật liên tục hình ảnh và hoạt động gắn kết cộng đồng tại cơ sở.</p>
+                    <span class="text-xs font-black uppercase tracking-widest text-brand-green bg-green-100 px-3 py-1 rounded-full border border-green-200">Góc chia sẻ</span>
+                    <h2 class="mt-3 text-2xl sm:text-4xl font-extrabold text-slate-900">Nhật ký những chuyến đi</h2>
+                    <p class="mt-2 text-slate-600 text-sm sm:text-base">Ghi lại những khoảnh khắc ấm lòng từ các buổi gặp gỡ thực tế tại Đắk Lắk.</p>
                 </div>
                 <div class="mt-4 md:mt-0">
                     <span class="text-xs font-bold text-slate-600 bg-white/80 backdrop-blur px-3.5 py-2 rounded-xl border border-slate-200 shadow-sm inline-block">
-                        <i class="fa-regular fa-clock mr-1 text-brand-pink"></i> Cập nhật hàng tuần
+                        <i class="fa-solid fa-location-dot mr-1 text-brand-pink"></i> Buôn Ma Thuột & các Huyện lân cận
                     </span>
                 </div>
             </div>
@@ -275,20 +276,20 @@
                             <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=700&q=80" 
                                  alt="Thăm hỏi người già" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 left-3 bg-brand-pink text-white text-[10px] sm:text-[11px] font-bold px-2.5 py-1 rounded-full shadow">Hoạt động cơ sở</span>
+                            <span class="absolute top-3 left-3 bg-brand-pink text-white text-[10px] sm:text-[11px] font-bold px-2.5 py-1 rounded-full shadow">Chuyến đi gần nhất</span>
                         </div>
                         <div class="p-5 sm:p-6">
-                            <span class="text-[11px] sm:text-xs text-slate-400 font-semibold">12/10/2026 • Huyện Cư Kuin</span>
+                            <span class="text-[11px] sm:text-xs text-slate-400 font-semibold">Tháng 10/2026 • Cư Kuin</span>
                             <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-2 mb-2 sm:mb-3 group-hover:text-brand-pink transition line-clamp-2">
-                                Chuyến đi thực địa đầu tiên: Lắng nghe tâm tư các cụ già tại Xã Ea Tiêu
+                                Buổi sáng ấm áp cùng cụ bà neo đơn tại Xã Ea Tiêu
                             </h3>
                             <p class="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
-                                Đội công tác đã có mặt tại buôn làng từ sớm, cùng tình nguyện viên dọn dẹp khuôn viên nhà ở, hỗ trợ kiểm tra sức khỏe và ghi nhận nhu cầu của hơn 30 hộ gia đình người cao tuổi neo đơn.
+                                Cùng dọn dẹp lại mảnh sân nhỏ sau cơn mưa, ngồi nghe cụ kể chuyện những mùa rẫy cà phê ngày trước. Nụ cười rạng rỡ của cụ là động lực lớn nhất của cả nhóm.
                             </p>
                         </div>
                     </div>
                     <div class="px-5 pb-5 sm:px-6 sm:pb-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-green group-hover:text-brand-pink transition">
-                        <span>Đọc tiếp câu chuyện</span>
+                        <span>Xem chi tiết nhật ký</span>
                         <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition"></i>
                     </div>
                 </article>
@@ -298,22 +299,22 @@
                     <div>
                         <div class="h-48 sm:h-52 overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80" 
-                                 alt="Khảo sát công nghệ" 
+                                 alt="Khảo sát nhu cầu" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 left-3 bg-brand-green text-white text-[10px] sm:text-[11px] font-bold px-2.5 py-1 rounded-full shadow">Nghiên cứu & Khảo sát</span>
+                            <span class="absolute top-3 left-3 bg-brand-green text-white text-[10px] sm:text-[11px] font-bold px-2.5 py-1 rounded-full shadow">Lắng nghe</span>
                         </div>
                         <div class="p-5 sm:p-6">
-                            <span class="text-[11px] sm:text-xs text-slate-400 font-semibold">05/10/2026 • TP. Buôn Ma Thuột</span>
+                            <span class="text-[11px] sm:text-xs text-slate-400 font-semibold">Tháng 10/2026 • Buôn Ma Thuột</span>
                             <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-2 mb-2 sm:mb-3 group-hover:text-brand-pink transition line-clamp-2">
-                                Kết quả khảo sát: Người cao tuổi nông thôn Tây Nguyên cần gì ở một ứng dụng số?
+                                Các cụ cần gì nhất khi ở nhà một mình?
                             </h3>
                             <p class="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
-                                Hơn 85% người lớn tuổi tham gia khảo sát mong muốn có một phím gọi khẩn cấp nhanh cho con cháu và thích nghe giọng đọc thơ ca truyền cảm hơn là phải tự đọc chữ nhỏ trên màn hình.
+                                Không phải vật chất xa xỉ, điều phần lớn các bậc cao niên mong mỏi là một người thỉnh thoảng ghé qua hỏi han sức khỏe và một cách dễ dàng để gọi người thân khi mệt mỏi.
                             </p>
                         </div>
                     </div>
                     <div class="px-5 pb-5 sm:px-6 sm:pb-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-green group-hover:text-brand-pink transition">
-                        <span>Xem số liệu khảo sát</span>
+                        <span>Đọc thêm chia sẻ</span>
                         <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition"></i>
                     </div>
                 </article>
@@ -323,17 +324,17 @@
                     <div>
                         <div class="h-48 sm:h-52 overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=700&q=80" 
-                                 alt="Câu lạc bộ dưỡng sinh" 
+                                 alt="Giao lưu cộng đồng" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 left-3 bg-indigo-600 text-white text-[10px] sm:text-[11px] font-bold px-2.5 py-1 rounded-full shadow">Đời sống văn hóa</span>
+                            <span class="absolute top-3 left-3 bg-amber-600 text-white text-[10px] sm:text-[11px] font-bold px-2.5 py-1 rounded-full shadow">Niềm vui tuổi già</span>
                         </div>
                         <div class="p-5 sm:p-6">
-                            <span class="text-[11px] sm:text-xs text-slate-400 font-semibold">28/09/2026 • Huyện Krông Ana</span>
+                            <span class="text-[11px] sm:text-xs text-slate-400 font-semibold">Tháng 09/2026 • Krông Ana</span>
                             <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-2 mb-2 sm:mb-3 group-hover:text-brand-pink transition line-clamp-2">
-                                Ngày hội dưỡng sinh & kết nối ký ức thế hệ vàng tại nhà sinh hoạt cộng đồng
+                                Tiếng đàn và những câu thơ mộc mạc nơi hiên nhà
                             </h3>
                             <p class="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
-                                Buổi sáng ngập tràn tiếng cười với các bài tập thể dục nhẹ nhàng và những câu chuyện xưa về vùng đất bazan màu mỡ được các bậc cao niên kể lại cho thế hệ trẻ.
+                                Buổi gặp gỡ tràn ngập tiếng cười khi cụ ông mang cây đàn guitar cũ ra so dây, cùng các bạn trẻ hát lại những bài ca quê hương thân thương.
                             </p>
                         </div>
                     </div>
@@ -347,162 +348,110 @@
         </div>
     </section>
 
-    <!-- 5. ĐỀ ÁN NỀN TẢNG SỐ (APP) -->
-    <section id="app" class="py-16 sm:py-20 bg-white/90 backdrop-blur-sm border-t border-slate-200/80 relative z-10">
+    <!-- 5. GÓC CÔNG NGHỆ THÂN THIỆN (ĐỊNH HƯỚNG TƯƠNG LAI) -->
+    <section class="py-16 sm:py-20 bg-white/90 backdrop-blur-sm border-t border-slate-200/80 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                 
-                <div class="lg:col-span-6 space-y-5 sm:space-y-6" data-aos="fade-right">
-                    <span class="text-xs font-black uppercase tracking-widest text-brand-pink bg-pink-50 px-3 py-1 rounded-full border border-pink-200">
-                        Kế hoạch chuyển đổi số
+                <div class="lg:col-span-7 space-y-5 sm:space-y-6" data-aos="fade-right">
+                    <span class="text-xs font-black uppercase tracking-widest text-brand-green bg-green-50 px-3 py-1 rounded-full border border-green-200">
+                        Ý tưởng tương lai
                     </span>
                     <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug">
-                        Đề án ứng dụng kết nối: Đơn giản hóa công nghệ cho người cao tuổi
+                        Công nghệ giản dị để kết nối thế hệ
                     </h2>
                     <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-                        Từ kết quả khảo sát thực tế, chúng tôi thiết kế mô hình nền tảng số loại bỏ mọi sự phức tạp, tập trung vào 2 giá trị then chốt: <strong>An toàn khẩn cấp</strong> và <strong>Kết nối tinh thần</strong>.
+                        Nhóm đang ấp ủ xây dựng các kênh kết nối đơn giản nhất (qua Zalo hoặc ứng dụng chữ lớn) để con cháu hay tình nguyện viên có thể kịp thời nhận tín hiệu khi các cụ cần trợ giúp tại nhà.
                     </p>
 
                     <div class="space-y-3.5 pt-1">
                         <div class="p-4 rounded-2xl border border-slate-200 bg-white shadow-sm flex items-start gap-3.5">
                             <div class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold flex-shrink-0">
-                                <i class="fa-solid fa-bell"></i>
+                                <i class="fa-solid fa-phone-volume"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-slate-900 text-sm sm:text-base">Phím bấm khẩn cấp SOS (1 Chạm)</h4>
-                                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Tự động phát tín hiệu và vị trí đến người thân cùng đội phản ứng nhanh khi cụ gặp vấn đề sức khỏe.</p>
+                                <h4 class="font-bold text-slate-900 text-sm sm:text-base">Số điện thoại khẩn cấp 1 chạm</h4>
+                                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Cài sẵn phím gọi nhanh cho người thân hoặc tình nguyện viên gần nhất.</p>
                             </div>
                         </div>
 
                         <div class="p-4 rounded-2xl border border-slate-200 bg-white shadow-sm flex items-start gap-3.5">
                             <div class="w-10 h-10 rounded-xl bg-green-100 text-brand-green flex items-center justify-center font-bold flex-shrink-0">
-                                <i class="fa-solid fa-microphone"></i>
+                                <i class="fa-solid fa-radio"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-slate-900 text-sm sm:text-base">Góc phát thanh & Thơ ca buôn làng</h4>
-                                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Không cần đọc chữ, người già chỉ cần chạm để nghe các bài nói chuyện sức khỏe, tin tức Hội và giọng ngâm thơ đồng niên.</p>
+                                <h4 class="font-bold text-slate-900 text-sm sm:text-base">Kênh nghe đọc truyện & thơ ca</h4>
+                                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Thu âm lại các câu chuyện vui, bài thơ hay để các cụ dễ dàng bấm nghe mỗi buổi sớm.</p>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="pt-2">
-                        <p class="text-xs text-slate-600 bg-brand-green-light/80 p-3.5 rounded-xl border border-green-200">
-                            <i class="fa-solid fa-circle-info text-brand-green mr-1.5"></i>
-                            <strong>Lộ trình:</strong> Thử nghiệm trước trên nền tảng Zalo Mini App / Web để tiết kiệm ngân sách, sau đó nâng cấp ứng dụng độc lập khi được quỹ tài trợ quốc tế phê duyệt.
+                <!-- Box thông điệp chân thành -->
+                <div class="lg:col-span-5" data-aos="fade-left">
+                    <div class="p-8 rounded-3xl bg-gradient-to-br from-pink-50 to-emerald-50 border border-slate-200 shadow-lg text-center space-y-4">
+                        <div class="w-16 h-16 rounded-2xl bg-white shadow-md text-brand-pink text-3xl flex items-center justify-center mx-auto">
+                            <i class="fa-solid fa-people-group"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-900">Bắt đầu từ những bước chân nhỏ</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Mọi ý tưởng lớn đều cần những hành động thực tế đầu tiên. Chúng mình tin rằng sự kiên trì và tình yêu thương chân thành sẽ dần kết nối được nhiều cánh tay cùng chung chí hướng.
                         </p>
                     </div>
                 </div>
 
-                <!-- Mockup màn hình điện thoại -->
-                <div class="lg:col-span-6 flex justify-center" data-aos="fade-left">
-                    <div class="w-68 sm:w-72 bg-slate-900 p-3.5 rounded-[44px] shadow-2xl border-4 border-slate-800">
-                        <div class="w-24 h-4 bg-slate-800 rounded-full mx-auto mb-3"></div>
-                        <div class="bg-slate-50 rounded-[32px] p-4 flex flex-col space-y-3.5 border border-slate-200 text-slate-800">
-                            <div class="flex items-center justify-between pb-2 border-b border-slate-200">
-                                <span class="font-black text-brand-pink text-sm">TRĂM TUỔI</span>
-                                <span class="text-[10px] bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full">Trực tuyến</span>
-                            </div>
-
-                            <div class="bg-red-50 p-4 rounded-2xl border border-red-200 text-center">
-                                <button class="w-16 h-16 bg-red-600 text-white rounded-full font-black text-xl shadow-md mx-auto block hover:scale-105 transition">
-                                    SOS
-                                </button>
-                                <p class="text-xs font-bold text-red-700 mt-2">Bấm khi cần trợ giúp gấp</p>
-                            </div>
-
-                            <div class="space-y-2">
-                                <div class="p-2.5 bg-white rounded-xl border border-slate-200 shadow-sm flex items-center gap-2.5">
-                                    <i class="fa-solid fa-heart-pulse text-brand-pink text-base"></i>
-                                    <div>
-                                        <p class="text-xs font-bold text-slate-800">Nhắc nhở uống thuốc</p>
-                                        <p class="text-[10px] text-slate-400">Đã thiết lập hàng ngày</p>
-                                    </div>
-                                </div>
-                                <div class="p-2.5 bg-white rounded-xl border border-slate-200 shadow-sm flex items-center gap-2.5">
-                                    <i class="fa-solid fa-users text-brand-green text-base"></i>
-                                    <div>
-                                        <p class="text-xs font-bold text-slate-800">Câu lạc bộ Cờ tướng</p>
-                                        <p class="text-[10px] text-slate-400">Hội trường thôn - 15:00</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <p class="text-center text-[10px] text-slate-400 font-medium pt-1">
-                                Mô phỏng thử nghiệm 1.000 hội viên
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 
-    <!-- 6. ĐỐI TÁC, BẢO TRỢ & PHÁP LÝ (PARTNERS) -->
-    <section id="partners" class="py-14 sm:py-16 bg-white/70 backdrop-blur-sm border-t border-slate-200/80 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
-            <span class="text-xs font-black uppercase tracking-widest text-slate-400">Đồng hành & Quản trị minh bạch</span>
-            <h3 class="text-xl font-bold text-slate-900 mt-1 mb-8">Tổ chức bảo trợ & Tiêu chí vận hành</h3>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 items-stretch max-w-5xl mx-auto">
-                <div class="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition flex flex-col items-center justify-center">
-                    <i class="fa-solid fa-handshake text-2xl sm:text-3xl text-brand-green mb-2.5"></i>
-                    <span class="font-bold text-slate-900 text-xs sm:text-sm">The Nippon Foundation</span>
-                    <span class="text-[10px] sm:text-xs text-slate-500 mt-0.5">Đối tác quốc tế mục tiêu</span>
-                </div>
+    <!-- 6. KHỐI ĐĂNG KÝ THAM GIA TÌNH NGUYỆN (CALL TO ACTION) -->
+    <section id="join" class="py-16 sm:py-20 bg-gradient-to-tr from-brand-pink to-pink-700 text-white relative z-10 overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6" data-aos="fade-up">
+            <span class="inline-block px-3.5 py-1 bg-white/20 backdrop-blur rounded-full text-xs font-bold uppercase tracking-wider text-pink-100">
+                Gia nhập nhóm tình nguyện
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-black leading-tight">
+                Bạn có muốn cùng chúng mình ghé thăm các cụ cuối tuần này?
+            </h2>
+            <p class="text-base sm:text-lg text-pink-100 max-w-2xl mx-auto leading-relaxed">
+                Dù bạn là học sinh, sinh viên, người đi làm hay người dân địa phương tại Đắk Lắk — chỉ cần một buổi sáng rảnh rỗi và một tấm lòng sẻ chia, bạn đã có thể mang lại niềm vui lớn cho một cụ già neo đơn.
+            </p>
 
-                <div class="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition flex flex-col items-center justify-center">
-                    <i class="fa-solid fa-people-roof text-2xl sm:text-3xl text-emerald-700 mb-2.5"></i>
-                    <span class="font-bold text-slate-900 text-xs sm:text-sm">Hội Người Cao Tuổi</span>
-                    <span class="text-[10px] sm:text-xs text-slate-500 mt-0.5">Phối hợp tại Đắk Lắk</span>
-                </div>
-
-                <div class="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition flex flex-col items-center justify-center">
-                    <i class="fa-solid fa-scale-balanced text-2xl sm:text-3xl text-brand-pink mb-2.5"></i>
-                    <span class="font-bold text-slate-900 text-xs sm:text-sm">Cục SHTT (IP Vietnam)</span>
-                    <span class="text-[10px] sm:text-xs text-slate-500 mt-0.5">Bảo hộ Nhóm 38 & 45</span>
-                </div>
-
-                <div class="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition flex flex-col items-center justify-center">
-                    <i class="fa-solid fa-earth-asia text-2xl sm:text-3xl text-blue-600 mb-2.5"></i>
-                    <span class="font-bold text-slate-900 text-xs sm:text-sm">Mục Tiêu UN SDGs</span>
-                    <span class="text-[10px] sm:text-xs text-slate-500 mt-0.5">Mục tiêu 3 & 10</span>
-                </div>
+            <div class="pt-4 flex flex-wrap justify-center gap-4">
+                <a href="https://zalo.me" target="_blank" class="bg-white text-brand-pink hover:bg-pink-50 font-extrabold text-base px-8 py-3.5 rounded-2xl shadow-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>Nhắn tin tham gia nhóm qua Zalo</span>
+                </a>
             </div>
+            <p class="text-xs text-pink-200">Hoặc liên hệ gặp trực tiếp nhóm tại Buôn Ma Thuột</p>
         </div>
     </section>
 
     <!-- 7. CHÂN TRANG (FOOTER) -->
-    <footer id="contact" class="bg-slate-900 text-slate-300 py-12 sm:py-16 border-t border-slate-800 relative z-10">
+    <footer id="contact" class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-slate-800">
-                <div class="md:col-span-6 space-y-3 sm:space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-slate-800">
+                <div class="md:col-span-7 space-y-3">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 rounded-xl bg-brand-pink flex items-center justify-center text-white font-black text-lg">
                             100
                         </div>
-                        <span class="text-lg sm:text-xl font-black text-white tracking-tight uppercase">DOANH NGHIỆP XÃ HỘI TRĂM TUỔI</span>
+                        <span class="text-lg font-black text-white tracking-tight uppercase">NHÓM TÌNH NGUYỆN TRĂM TUỔI</span>
                     </div>
                     <p class="text-xs sm:text-sm text-slate-400 max-w-md leading-relaxed">
-                        Doanh nghiệp xã hội hoạt động phi lợi nhuận tối đa hóa, cam kết sử dụng ít nhất 51% lợi nhuận tái đầu tư cho các chương trình cải thiện sức khỏe tinh thần và thể chất người cao tuổi tại tỉnh Đắk Lắk.
+                        Cộng đồng tình nguyện tự do vì người cao tuổi tại tỉnh Đắk Lắk. Hoạt động trên tinh thần tự nguyện, sẻ chia và mang hơi ấm yêu thương đến các buôn làng.
                     </p>
                 </div>
 
-                <div class="md:col-span-3 space-y-1.5 sm:space-y-2">
-                    <h4 class="text-white font-bold text-sm mb-2 sm:mb-3">Địa bàn hoạt động</h4>
-                    <p class="text-xs text-slate-400"><i class="fa-solid fa-location-dot text-brand-pink mr-2"></i> Tỉnh Đắk Lắk, Việt Nam</p>
-                    <p class="text-xs text-slate-400"><i class="fa-solid fa-envelope text-brand-pink mr-2"></i> lienhe@tramtuoi.org.vn</p>
-                </div>
-
-                <div class="md:col-span-3 space-y-1.5 sm:space-y-2">
-                    <h4 class="text-white font-bold text-sm mb-2 sm:mb-3">Tính pháp lý & Minh bạch</h4>
-                    <p class="text-xs text-slate-400">Đơn đăng ký Nhãn hiệu & Logo đã nộp chính thức tại Cục Sở hữu trí tuệ.</p>
-                    <p class="text-xs text-slate-500 mt-2">Mọi khoản tài trợ được kiểm toán độc lập theo tiêu chuẩn quốc tế.</p>
+                <div class="md:col-span-5 space-y-2">
+                    <h4 class="text-white font-bold text-sm mb-2">Kết nối với nhóm</h4>
+                    <p class="text-xs text-slate-400"><i class="fa-solid fa-location-dot text-brand-pink mr-2"></i> Buôn Ma Thuột, Đắk Lắk</p>
+                    <p class="text-xs text-slate-400"><i class="fa-solid fa-heart text-brand-pink mr-2"></i> Hoạt động thiện nguyện cuối tuần</p>
                 </div>
             </div>
 
-            <div class="pt-6 sm:pt-8 text-center text-xs text-slate-500">
-                <p>&copy; 2026 Doanh nghiệp Xã hội Trăm Tuổi. Bản quyền được bảo hộ.</p>
+            <div class="pt-6 text-center text-xs text-slate-500">
+                <p>&copy; 2026 Nhóm Tình Nguyện Trăm Tuổi - Đắk Lắk. Cùng nhau trao yêu thương.</p>
             </div>
         </div>
     </footer>
