@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- AOS Animation Library (Hiệu ứng khi lăn chuột) -->
+    <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <script>
@@ -27,18 +27,49 @@
                         'brand-pink-dark': '#C2185B',
                         'brand-green': '#1E5A32',
                         'brand-green-light': '#EBF5EE',
-                        'brand-bg': '#F8F9FA'
+                        'brand-bg': '#FAF9F6'
                     }
                 }
             }
         }
     </script>
+    <style>
+        /* Họa tiết lưới chấm bi tinh tế tạo chiều sâu */
+        .bg-dots {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Chuyển động nhẹ của quầng sáng nền */
+        @keyframes blob-float {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(30px, -20px) scale(1.08); }
+        }
+        .animate-blob-1 {
+            animation: blob-float 10s ease-in-out infinite;
+        }
+        .animate-blob-2 {
+            animation: blob-float 14s ease-in-out infinite 3s;
+        }
+    </style>
 </head>
-<body class="bg-brand-bg text-slate-800 font-sans antialiased selection:bg-pink-100 selection:text-brand-pink overflow-x-hidden">
+<body class="bg-brand-bg text-slate-800 font-sans antialiased selection:bg-pink-100 selection:text-brand-pink overflow-x-hidden relative">
+
+    <!-- LỚP NỀN ĐỘNG (BACKGROUND LAYER) -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <!-- Lưới chấm bi phủ mờ -->
+        <div class="absolute inset-0 bg-dots opacity-40"></div>
+        <!-- Quầng sáng Hồng ấm góc trên trái -->
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-pink-300/25 rounded-full blur-3xl animate-blob-1"></div>
+        <!-- Quầng sáng Xanh lá tự nhiên góc giữa phải -->
+        <div class="absolute top-1/3 -right-32 w-[32rem] h-[32rem] bg-emerald-200/30 rounded-full blur-3xl animate-blob-2"></div>
+        <!-- Quầng sáng Vàng nhạt ấm áp góc dưới -->
+        <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-amber-100/40 rounded-full blur-3xl animate-blob-1"></div>
+    </div>
 
     <!-- 1. THANH ĐIỀU HƯỚNG CHÍNH (HEADER) -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header class="sticky top-0 z-50 bg-white/85 backdrop-blur-md shadow-sm border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative z-10">
             <!-- Logo Trăm Tuổi -->
             <a href="#" class="flex items-center space-x-3.5 group">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-pink to-pink-500 flex items-center justify-center text-white shadow-md shadow-pink-200 group-hover:scale-105 transition">
@@ -74,20 +105,20 @@
     </header>
 
     <!-- 2. BANNER CHÍNH (HERO) -->
-    <section class="relative bg-gradient-to-b from-white via-pink-50/20 to-brand-bg pt-12 pb-20 border-b border-slate-200/60 overflow-hidden">
+    <section class="relative pt-12 pb-24 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 <!-- Cột chữ -->
                 <div class="lg:col-span-7 space-y-6" data-aos="fade-right" data-aos-duration="800">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-100/80 border border-pink-200 text-brand-pink text-xs font-bold">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur border border-pink-200 text-brand-pink text-xs font-bold shadow-sm">
                         <span class="w-2 h-2 rounded-full bg-brand-pink animate-ping"></span>
                         <span>Mô hình Doanh nghiệp Xã hội phi lợi nhuận tối đa</span>
                     </div>
 
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.2]">
                         Gắn kết yêu thương, <br>
-                        nâng niu <span class="text-brand-pink">thế hệ vàng</span> Tây Nguyên.
+                        nâng niu <span class="text-brand-pink underline decoration-pink-300 decoration-wavy decoration-2">thế hệ vàng</span> Tây Nguyên.
                     </h1>
 
                     <p class="text-lg text-slate-600 leading-relaxed font-normal max-w-xl">
@@ -95,37 +126,37 @@
                     </p>
 
                     <div class="flex flex-wrap gap-4 pt-2">
-                        <a href="#articles" class="bg-brand-green hover:bg-green-900 text-white text-base font-bold px-7 py-3.5 rounded-xl shadow-md transition flex items-center gap-2">
+                        <a href="#articles" class="bg-brand-green hover:bg-green-900 text-white text-base font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-green-900/15 transition flex items-center gap-2">
                             <i class="fa-regular fa-newspaper"></i>
                             <span>Xem Nhật Ký Hoạt Động</span>
                         </a>
-                        <a href="#app" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 text-base font-bold px-6 py-3.5 rounded-xl transition flex items-center gap-2 shadow-sm">
+                        <a href="#app" class="bg-white/90 backdrop-blur hover:bg-white text-slate-700 border border-slate-300 text-base font-bold px-6 py-3.5 rounded-xl transition flex items-center gap-2 shadow-sm">
                             <i class="fa-solid fa-mobile-screen-button text-brand-pink"></i>
                             <span>Kế Hoạch Nền Tảng Số</span>
                         </a>
                     </div>
 
                     <!-- Chỉ số nhanh -->
-                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-200">
-                        <div>
+                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-200/80">
+                        <div class="p-3 bg-white/60 backdrop-blur rounded-2xl border border-white">
                             <p class="text-2xl font-black text-brand-pink">1.000+</p>
-                            <p class="text-xs text-slate-500 font-medium">Hội viên mục tiêu thử nghiệm</p>
+                            <p class="text-xs text-slate-500 font-medium">Hội viên thử nghiệm</p>
                         </div>
-                        <div>
+                        <div class="p-3 bg-white/60 backdrop-blur rounded-2xl border border-white">
                             <p class="text-2xl font-black text-brand-green">100%</p>
                             <p class="text-xs text-slate-500 font-medium">Tái đầu tư vì cộng đồng</p>
                         </div>
-                        <div>
+                        <div class="p-3 bg-white/60 backdrop-blur rounded-2xl border border-white">
                             <p class="text-2xl font-black text-slate-800">SDG 3 & 10</p>
                             <p class="text-xs text-slate-500 font-medium">Mục tiêu phát triển LHQ</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Cột hình ảnh minh họa cảm xúc -->
+                <!-- Cột ảnh minh họa -->
                 <div class="lg:col-span-5" data-aos="fade-left" data-aos-duration="800">
                     <div class="relative">
-                        <div class="bg-white p-3 rounded-3xl shadow-xl border border-slate-200/80 overflow-hidden transform hover:-translate-y-1 transition duration-300">
+                        <div class="bg-white/90 backdrop-blur p-3.5 rounded-3xl shadow-xl border border-slate-200/70 overflow-hidden transform hover:-translate-y-1 transition duration-300">
                             <div class="h-80 sm:h-96 rounded-2xl overflow-hidden relative">
                                 <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" 
                                      alt="Người cao tuổi vui vẻ" 
@@ -138,7 +169,7 @@
                         </div>
 
                         <!-- Card trôi góc dưới -->
-                        <div class="absolute -bottom-5 -left-5 bg-white p-3.5 rounded-2xl shadow-lg border border-slate-200 flex items-center gap-3">
+                        <div class="absolute -bottom-5 -left-5 bg-white/95 backdrop-blur p-3.5 rounded-2xl shadow-xl border border-pink-100 flex items-center gap-3">
                             <div class="w-10 h-10 rounded-xl bg-green-100 text-brand-green flex items-center justify-center text-xl">
                                 <i class="fa-solid fa-seedling"></i>
                             </div>
@@ -155,7 +186,7 @@
     </section>
 
     <!-- 3. SỨ MỆNH & MỤC TIÊU CỐT LÕI -->
-    <section id="about" class="py-20 bg-white">
+    <section id="about" class="py-20 bg-white/80 backdrop-blur-sm border-y border-slate-200/70 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
                 <span class="text-xs font-black uppercase tracking-widest text-brand-pink bg-pink-50 px-3 py-1 rounded-full border border-pink-200">Định hướng phát triển</span>
@@ -164,43 +195,61 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Thẻ 1 -->
-                <div class="p-8 rounded-2xl bg-brand-bg border border-slate-200 hover:border-pink-300 transition duration-300" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-14 h-14 bg-pink-100 text-brand-pink rounded-xl flex items-center justify-center text-2xl mb-6">
-                        <i class="fa-solid fa-people-carry-box"></i>
+                <div class="p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-pink-300 transition duration-300 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                    <div>
+                        <div class="w-14 h-14 bg-pink-100 text-brand-pink rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
+                            <i class="fa-solid fa-people-carry-box"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Hỗ trợ thực địa lưu động</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Tổ chức các chuyến công tác định kỳ về các xã, buôn làng tại Đắk Lắk. Mang đội ngũ tình nguyện viên hỗ trợ dọn dẹp vệ sinh môi trường sống, thăm hỏi và khảo sát nhu cầu sinh hoạt thực tế.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Hỗ trợ thực địa lưu động</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Tổ chức các chuyến công tác định kỳ về các xã, buôn làng tại Đắk Lắk. Mang đội ngũ tình nguyện viên hỗ trợ dọn dẹp vệ sinh môi trường sống, thăm hỏi và khảo sát nhu cầu sinh hoạt thực tế.
-                    </p>
+                    <div class="mt-6 pt-4 border-t border-slate-100 text-brand-pink font-bold text-sm flex items-center gap-2">
+                        <span>Hoạt động định kỳ</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
                 </div>
 
                 <!-- Thẻ 2 -->
-                <div class="p-8 rounded-2xl bg-brand-bg border border-slate-200 hover:border-green-300 transition duration-300" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-14 h-14 bg-green-100 text-brand-green rounded-xl flex items-center justify-center text-2xl mb-6">
-                        <i class="fa-solid fa-hand-holding-hand"></i>
+                <div class="p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-green-300 transition duration-300 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+                    <div>
+                        <div class="w-14 h-14 bg-green-100 text-brand-green rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
+                            <i class="fa-solid fa-hand-holding-hand"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Ngày hội gắn kết đồng niên</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Phối hợp chặt chẽ cùng Hội Người cao tuổi cơ sở tổ chức các câu lạc bộ dưỡng sinh, chia sẻ ký ức văn hóa và sinh hoạt văn nghệ, tạo sân chơi ấm áp để người già không còn cảm thấy cô đơn.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Ngày hội gắn kết đồng niên</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Phối hợp chặt chẽ cùng Hội Người cao tuổi cơ sở tổ chức các câu lạc bộ dưỡng sinh, chia sẻ ký ức văn hóa và sinh hoạt văn nghệ, tạo sân chơi ấm áp để người già không còn cảm thấy cô đơn.
-                    </p>
+                    <div class="mt-6 pt-4 border-t border-slate-100 text-brand-green font-bold text-sm flex items-center gap-2">
+                        <span>Gắn kết Hội Người cao tuổi</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
                 </div>
 
                 <!-- Thẻ 3 -->
-                <div class="p-8 rounded-2xl bg-brand-bg border border-slate-200 hover:border-indigo-300 transition duration-300" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-14 h-14 bg-indigo-100 text-indigo-700 rounded-xl flex items-center justify-center text-2xl mb-6">
-                        <i class="fa-solid fa-microchip"></i>
+                <div class="p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-300 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+                    <div>
+                        <div class="w-14 h-14 bg-indigo-100 text-indigo-700 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Ứng dụng công nghệ vì con người</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Không ngừng nghiên cứu xây dựng giải pháp nền tảng số tối giản: nút bấm trợ giúp khẩn cấp SOS, nhắc nhở uống thuốc và kết nối con cháu, phù hợp hoàn toàn với thể trạng người lớn tuổi.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Ứng dụng công nghệ vì con người</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Không ngừng nghiên cứu xây dựng giải pháp nền tảng số tối giản: nút bấm trợ giúp khẩn cấp SOS, nhắc nhở uống thuốc và kết nối con cháu, phù hợp hoàn toàn với thể trạng người lớn tuổi.
-                    </p>
+                    <div class="mt-6 pt-4 border-t border-slate-100 text-indigo-700 font-bold text-sm flex items-center gap-2">
+                        <span>Chuyển đổi số nhân văn</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. KHU VỰC BÀI VIẾT & NHẬT KÝ THỰC ĐỊA (GIẢI QUYẾT SỰ TRỐNG TRẢI) -->
-    <section id="articles" class="py-20 bg-slate-50 border-y border-slate-200">
+    <!-- 4. KHU VỰC BÀI VIẾT & NHẬT KÝ THỰC ĐỊA -->
+    <section id="articles" class="py-20 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-14" data-aos="fade-up">
                 <div>
@@ -209,7 +258,7 @@
                     <p class="mt-2 text-slate-600 text-base">Cập nhật liên tục hình ảnh và hoạt động gắn kết cộng đồng tại cơ sở.</p>
                 </div>
                 <div class="mt-4 md:mt-0">
-                    <span class="text-xs font-bold text-slate-500 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
+                    <span class="text-xs font-bold text-slate-600 bg-white/80 backdrop-blur px-3.5 py-2 rounded-xl border border-slate-200 shadow-sm">
                         <i class="fa-regular fa-clock mr-1 text-brand-pink"></i> Cập nhật hàng tuần
                     </span>
                 </div>
@@ -219,13 +268,13 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
                 <!-- Bài 1 -->
-                <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="100">
+                <article class="bg-white/90 backdrop-blur rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="100">
                     <div>
-                        <div class="h-48 overflow-hidden relative">
+                        <div class="h-52 overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=700&q=80" 
                                  alt="Thăm hỏi người già" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 left-3 bg-brand-pink text-white text-[11px] font-bold px-2.5 py-1 rounded-md">Hoạt động cơ sở</span>
+                            <span class="absolute top-3 left-3 bg-brand-pink text-white text-[11px] font-bold px-3 py-1 rounded-full shadow">Hoạt động cơ sở</span>
                         </div>
                         <div class="p-6">
                             <span class="text-xs text-slate-400 font-semibold">12/10/2026 • Huyện Cư Kuin</span>
@@ -237,20 +286,20 @@
                             </p>
                         </div>
                     </div>
-                    <div class="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-green">
+                    <div class="px-6 pb-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-green">
                         <span>Đọc tiếp câu chuyện</span>
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition"></i>
                     </div>
                 </article>
 
                 <!-- Bài 2 -->
-                <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="200">
+                <article class="bg-white/90 backdrop-blur rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="200">
                     <div>
-                        <div class="h-48 overflow-hidden relative">
+                        <div class="h-52 overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80" 
                                  alt="Khảo sát công nghệ" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 left-3 bg-brand-green text-white text-[11px] font-bold px-2.5 py-1 rounded-md">Nghiên cứu & Khảo sát</span>
+                            <span class="absolute top-3 left-3 bg-brand-green text-white text-[11px] font-bold px-3 py-1 rounded-full shadow">Nghiên cứu & Khảo sát</span>
                         </div>
                         <div class="p-6">
                             <span class="text-xs text-slate-400 font-semibold">05/10/2026 • TP. Buôn Ma Thuột</span>
@@ -262,20 +311,20 @@
                             </p>
                         </div>
                     </div>
-                    <div class="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-green">
+                    <div class="px-6 pb-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-green">
                         <span>Xem số liệu khảo sát</span>
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition"></i>
                     </div>
                 </article>
 
                 <!-- Bài 3 -->
-                <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="300">
+                <article class="bg-white/90 backdrop-blur rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="300">
                     <div>
-                        <div class="h-48 overflow-hidden relative">
+                        <div class="h-52 overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=700&q=80" 
                                  alt="Câu lạc bộ dưỡng sinh" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 left-3 bg-indigo-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-md">Đời sống văn hóa</span>
+                            <span class="absolute top-3 left-3 bg-indigo-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow">Đời sống văn hóa</span>
                         </div>
                         <div class="p-6">
                             <span class="text-xs text-slate-400 font-semibold">28/09/2026 • Huyện Krông Ana</span>
@@ -287,9 +336,9 @@
                             </p>
                         </div>
                     </div>
-                    <div class="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-green">
+                    <div class="px-6 pb-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-green">
                         <span>Đọc tiếp câu chuyện</span>
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition"></i>
                     </div>
                 </article>
 
@@ -297,8 +346,8 @@
         </div>
     </section>
 
-    <!-- 5. ĐỀ ÁN NỀN TẢNG SỐ (GIỚI THIỆU TỚI ĐỐI TÁC QUỐC TẾ) -->
-    <section id="app" class="py-20 bg-white">
+    <!-- 5. ĐỀ ÁN NỀN TẢNG SỐ (APP) -->
+    <section id="app" class="py-20 bg-white/90 backdrop-blur-sm border-t border-slate-200/80 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
@@ -314,8 +363,8 @@
                     </p>
 
                     <div class="space-y-4 pt-2">
-                        <div class="p-4 rounded-xl border border-slate-200 bg-brand-bg flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold flex-shrink-0">
+                        <div class="p-4 rounded-2xl border border-slate-200 bg-white shadow-sm flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold flex-shrink-0">
                                 <i class="fa-solid fa-bell"></i>
                             </div>
                             <div>
@@ -324,8 +373,8 @@
                             </div>
                         </div>
 
-                        <div class="p-4 rounded-xl border border-slate-200 bg-brand-bg flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-lg bg-green-100 text-brand-green flex items-center justify-center font-bold flex-shrink-0">
+                        <div class="p-4 rounded-2xl border border-slate-200 bg-white shadow-sm flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-green-100 text-brand-green flex items-center justify-center font-bold flex-shrink-0">
                                 <i class="fa-solid fa-microphone"></i>
                             </div>
                             <div>
@@ -336,18 +385,18 @@
                     </div>
 
                     <div class="pt-2">
-                        <p class="text-xs text-slate-500 bg-slate-100 p-3 rounded-lg border border-slate-200">
+                        <p class="text-xs text-slate-600 bg-brand-green-light/80 p-3.5 rounded-xl border border-green-200">
                             <i class="fa-solid fa-circle-info text-brand-green mr-1.5"></i>
                             <strong>Lộ trình:</strong> Thử nghiệm trước trên nền tảng Zalo Mini App / Web để tiết kiệm ngân sách, sau đó nâng cấp ứng dụng độc lập khi được quỹ tài trợ quốc tế phê duyệt.
                         </p>
                     </div>
                 </div>
 
-                <!-- Mockup màn hình ứng dụng sạch đẹp -->
+                <!-- Mockup màn hình điện thoại -->
                 <div class="lg:col-span-6 flex justify-center" data-aos="fade-left">
-                    <div class="w-72 bg-slate-900 p-3.5 rounded-[42px] shadow-2xl border-4 border-slate-800">
+                    <div class="w-72 bg-slate-900 p-3.5 rounded-[44px] shadow-2xl border-4 border-slate-800">
                         <div class="w-24 h-4 bg-slate-800 rounded-full mx-auto mb-3"></div>
-                        <div class="bg-slate-50 rounded-[30px] p-4 flex flex-col space-y-4 border border-slate-200 text-slate-800">
+                        <div class="bg-slate-50 rounded-[32px] p-4 flex flex-col space-y-4 border border-slate-200 text-slate-800">
                             <div class="flex items-center justify-between pb-2 border-b border-slate-200">
                                 <span class="font-black text-brand-pink text-sm">TRĂM TUỔI</span>
                                 <span class="text-[10px] bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full">Trực tuyến</span>
@@ -389,31 +438,31 @@
     </section>
 
     <!-- 6. ĐỐI TÁC, BẢO TRỢ & PHÁP LÝ (PARTNERS) -->
-    <section id="partners" class="py-16 bg-slate-100/70 border-t border-slate-200">
+    <section id="partners" class="py-16 bg-white/70 backdrop-blur-sm border-t border-slate-200/80 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
             <span class="text-xs font-black uppercase tracking-widest text-slate-400">Đồng hành & Quản trị minh bạch</span>
             <h3 class="text-xl font-bold text-slate-900 mt-1 mb-8">Tổ chức bảo trợ & Tiêu chí vận hành</h3>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-stretch max-w-5xl mx-auto">
-                <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                <div class="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition flex flex-col items-center justify-center">
                     <i class="fa-solid fa-handshake text-3xl text-brand-green mb-3"></i>
                     <span class="font-bold text-slate-900 text-sm">The Nippon Foundation</span>
                     <span class="text-xs text-slate-500 mt-1">Đối tác quốc tế mục tiêu</span>
                 </div>
 
-                <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                <div class="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition flex flex-col items-center justify-center">
                     <i class="fa-solid fa-people-roof text-3xl text-emerald-700 mb-3"></i>
                     <span class="font-bold text-slate-900 text-sm">Hội Người Cao Tuổi</span>
                     <span class="text-xs text-slate-500 mt-1">Phối hợp tại Đắk Lắk</span>
                 </div>
 
-                <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                <div class="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition flex flex-col items-center justify-center">
                     <i class="fa-solid fa-scale-balanced text-3xl text-brand-pink mb-3"></i>
                     <span class="font-bold text-slate-900 text-sm">Cục SHTT (IP Vietnam)</span>
                     <span class="text-xs text-slate-500 mt-1">Bảo hộ Nhóm 38 & 45</span>
                 </div>
 
-                <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                <div class="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition flex flex-col items-center justify-center">
                     <i class="fa-solid fa-earth-asia text-3xl text-blue-600 mb-3"></i>
                     <span class="font-bold text-slate-900 text-sm">Mục Tiêu UN SDGs</span>
                     <span class="text-xs text-slate-500 mt-1">Mục tiêu 3 (Sức khỏe) & 10</span>
@@ -423,7 +472,7 @@
     </section>
 
     <!-- 7. CHÂN TRANG (FOOTER) -->
-    <footer id="contact" class="bg-slate-900 text-slate-300 py-16 border-t border-slate-800">
+    <footer id="contact" class="bg-slate-900 text-slate-300 py-16 border-t border-slate-800 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-slate-800">
                 <div class="md:col-span-6 space-y-4">
@@ -457,7 +506,7 @@
         </div>
     </footer>
 
-    <!-- Thư viện Javascript kích hoạt hiệu ứng cuộn chuột (AOS) -->
+    <!-- Thư viện Javascript kích hoạt AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
