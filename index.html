@@ -308,7 +308,8 @@
                     <p class="text-xs text-slate-500 mt-1">Điền thông tin để cùng tham gia các chuyến thăm buôn làng cuối tuần.</p>
                 </div>
 
-                <form id="regForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <iframe name="hidden_iframe" style="display:none;"></iframe>
+    <form id="regForm" action="https://script.google.com/macros/s/AKfycbygfakQbY23ZqnadbDuZw5kkla837NaNVhd7GXFfylBnrtsOkTDw5sl0NpH1L1Qnm5T/exec" method="POST" target="hidden_iframe" onsubmit="setTimeout(() => { document.getElementById('formSection').classList.add('hidden'); document.getElementById('cardSection').classList.remove('hidden'); }, 500)" class="space-y-4">
                     <!-- Khu vực tải và chọn ảnh đại diện -->
                     <div class="flex flex-col items-center justify-center">
                         <label class="cursor-pointer group flex flex-col items-center">
