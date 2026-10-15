@@ -454,7 +454,7 @@
         // 4. Xử lý khi nhấn nút Gửi form
         function handleFormSubmit(event) {
             event.preventDefault();
-            fetch("https://script.google.com/macros/s/AKfycbzY1bNxM9gLxxyTt4TbBepPT7msQ9_FOl8OCLrvDoVQxpl59fnkPUTgumezM1OCaEUy/exec", { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, phone, birth, address, email }) }).catch(e => console.error(e));
+            fetch("https://script.google.com/macros/s/AKfycbySHDSrqHgGjOreqAD3d14F9vzuikDU4E9Q64viXohw_oeXuaqiCnSBXfU-ZrxzJXB8/exec", { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, phone, birth, address, email }) }).catch(e => console.error(e));
 
             const name = document.getElementById('inputName').value.trim();
             const phone = document.getElementById('inputPhone').value.trim();
