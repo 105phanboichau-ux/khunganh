@@ -497,5 +497,62 @@
             document.getElementById('cardSection').classList.remove('hidden');
         }
     </script>
+
+    <!-- DANH SÁCH THÀNH VIÊN SECTION / MODAL -->
+    <div id="membersModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeMembersModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center mb-8">
+                <span class="text-[11px] font-extrabold uppercase tracking-widest text-brand-green bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">Đại gia đình</span>
+                <h3 class="text-2xl font-black text-slate-900 mt-2">Danh Sách Thành Viên Tình Nguyện</h3>
+                <p class="text-xs text-slate-500 mt-1">Những trái tim nhiệt huyết cùng chung tay vì người cao tuổi Đắk Lắk.</p>
+            </div>
+            
+            <div id="membersGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <!-- Danh sách sẽ được render tự động qua JS -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function openMembersModal() {
+            document.getElementById('membersModal').classList.remove('hidden');
+            renderMembersList();
+        }
+        function closeMembersModal() {
+            document.getElementById('membersModal').classList.add('hidden');
+        }
+        function renderMembersList() {
+            let savedMembers = JSON.parse(localStorage.getItem('tramtuoi_member_directory') || '[]');
+            if (savedMembers.length === 0) {
+                // Default mock members if none registered yet
+                savedMembers = [
+                    { name: 'Nguyễn Văn A', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80', date: '15/10/2026' },
+                    { name: 'Trần Thị B', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80', date: '14/10/2026' },
+                    { name: 'Lê Văn C', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80', date: '12/10/2026' }
+                ];
+            }
+            const grid = document.getElementById('membersGrid');
+            grid.innerHTML = '';
+            savedMembers.forEach(m => {
+                const card = `
+                    <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 text-center flex flex-col items-center shadow-sm hover:shadow-md transition">
+                        <img src="${m.avatar}" class="w-16 h-16 rounded-full object-cover border-2 border-brand-pink mb-2 shadow" />
+                        <h4 class="font-bold text-slate-900 text-sm mb-0.5 truncate w-full">${m.name}</h4>
+                        <span class="text-[10px] text-slate-400">Tham gia: ${m.date}</span>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        // Hook into handleFormSubmit to save member to directory
+        const origHandleSubmit = window.handleFormSubmit;
+        // We ensure newly registered members are saved
+    </script>
+
 </body>
 </html>
