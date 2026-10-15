@@ -358,7 +358,7 @@
                     <!-- Nút bấm Gửi -->
                     <button type="submit" class="w-full bg-brand-pink hover:bg-brand-pink-dark text-white font-extrabold py-3.5 rounded-xl shadow-lg shadow-pink-200 transition flex items-center justify-center gap-2 mt-2">
                         <i class="fa-solid fa-paper-plane"></i>
-                        <span>Hoàn Tất & Tạo Thẻ Tình Nguyện Viên</span>
+                        <span>Gửi Đăng Kí</span>
                     </button>
                 </form>
             </div>
@@ -456,11 +456,25 @@
             event.preventDefault();
             fetch("https://script.google.com/macros/s/AKfycbySHDSrqHgGjOreqAD3d14F9vzuikDU4E9Q64viXohw_oeXuaqiCnSBXfU-ZrxzJXB8/exec", { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, phone, birth, address, email }) }).catch(e => console.error(e));
 
+
             const name = document.getElementById('inputName').value.trim();
             const phone = document.getElementById('inputPhone').value.trim();
             const birth = document.getElementById('inputBirth').value.trim();
             const address = document.getElementById('inputAddress').value.trim();
             const email = document.getElementById('inputEmail').value.trim();
+
+            // Gửi ngầm không chặn giao diện
+            try {
+                fetch("https://script.google.com/macros/s/AKfycbySHDSrqHgGjOreqAD3d14F9vzuikDU4E9Q64viXohw_oeXuaqiCnSBXfU-ZrxzJXB8/exec", {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, phone, birth, address, email })
+                }).catch(err => console.log(err));
+            } catch (e) {
+                console.log(e);
+            }
+
 
             // Tự động +1 vào số lượng tình nguyện viên
             currentCount += 1;
