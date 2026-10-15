@@ -454,8 +454,6 @@
         // 4. Xử lý khi nhấn nút Gửi form
         function handleFormSubmit(event) {
             event.preventDefault();
-            fetch("https://script.google.com/macros/s/AKfycbySHDSrqHgGjOreqAD3d14F9vzuikDU4E9Q64viXohw_oeXuaqiCnSBXfU-ZrxzJXB8/exec", { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, phone, birth, address, email }) }).catch(e => console.error(e));
-
 
             const name = document.getElementById('inputName').value.trim();
             const phone = document.getElementById('inputPhone').value.trim();
@@ -463,7 +461,7 @@
             const address = document.getElementById('inputAddress').value.trim();
             const email = document.getElementById('inputEmail').value.trim();
 
-            // Gửi ngầm không chặn giao diện
+            // Gửi dữ liệu qua Google Apps Script một cách an toàn
             try {
                 fetch("https://script.google.com/macros/s/AKfycbySHDSrqHgGjOreqAD3d14F9vzuikDU4E9Q64viXohw_oeXuaqiCnSBXfU-ZrxzJXB8/exec", {
                     method: "POST",
@@ -474,7 +472,6 @@
             } catch (e) {
                 console.log(e);
             }
-
 
             // Tự động +1 vào số lượng tình nguyện viên
             currentCount += 1;
